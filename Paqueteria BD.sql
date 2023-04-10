@@ -1,0 +1,14 @@
+CREATE DATABASE Paqueteria
+GO
+USE Paqueteria
+
+GO
+CREATE SCHEMA Gral
+GO
+
+CREATE SCHEMA Paq
+GO
+
+
+
+
