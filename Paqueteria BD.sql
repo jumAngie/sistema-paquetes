@@ -1,3 +1,6 @@
+
+-- DROP DATABASE Paqueteria
+
 CREATE DATABASE Paqueteria
 GO
 USE Paqueteria
@@ -10,7 +13,7 @@ CREATE SCHEMA Paq
 GO
 
 
-CREATE TABLE Gral.tbEstadoCiviles
+CREATE TABLE Gral.tblEstadoCiviles
 (
 esci_ID                 INT IDENTITY(1,1),
 esci_Descripcion        NVARCHAR(150) NOT NULL,
@@ -24,7 +27,7 @@ esci_Estado             BIT DEFAULT 1,
 CONSTRAINT PK_Gral_tbEstadoCiviles_esta_ID PRIMARY KEY (esci_ID)
 );
 
-INSERT INTO Gral.tbEstadoCiviles
+INSERT INTO Gral.tblEstadoCiviles
 VALUES('Soltero(a)',1,GETDATE(),NULL,NULL,1),
       ('Casado(a)',1,GETDATE(),NULL,NULL,1),
 	  ('Divorciado(a)',1,GETDATE(),NULL,NULL,1),
@@ -32,24 +35,21 @@ VALUES('Soltero(a)',1,GETDATE(),NULL,NULL,1),
 	  ('Viudo(a)',1,GETDATE(),NULL,NULL,1)
 
 
-
-
-
-CREATE TABLE Gral.tbDepartamentos
+CREATE TABLE Gral.tblDepartamentos
 (
-dep_ID				   INT IDENTITY(1,1),
-dep_Descri             NVARCHAR(150) NOT NULL,
+depa_ID				   INT IDENTITY(1,1),
+depa_Descri             NVARCHAR(150) NOT NULL,
 
-dep_UsuarioCrea        INT NOT NULL,
-dep_FechaCrea          DATETIME DEFAULT GETDATE(),
-dep_UsuarioModifica    INT,
-dep_FechaModifica      DATETIME,
+depa_UsuarioCrea        INT NOT NULL,
+depa_FechaCrea          DATETIME DEFAULT GETDATE(),
+depa_UsuarioModifica    INT,
+depa_FechaModifica      DATETIME,
 
-CONSTRAINT PK_Gral_tbDepartamento_dep_ID PRIMARY KEY (dep_ID),
-CONSTRAINT UQ_Gral_tbDepartamento_dep_Descri UNIQUE (dep_Descri)
+CONSTRAINT PK_Gral_tbDepartamento_dep_ID PRIMARY KEY (depa_ID),
+CONSTRAINT UQ_Gral_tbDepartamento_dep_Descri UNIQUE (depa_Descri)
 
 );
-INSERT INTO Gral.tbDepartamentos
+INSERT INTO Gral.tblDepartamentos
 VALUES	('Atlántida',1,GETDATE(),NULL,NULL),
 		('Colón',1,GETDATE(),NULL,NULL),
 		('Comayagua',1,GETDATE(),NULL,NULL),
@@ -70,22 +70,22 @@ VALUES	('Atlántida',1,GETDATE(),NULL,NULL),
 		('Yoro',1,GETDATE(),NULL,NULL);    
 
 
-CREATE TABLE Gral.tbCiudades
+CREATE TABLE Gral.tblCiudades
 (
-ciu_ID                 INT IDENTITY(1,1),
-ciu_Descri             NVARCHAR(150) NOT NULL,
-dep_ID                 INT NOT NULL,
+ciud_ID                 INT IDENTITY(1,1),
+ciud_Descri             NVARCHAR(150) NOT NULL,
+depa_ID                 INT NOT NULL,
 
-ciu_UsuarioCrea        INT NOT NULL,
-ciu_FechaCrea          DATETIME DEFAULT GETDATE(),
-ciu_UsuarioModifica    INT,
-ciu_FechaModifica      DATETIME,
+ciud_UsuarioCrea        INT NOT NULL,
+ciud_FechaCrea          DATETIME DEFAULT GETDATE(),
+ciud_UsuarioModifica    INT,
+ciud_FechaModifica      DATETIME,
 
-CONSTRAINT PK_Gral_tbCiudad_ciu_ID PRIMARY KEY (ciu_ID),
-CONSTRAINT FK_Gral_tbCiudad_Gral_tbDepartamento_dep_ID FOREIGN KEY (dep_ID) REFERENCES Gral.tbDepartamentos (dep_ID)
+CONSTRAINT PK_Gral_tbCiudad_ciu_ID PRIMARY KEY (ciud_ID),
+CONSTRAINT FK_Gral_tbCiudad_Gral_tbDepartamento_dep_ID FOREIGN KEY (depa_ID) REFERENCES Gral.tblDepartamentos (depa_ID)
 );
 
-INSERT INTO Gral.tbCiudades
+INSERT INTO Gral.tblCiudades
 VALUES ('La Ceiba', 1,1,GETDATE(),NULL,NULL),
 	   ('El Porvenir', 1,1,GETDATE(),NULL,NULL),
 	   ('Esparta', 1,1,GETDATE(),NULL,NULL),
@@ -394,4 +394,95 @@ CREATE TABLE Gral.tblPersonas
 		pers_Sexo			CHAR(1)				NOT NULL,
 		pers_EstadoCivil	INT					NOT NULL
 
+		CONSTRAINT PK_Gral_tblPersonas_pers_Id		PRIMARY KEY(pers_Id),
+		CONSTRAINT FK_Gral_tblPersonas_pers_EstadoCivil_Gral_tblEstadosCiviles_esci_Id FOREIGN KEY (pers_EstadoCivil) REFERENCES Gral.tblEstadoCiviles (esci_Id),
+		CONSTRAINT CK_Gral_tblPersonas_pers_Sexo	CHECK(pers_EstadoCivil IN('F','M')),
+		CONSTRAINT UQ_Gral_tblPersonas_pers_DNI		UNIQUE(pers_DNI)
+);
+
+CREATE TABLE Gral.tblUsuarios
+(
+		usua_Id			INT IDENTITY(1,1) PRIMARY KEY,
+		usua_Usuario	NVARCHAR(250)	  NOT NULL,
+		usua_Clave		NVARCHAR(250)	  NOT NULL,
+		usua_Empleado	INT				  NOT NULL,
+		usua_EsAdmin	BIT				  NOT NULL
+
+		CONSTRAINT FK_Gral_tblUsuarios_usua_Empleado_Gral_tblPersonas_pers_Id	FOREIGN KEY (usua_Empleado) REFERENCES Gral.tblPersonas (pers_Id),
+		CONSTRAINT UQ_Gral_tblUsuarios_usua_Usuarios UNIQUE (usua_Usuario)
+);
+
+-- ****************************** AÑADIR LOS CONSTRAINTS LUEGO DE INSERTAR 1 USUARIO ******************************
+--CONSTRAINT FK_Gral_tblUsuarios_usua_UsuarioCrea_Gral_tblUsuarios_usua_Id		FOREIGN KEY (usua_UsuarioCrea)		REFERENCES Gral.tblUsuarios	(usua_Id),
+--CONSTRAINT FK_Gral_tblUsuarios_usua_UsuarioModifica_Gral_tblUsuarios_usua_Id FOREIGN KEY (paqu_UsuarioModifica)	REFERENCES Gral.tblUsuarios	(usua_Id)
+
+
+
+CREATE TABLE Paq.tblPaquetes
+(
+		paqu_Id					INT IDENTITY(1,1),
+		paqu_Cliente			INT					NOT NULL,
+		paqu_Ciudad				INT					NOT NULL,
+		paqu_DireccionExacta	NVARCHAR(150)		NOT NULL,
+		paqu_Bodega				DATETIME			DEFAULT GETDATE(),
+		paqu_EnCamino			DATETIME			NULL,
+		paqu_Entregado			DATETIME			NULL,
+
+		paqu_UsuarioCrea        INT					NOT NULL,
+		paqu_FechaCrea          DATETIME			DEFAULT GETDATE(),
+		paqu_UsuarioModifica    INT,
+		paqu_FechaModifica      DATETIME,
+		paqu_Estado				BIT NOT NULL		DEFAULT(1)
+
+		CONSTRAINT PK_Paq_tblPaquetes_paqu_Id										PRIMARY KEY (paqu_Id),
+		CONSTRAINT FK_Paq_tblPaquetes_paqu_Cliente_Gral_tblPersonas_pers_Id			FOREIGN KEY (paqu_Cliente)			REFERENCES Gral.tblPersonas (pers_Id),
+		CONSTRAINT FK_Paq_tblPaquetes_paqu_Ciudad_Gral_tblCiudades_ciud_Id			FOREIGN KEY (paqu_Ciudad)			REFERENCES Gral.tblCiudades (ciud_Id),
+		CONSTRAINT FK_Paq_tblPaquetes_paqu_UsuarioCrea_Gral_tblUsuarios_usua_Id		FOREIGN KEY (paqu_UsuarioCrea)		REFERENCES Gral.tblUsuarios	(usua_Id),
+		CONSTRAINT FK_Paq_tblPaquetes_paqu_UsuarioModifica_Gral_tblUsuarios_usua_Id FOREIGN KEY (paqu_UsuarioModifica)	REFERENCES Gral.tblUsuarios	(usua_Id)
+);
+
+CREATE TABLE Paq.tblCamiones(
+		
+		cami_Id			INT IDENTITY (1,1) PRIMARY KEY,
+		cami_Empleado	INT
+
+		CONSTRAINT FK_Paq_Camiones_cami_Empleado_Gral_tblPersonas_pers_Id FOREIGN KEY (cami_Empleado) REFERENCES Gral.tblPersonas (pers_Id)
+);
+
+
+CREATE TABLE Paq.tblEnvios
+(
+		envi_Id					INT IDENTITY (1,1) PRIMARY KEY,
+		envi_Camion				INT			NOT NULL,
+		envi_FechaSalida		DATETIME	NOT NULL,
+		envi_FechaEntrega		DATETIME	NOT NULL,
+
+		envi_UsuarioCrea        INT					NOT NULL,
+		envi_FechaCrea          DATETIME			DEFAULT GETDATE(),
+		envi_UsuarioModifica    INT,
+		envi_FechaModifica      DATETIME,
+		envi_Estado				BIT NOT NULL		DEFAULT(1)
+
+		CONSTRAINT FK_Paq_tblEnvios_envi_Camion_Paq_tblCamiones_cami_Id			  FOREIGN KEY (envi_Camion)				REFERENCES Paq.tblCamiones (cami_Id),
+		CONSTRAINT FK_Paq_tblEnvios_envi_UsuarioCrea_Gral_tblUsuarios_usua_Id	  FOREIGN KEY (envi_UsuarioCrea)		REFERENCES Gral.tblUsuarios	(usua_Id),
+		CONSTRAINT FK_Paq_tblEnvios_envi_UsuarioModifica_Gral_tblUsuarios_usua_Id FOREIGN KEY (envi_UsuarioModifica)	REFERENCES Gral.tblUsuarios	(usua_Id)
+);
+
+
+CREATE TABLE Paq.tblEnviosPorPaquetes
+(
+		enpa_Id					INT IDENTITY (1,1) PRIMARY KEY,
+		enpa_Envio				INT					NOT NULL,
+		enpa_Paquete			INT					NOT NULL,
+
+		enpa_UsuarioCrea        INT					NOT NULL,
+		enpa_FechaCrea          DATETIME			DEFAULT GETDATE(),
+		enpa_UsuarioModifica    INT,
+		enpa_FechaModifica      DATETIME,
+		enpa_Estado				BIT NOT NULL		DEFAULT(1)
+
+		CONSTRAINT FK_Paq_tblEnviosPorPaquetes_enpa_Envio_Paq_tblEnvios_envi_Id	 FOREIGN KEY (enpa_Envio)   REFERENCES Paq.tblEnvios (envi_Id),
+		CONSTRAINT FK_Paq_tblEnviosPorPaquetes_enpa_Paquete_Paq_tblPaquetes_paqu_Id FOREIGN KEY (enpa_Paquete) REFERENCES Paq.tblPaquetes (paqu_Id),
+		CONSTRAINT FK_Paq_tblEnviosPorPaquetes_enpa_UsuarioCrea_Gral_tblUsuarios_usua_Id	  FOREIGN KEY (enpa_UsuarioCrea)		REFERENCES Gral.tblUsuarios	(usua_Id),
+		CONSTRAINT FK_Paq_tblEnviosPorPaquetes_enpa_UsuarioModifica_Gral_tblUsuarios_usua_Id FOREIGN KEY (enpa_UsuarioModifica)	REFERENCES Gral.tblUsuarios	(usua_Id)
 );
