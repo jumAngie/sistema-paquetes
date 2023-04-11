@@ -19,58 +19,37 @@ namespace Paqueteria.DataAccess.Context
         {
         }
 
-        public virtual DbSet<tbCiudades> tbCiudades { get; set; }
-        public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
+        public virtual DbSet<WV_tbLUsuarios> WV_tbLUsuarios { get; set; }
         public virtual DbSet<tbEstadoCivil> tbEstadoCivil { get; set; }
-        public virtual DbSet<tbEstadoCiviles> tbEstadoCiviles { get; set; }
+        public virtual DbSet<tblCamiones> tblCamiones { get; set; }
+        public virtual DbSet<tblCiudades> tblCiudades { get; set; }
+        public virtual DbSet<tblDepartamentos> tblDepartamentos { get; set; }
+        public virtual DbSet<tblEnvios> tblEnvios { get; set; }
+        public virtual DbSet<tblEnviosPorPaquetes> tblEnviosPorPaquetes { get; set; }
+        public virtual DbSet<tblEstadoCiviles> tblEstadoCiviles { get; set; }
+        public virtual DbSet<tblPaquetes> tblPaquetes { get; set; }
+        public virtual DbSet<tblPersonas> tblPersonas { get; set; }
+        public virtual DbSet<tblUsuarios> tblUsuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
-            modelBuilder.Entity<tbCiudades>(entity =>
+            modelBuilder.Entity<WV_tbLUsuarios>(entity =>
             {
-                entity.HasKey(e => e.ciu_ID)
-                    .HasName("PK_Gral_tbCiudad_ciu_ID");
+                entity.HasNoKey();
 
-                entity.ToTable("tbCiudades", "Gral");
+                entity.ToView("WV_tbLUsuarios");
 
-                entity.Property(e => e.ciu_Descri)
+                entity.Property(e => e.Es_Admin)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.usua_Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.usua_Usuario)
                     .IsRequired()
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.ciu_FechaCrea)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.ciu_FechaModifica).HasColumnType("datetime");
-
-                entity.HasOne(d => d.dep)
-                    .WithMany(p => p.tbCiudades)
-                    .HasForeignKey(d => d.dep_ID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Gral_tbCiudad_Gral_tbDepartamento_dep_ID");
-            });
-
-            modelBuilder.Entity<tbDepartamentos>(entity =>
-            {
-                entity.HasKey(e => e.dep_ID)
-                    .HasName("PK_Gral_tbDepartamento_dep_ID");
-
-                entity.ToTable("tbDepartamentos", "Gral");
-
-                entity.HasIndex(e => e.dep_Descri, "UQ_Gral_tbDepartamento_dep_Descri")
-                    .IsUnique();
-
-                entity.Property(e => e.dep_Descri)
-                    .IsRequired()
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.dep_FechaCrea)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.dep_FechaModifica).HasColumnType("datetime");
+                    .HasMaxLength(250);
             });
 
             modelBuilder.Entity<tbEstadoCivil>(entity =>
@@ -87,12 +66,150 @@ namespace Paqueteria.DataAccess.Context
                 entity.Property(e => e.esta_FechaModifica).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<tbEstadoCiviles>(entity =>
+            modelBuilder.Entity<tblCamiones>(entity =>
+            {
+                entity.HasKey(e => e.cami_Id)
+                    .HasName("PK__tblCamio__D473E766F3C71240");
+
+                entity.ToTable("tblCamiones", "Paq");
+
+                entity.HasOne(d => d.cami_EmpleadoNavigation)
+                    .WithMany(p => p.tblCamiones)
+                    .HasForeignKey(d => d.cami_Empleado)
+                    .HasConstraintName("FK_Paq_Camiones_cami_Empleado_Gral_tblPersonas_pers_Id");
+            });
+
+            modelBuilder.Entity<tblCiudades>(entity =>
+            {
+                entity.HasKey(e => e.ciud_ID)
+                    .HasName("PK_Gral_tbCiudad_ciu_ID");
+
+                entity.ToTable("tblCiudades", "Gral");
+
+                entity.Property(e => e.ciud_Descri)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.ciud_FechaCrea)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.ciud_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.depa)
+                    .WithMany(p => p.tblCiudades)
+                    .HasForeignKey(d => d.depa_ID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbCiudad_Gral_tbDepartamento_dep_ID");
+            });
+
+            modelBuilder.Entity<tblDepartamentos>(entity =>
+            {
+                entity.HasKey(e => e.depa_ID)
+                    .HasName("PK_Gral_tbDepartamento_dep_ID");
+
+                entity.ToTable("tblDepartamentos", "Gral");
+
+                entity.HasIndex(e => e.depa_Descri, "UQ_Gral_tbDepartamento_dep_Descri")
+                    .IsUnique();
+
+                entity.Property(e => e.depa_Descri)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.depa_FechaCrea)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.depa_FechaModifica).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<tblEnvios>(entity =>
+            {
+                entity.HasKey(e => e.envi_Id)
+                    .HasName("PK__tblEnvio__6D62E4403A95452C");
+
+                entity.ToTable("tblEnvios", "Paq");
+
+                entity.Property(e => e.envi_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.envi_FechaCrea)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.envi_FechaEntrega).HasColumnType("datetime");
+
+                entity.Property(e => e.envi_FechaModifica).HasColumnType("datetime");
+
+                entity.Property(e => e.envi_FechaSalida).HasColumnType("datetime");
+
+                entity.HasOne(d => d.envi_CamionNavigation)
+                    .WithMany(p => p.tblEnvios)
+                    .HasForeignKey(d => d.envi_Camion)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Paq_tblEnvios_envi_Camion_Paq_tblCamiones_cami_Id");
+
+                entity.HasOne(d => d.envi_UsuarioCreaNavigation)
+                    .WithMany(p => p.tblEnviosenvi_UsuarioCreaNavigation)
+                    .HasForeignKey(d => d.envi_UsuarioCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Paq_tblEnvios_envi_UsuarioCrea_Gral_tblUsuarios_usua_Id");
+
+                entity.HasOne(d => d.envi_UsuarioModificaNavigation)
+                    .WithMany(p => p.tblEnviosenvi_UsuarioModificaNavigation)
+                    .HasForeignKey(d => d.envi_UsuarioModifica)
+                    .HasConstraintName("FK_Paq_tblEnvios_envi_UsuarioModifica_Gral_tblUsuarios_usua_Id");
+            });
+
+            modelBuilder.Entity<tblEnviosPorPaquetes>(entity =>
+            {
+                entity.HasKey(e => e.enpa_Id)
+                    .HasName("PK__tblEnvio__1D808A83502927E7");
+
+                entity.ToTable("tblEnviosPorPaquetes", "Paq");
+
+                entity.Property(e => e.enpa_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.enpa_FechaCrea)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.enpa_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.enpa_EnvioNavigation)
+                    .WithMany(p => p.tblEnviosPorPaquetes)
+                    .HasForeignKey(d => d.enpa_Envio)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Paq_tblEnviosPorPaquetes_enpa_Envio_Paq_tblEnvios_envi_Id");
+
+                entity.HasOne(d => d.enpa_PaqueteNavigation)
+                    .WithMany(p => p.tblEnviosPorPaquetes)
+                    .HasForeignKey(d => d.enpa_Paquete)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Paq_tblEnviosPorPaquetes_enpa_Paquete_Paq_tblPaquetes_paqu_Id");
+
+                entity.HasOne(d => d.enpa_UsuarioCreaNavigation)
+                    .WithMany(p => p.tblEnviosPorPaquetesenpa_UsuarioCreaNavigation)
+                    .HasForeignKey(d => d.enpa_UsuarioCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Paq_tblEnviosPorPaquetes_enpa_UsuarioCrea_Gral_tblUsuarios_usua_Id");
+
+                entity.HasOne(d => d.enpa_UsuarioModificaNavigation)
+                    .WithMany(p => p.tblEnviosPorPaquetesenpa_UsuarioModificaNavigation)
+                    .HasForeignKey(d => d.enpa_UsuarioModifica)
+                    .HasConstraintName("FK_Paq_tblEnviosPorPaquetes_enpa_UsuarioModifica_Gral_tblUsuarios_usua_Id");
+            });
+
+            modelBuilder.Entity<tblEstadoCiviles>(entity =>
             {
                 entity.HasKey(e => e.esci_ID)
                     .HasName("PK_Gral_tbEstadoCiviles_esta_ID");
 
-                entity.ToTable("tbEstadoCiviles", "Gral");
+                entity.ToTable("tblEstadoCiviles", "Gral");
 
                 entity.Property(e => e.esci_Descripcion)
                     .IsRequired()
@@ -105,6 +222,120 @@ namespace Paqueteria.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.esci_FechaModifica).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<tblPaquetes>(entity =>
+            {
+                entity.HasKey(e => e.paqu_Id)
+                    .HasName("PK_Paq_tblPaquetes_paqu_Id");
+
+                entity.ToTable("tblPaquetes", "Paq");
+
+                entity.Property(e => e.paqu_Bodega)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.paqu_DireccionExacta)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.paqu_EnCamino).HasColumnType("datetime");
+
+                entity.Property(e => e.paqu_Entregado).HasColumnType("datetime");
+
+                entity.Property(e => e.paqu_Estado)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.paqu_FechaCrea)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.paqu_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.paqu_CiudadNavigation)
+                    .WithMany(p => p.tblPaquetes)
+                    .HasForeignKey(d => d.paqu_Ciudad)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Paq_tblPaquetes_paqu_Ciudad_Gral_tblCiudades_ciud_Id");
+
+                entity.HasOne(d => d.paqu_ClienteNavigation)
+                    .WithMany(p => p.tblPaquetes)
+                    .HasForeignKey(d => d.paqu_Cliente)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Paq_tblPaquetes_paqu_Cliente_Gral_tblPersonas_pers_Id");
+
+                entity.HasOne(d => d.paqu_UsuarioCreaNavigation)
+                    .WithMany(p => p.tblPaquetespaqu_UsuarioCreaNavigation)
+                    .HasForeignKey(d => d.paqu_UsuarioCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Paq_tblPaquetes_paqu_UsuarioCrea_Gral_tblUsuarios_usua_Id");
+
+                entity.HasOne(d => d.paqu_UsuarioModificaNavigation)
+                    .WithMany(p => p.tblPaquetespaqu_UsuarioModificaNavigation)
+                    .HasForeignKey(d => d.paqu_UsuarioModifica)
+                    .HasConstraintName("FK_Paq_tblPaquetes_paqu_UsuarioModifica_Gral_tblUsuarios_usua_Id");
+            });
+
+            modelBuilder.Entity<tblPersonas>(entity =>
+            {
+                entity.HasKey(e => e.pers_Id)
+                    .HasName("PK_Gral_tblPersonas_pers_Id");
+
+                entity.ToTable("tblPersonas", "Gral");
+
+                entity.HasIndex(e => e.pers_DNI, "UQ_Gral_tblPersonas_pers_DNI")
+                    .IsUnique();
+
+                entity.Property(e => e.pers_Apellidos)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.pers_DNI)
+                    .IsRequired()
+                    .HasMaxLength(13);
+
+                entity.Property(e => e.pers_Nombres)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.pers_Sexo)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.pers_EstadoCivilNavigation)
+                    .WithMany(p => p.tblPersonas)
+                    .HasForeignKey(d => d.pers_EstadoCivil)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tblPersonas_pers_EstadoCivil_Gral_tblEstadosCiviles_esci_Id");
+            });
+
+            modelBuilder.Entity<tblUsuarios>(entity =>
+            {
+                entity.HasKey(e => e.usua_Id)
+                    .HasName("PK__tblUsuar__EA3EC7A211D08D07");
+
+                entity.ToTable("tblUsuarios", "Gral");
+
+                entity.HasIndex(e => e.usua_Usuario, "UQ_Gral_tblUsuarios_usua_Usuarios")
+                    .IsUnique();
+
+                entity.Property(e => e.usua_Clave)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.usua_Usuario)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.HasOne(d => d.usua_EmpleadoNavigation)
+                    .WithMany(p => p.tblUsuarios)
+                    .HasForeignKey(d => d.usua_Empleado)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tblUsuarios_usua_Empleado_Gral_tblPersonas_pers_Id");
             });
 
             OnModelCreatingPartial(modelBuilder);

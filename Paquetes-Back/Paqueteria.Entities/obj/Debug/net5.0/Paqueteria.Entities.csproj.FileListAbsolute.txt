@@ -9,3 +9,15 @@ C:\Users\DELL\Desktop\Sistema_de_Paquetes\Paqueteria.Entities\obj\Debug\net5.0\P
 C:\Users\DELL\Desktop\Sistema_de_Paquetes\Paqueteria.Entities\obj\Debug\net5.0\Paqueteria.Entities.dll
 C:\Users\DELL\Desktop\Sistema_de_Paquetes\Paqueteria.Entities\obj\Debug\net5.0\ref\Paqueteria.Entities.dll
 C:\Users\DELL\Desktop\Sistema_de_Paquetes\Paqueteria.Entities\obj\Debug\net5.0\Paqueteria.Entities.pdb
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\bin\Debug\net5.0\Paqueteria.Entities.deps.json
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\bin\Debug\net5.0\Paqueteria.Entities.dll
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\bin\Debug\net5.0\ref\Paqueteria.Entities.dll
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\bin\Debug\net5.0\Paqueteria.Entities.pdb
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\obj\Debug\net5.0\Paqueteria.Entities.csproj.AssemblyReference.cache
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\obj\Debug\net5.0\Paqueteria.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\obj\Debug\net5.0\Paqueteria.Entities.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\obj\Debug\net5.0\Paqueteria.Entities.AssemblyInfo.cs
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\obj\Debug\net5.0\Paqueteria.Entities.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\obj\Debug\net5.0\Paqueteria.Entities.dll
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\obj\Debug\net5.0\ref\Paqueteria.Entities.dll
+C:\Users\DELL\Desktop\sistema-paquetes\Paquetes-Back\Paqueteria.Entities\obj\Debug\net5.0\Paqueteria.Entities.pdb

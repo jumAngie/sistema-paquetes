@@ -17,6 +17,7 @@ namespace Paqueteria.BusinessLogic
         {
 
             services.AddScoped<DepartamentosRepository>();
+            services.AddScoped<UsuariosRepository>();
 
             PaqueteriaConex.BuildConnectionString(connection);
 

@@ -16,11 +16,11 @@ namespace Paqueteria.API.Extensions
 
             #region Departamento
 
-            CreateMap<tbDepartamentos, DepartamentoViewModel>().ReverseMap();
+            CreateMap<tblDepartamentos, DepartamentoViewModel>().ReverseMap();
             #endregion
 
 
-
+            CreateMap<tblUsuarios, UsuariosViewModel>().ReverseMap();
         }
     }
 }

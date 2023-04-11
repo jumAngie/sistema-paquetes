@@ -6,8 +6,13 @@ using System.Collections.Generic;
 
 namespace Paqueteria.Entities.Entities
 {
-    public partial class tbEstadoCiviles
+    public partial class tblEstadoCiviles
     {
+        public tblEstadoCiviles()
+        {
+            tblPersonas = new HashSet<tblPersonas>();
+        }
+
         public int esci_ID { get; set; }
         public string esci_Descripcion { get; set; }
         public int esci_UsuarioCrea { get; set; }
@@ -15,5 +20,7 @@ namespace Paqueteria.Entities.Entities
         public int? esci_UsuarioModifica { get; set; }
         public DateTime? esci_FechaModifica { get; set; }
         public bool? esci_Estado { get; set; }
+
+        public virtual ICollection<tblPersonas> tblPersonas { get; set; }
     }
 }

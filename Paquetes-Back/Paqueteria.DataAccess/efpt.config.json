@@ -18,16 +18,44 @@
          "ObjectType": 0
       },
       {
-         "Name": "[Gral].[tbCiudades]",
+         "Name": "[Gral].[tblCiudades]",
          "ObjectType": 0
       },
       {
-         "Name": "[Gral].[tbDepartamentos]",
+         "Name": "[Gral].[tblDepartamentos]",
          "ObjectType": 0
       },
       {
-         "Name": "[Gral].[tbEstadoCiviles]",
+         "Name": "[Gral].[tblEstadoCiviles]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tblPersonas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tblUsuarios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Paq].[tblCamiones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Paq].[tblEnvios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Paq].[tblEnviosPorPaquetes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Paq].[tblPaquetes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WV_tbLUsuarios]",
+         "ObjectType": 3
       }
    ],
    "UiHint": "DESKTOP-BDFGUVA\\SQLEXPRESS.Paqueteria",

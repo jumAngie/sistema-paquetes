@@ -17,6 +17,25 @@ namespace Paqueteria.DataAccess.Repositories
 
         public static string ListarDepartamentos = "Departamentos";
 
+        #region Login
 
+        public static string ValidarLogin = "UDP_Inicio_Login";
+
+        #endregion
+
+
+        #region Usuarios
+        public static string InsertarUsuario = "UDP_InsertUsuario";
+
+        public static string ActualizarUsuario = "UDP_ActualizarUsuario";
+
+        public static string EliminarUsuario = "UDP_EliminarUsuario";
+
+        public static string EmpleadoSin = "UDP_Empleados_Sin_Usuario";
+
+
+
+        
+        #endregion
     }
 }

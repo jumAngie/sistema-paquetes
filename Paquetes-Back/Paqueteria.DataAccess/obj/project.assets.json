@@ -6803,11 +6803,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL\\Desktop\\Sistema_de_Paquetes\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
       "projectName": "Paqueteria.DataAccess",
-      "projectPath": "C:\\Users\\DELL\\Desktop\\Sistema_de_Paquetes\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
+      "projectPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL\\Desktop\\Sistema_de_Paquetes\\Paqueteria.DataAccess\\obj\\",
+      "outputPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -6830,8 +6830,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\DELL\\Desktop\\Sistema_de_Paquetes\\Paqueteria.Entities\\Paqueteria.Entities.csproj": {
-              "projectPath": "C:\\Users\\DELL\\Desktop\\Sistema_de_Paquetes\\Paqueteria.Entities\\Paqueteria.Entities.csproj"
+            "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj": {
+              "projectPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj"
             }
           }
         }

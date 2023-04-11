@@ -396,15 +396,22 @@ CREATE TABLE Gral.tblPersonas
 
 		CONSTRAINT PK_Gral_tblPersonas_pers_Id		PRIMARY KEY(pers_Id),
 		CONSTRAINT FK_Gral_tblPersonas_pers_EstadoCivil_Gral_tblEstadosCiviles_esci_Id FOREIGN KEY (pers_EstadoCivil) REFERENCES Gral.tblEstadoCiviles (esci_Id),
-		CONSTRAINT CK_Gral_tblPersonas_pers_Sexo	CHECK(pers_EstadoCivil IN('F','M')),
+		CONSTRAINT CK_Gral_tblPersonas_pers_Sexo	CHECK(pers_Sexo IN('F','M')),
 		CONSTRAINT UQ_Gral_tblPersonas_pers_DNI		UNIQUE(pers_DNI)
 );
+
+INSERT INTO Gral.tblPersonas
+VALUES ('Angie','Caceres','0501200401519',1,'F',1)
+
+INSERT INTO Gral.tblPersonas
+VALUES ('Alex','Pineda','0501203401519',1,'M',1)
+
 
 CREATE TABLE Gral.tblUsuarios
 (
 		usua_Id			INT IDENTITY(1,1) PRIMARY KEY,
 		usua_Usuario	NVARCHAR(250)	  NOT NULL,
-		usua_Clave		NVARCHAR(250)	  NOT NULL,
+		usua_Clave		VARCHAR(250)	  NOT NULL,
 		usua_Empleado	INT				  NOT NULL,
 		usua_EsAdmin	BIT				  NOT NULL
 
@@ -415,6 +422,20 @@ CREATE TABLE Gral.tblUsuarios
 -- ****************************** AÑADIR LOS CONSTRAINTS LUEGO DE INSERTAR 1 USUARIO ******************************
 --CONSTRAINT FK_Gral_tblUsuarios_usua_UsuarioCrea_Gral_tblUsuarios_usua_Id		FOREIGN KEY (usua_UsuarioCrea)		REFERENCES Gral.tblUsuarios	(usua_Id),
 --CONSTRAINT FK_Gral_tblUsuarios_usua_UsuarioModifica_Gral_tblUsuarios_usua_Id FOREIGN KEY (paqu_UsuarioModifica)	REFERENCES Gral.tblUsuarios	(usua_Id)
+
+
+
+DECLARE @CLAVE VARBINARY (MAX) = HASHBYTES('SHA2_512','123')
+DECLARE @INCRI VARCHAR(MAX) = CONVERT(VARCHAR(MAX),@CLAVE,2)
+
+INSERT INTO Gral.tblUsuarios
+VALUES('Admin',@INCRI,1,1)
+
+DECLARE @CLAVE2 VARBINARY (MAX) = HASHBYTES('SHA2_512','1234')
+DECLARE @INCRI2 VARCHAR(MAX) = CONVERT(VARCHAR(MAX),@CLAVE2,2)
+
+INSERT INTO Gral.tblUsuarios
+VALUES('No_Admin',@INCRI2,2,0)
 
 
 

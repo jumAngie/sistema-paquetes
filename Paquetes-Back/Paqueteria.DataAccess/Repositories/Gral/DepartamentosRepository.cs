@@ -11,36 +11,36 @@ using Paqueteria.DataAccess;
 
 namespace Paqueteria.DataAccess.Repositories.Gral
 {
-    public class DepartamentosRepository : IRepository<tbDepartamentos>
+    public class DepartamentosRepository : IRepository<tblDepartamentos>
     {
-        public RequestStatus Delete(tbDepartamentos item)
+        public RequestStatus Delete(tblDepartamentos item)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<tbDepartamentos> ListarDepartamentos()
+        public IEnumerable<tblDepartamentos> ListarDepartamentos()
         {
             using var db = new SqlConnection(PaqueteriaConex.ConnectionString);
       
-            return db.Query<tbDepartamentos>(ScriptsDatabase.ListarDepartamentos, commandType: CommandType.StoredProcedure);
+            return db.Query<tblDepartamentos>(ScriptsDatabase.ListarDepartamentos, commandType: CommandType.StoredProcedure);
 
         }
-        public tbDepartamentos Find(int? id)
+        public tblDepartamentos Find(int? id)
         {
             throw new NotImplementedException();
         }
 
-        public RequestStatus Insert(tbDepartamentos item)
+        public RequestStatus Insert(tblDepartamentos item)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<tbDepartamentos> List()
+        public IEnumerable<tblDepartamentos> List()
         {
             throw new NotImplementedException();
         }
 
-        public RequestStatus Update(tbDepartamentos item, int id)
+        public RequestStatus Update(tblDepartamentos item, int id)
         {
             throw new NotImplementedException();
         }
