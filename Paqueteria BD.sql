@@ -406,6 +406,8 @@ VALUES ('Angie','Caceres','0501200401519',1,'F',1)
 INSERT INTO Gral.tblPersonas
 VALUES ('Alex','Pineda','0501203401519',1,'M',1)
 
+INSERT INTO Gral.tblPersonas
+VALUES	('Prueba1', 'Prueba1', '0512200300736', 1, 'F', 1)
 
 CREATE TABLE Gral.tblUsuarios
 (
