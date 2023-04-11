@@ -1,0 +1,8 @@
+<style>
+:root {
+--brand-color: #019326;
+--dark-color: #03012C;
+--mid-color: #A4A4A5;
+--light-color: #E6E6E6;
+  }
+</style>
