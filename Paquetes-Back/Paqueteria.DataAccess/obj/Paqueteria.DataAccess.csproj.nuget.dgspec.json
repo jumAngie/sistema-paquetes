@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj": {}
+    "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj": {
+    "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
         "projectName": "Paqueteria.DataAccess",
-        "projectPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -34,8 +32,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj": {
-                "projectPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj"
+              "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj": {
+                "projectPath": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj"
               }
             }
           }
@@ -94,24 +92,22 @@
         }
       }
     },
-    "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj": {
+    "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj",
         "projectName": "Paqueteria.Entities",
-        "projectPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\obj\\",
+        "projectPath": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj",
+        "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
