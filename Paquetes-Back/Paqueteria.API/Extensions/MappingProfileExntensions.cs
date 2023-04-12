@@ -14,13 +14,14 @@ namespace Paqueteria.API.Extensions
         public MappingProfileExntensions()
        {
 
-            #region Departamento
-
+     
             CreateMap<tblDepartamentos, DepartamentoViewModel>().ReverseMap();
-            #endregion
+           
 
 
             CreateMap<tblUsuarios, UsuariosViewModel>().ReverseMap();
+
+            CreateMap<tblEnviosPorPaquetes, EnviosPorPaqueteViewModel>().ReverseMap();
         }
     }
 }

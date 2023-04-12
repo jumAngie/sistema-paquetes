@@ -15,7 +15,11 @@ namespace Paqueteria.DataAccess.Repositories
         //public static string InsertarUsuario = "Acce.UDP_InsertUsuario";
         //#endregion
 
-        public static string ListarDepartamentos = "Departamentos";
+        public static string ListarDepartamentos = " Gral.UDP_Departamentos";
+
+        public static string ListarMunicipios = " Gral.UDP_Municipios";
+
+        public static string ListarEstadoCiviles = " Gral.UDP_EstadoCivil";
 
         #region Login
 
@@ -33,9 +37,22 @@ namespace Paqueteria.DataAccess.Repositories
 
         public static string EmpleadoSin = "UDP_Empleados_Sin_Usuario";
 
-
-
-        
         #endregion
+
+
+        #region Envios Por Paquetes
+
+        public static string PaquetesPorEnvio = "Paq.UDP_Envios_Por_Paquete_Mostrar";
+    
+        public static string EnviosPorPaqueteInsertar = "Paq.UDP_Envios_Por_Paquete_Insertar";
+
+        public static string EnviosPorPaqueteEliminar = "Paq.UDP_Envios_Por_Paquete_Eliminar";
+
+
+        #endregion
+
+
+        public static string EnviosTodos = " Paq.UDP_Envios_Mostrar";
+
     }
 }

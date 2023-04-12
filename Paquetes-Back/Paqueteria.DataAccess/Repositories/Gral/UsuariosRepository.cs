@@ -34,10 +34,17 @@ namespace Paqueteria.DataAccess.Repositories.Gral
 
         public RequestStatus InsertarUsuario(tblUsuarios item)
         {
+            int admin = 0;
+
+            if (item.usua_EsAdmin == true)
+            {
+                admin = 1;
+            }
+            
             var parameters = new DynamicParameters();
             parameters.Add("@usua_Usuario", item.usua_Usuario, DbType.String, ParameterDirection.Input);
             parameters.Add("@usua_Clave", item.usua_Clave, DbType.String, ParameterDirection.Input);
-            parameters.Add("@usua_EsAdmin", item.usua_EsAdmin, DbType.Boolean, direction: ParameterDirection.Input);           
+            parameters.Add("@usua_EsAdmin", admin, DbType.Boolean, direction: ParameterDirection.Input);           
             parameters.Add("@usua_Empleado", item.usua_Empleado, DbType.Int32, direction: ParameterDirection.Input);
             parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
             using var db = new SqlConnection(PaqueteriaConex.ConnectionString);
@@ -56,10 +63,23 @@ namespace Paqueteria.DataAccess.Repositories.Gral
 
         public RequestStatus UpdateUsuario(tblUsuarios item)
         {
+
+            int admin = 0;
+
+            if (item.usua_EsAdmin == true)
+            {
+                admin = 1;
+            }
+
+            if (item.usua_Clave == "" || item.usua_Clave == null)
+            {
+                item.usua_Clave = "a:>2a";
+            }
             var parameters = new DynamicParameters();
+            parameters.Add("@usua_Id", item.usua_Id, DbType.String, ParameterDirection.Input);
             parameters.Add("@usua_Usuario", item.usua_Usuario, DbType.String, ParameterDirection.Input);
             parameters.Add("@usua_Clave", item.usua_Clave, DbType.String, ParameterDirection.Input);
-            parameters.Add("@usua_EsAdmin", item.usua_EsAdmin, DbType.Boolean, direction: ParameterDirection.Input);
+            parameters.Add("@usua_EsAdmin", admin, DbType.Boolean, direction: ParameterDirection.Input);
             parameters.Add("@usua_Empleado", item.usua_Empleado, DbType.Int32, direction: ParameterDirection.Input);
             parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
             using var db = new SqlConnection(PaqueteriaConex.ConnectionString);
