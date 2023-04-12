@@ -27,10 +27,10 @@ namespace Paqueteria.API.Controllers
         }
 
         [HttpGet("List")]
-        public IActionResult List()
+        public IEnumerable<WV_tbLUsuarios> List()
         {
             var list = _generalServices.ListUsuarios();
-            return Ok(list);
+            return list;
         }
 
         [HttpPost("Login")]
