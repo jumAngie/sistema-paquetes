@@ -30,6 +30,29 @@ namespace Paqueteria
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(option =>
+            {
+                option.AddPolicy("AllowFlutter", builder =>
+                {
+
+                    builder.SetIsOriginAllowed(origen => new Uri(origen).Host == "localhost")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+
+                });
+
+
+
+            });
+
+
+
+
+
+
+
+
+
             services.DataAccess(Configuration.GetConnectionString("ConexionPaque"));
             services.BusinessLogic();
             services.AddAutoMapper(x => x.AddProfile<MappingProfileExntensions>(), AppDomain.CurrentDomain.GetAssemblies());
@@ -82,6 +105,9 @@ namespace Paqueteria
             });
 
             app.UseRouting();
+
+            app.UseCors("AllowFlutter");
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

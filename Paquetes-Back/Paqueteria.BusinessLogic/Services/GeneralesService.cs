@@ -85,20 +85,14 @@ namespace Paqueteria.BusinessLogic.Services
             }
         }
 
-        public ServiceResult ListUsuarios()
+        public IEnumerable<WV_tbLUsuarios> ListUsuarios()
         {
             var result = new ServiceResult();
 
-            try
-            {
+            
                 var list = _usuariosRepository.List();
-                return result.Ok(list);
-            }
-            catch (Exception ex)
-            {
-
-                return result.Error(ex.Message);
-            }
+                return list;
+           
         }
 
         public ServiceResult ListarUsuarioEmpleados()
