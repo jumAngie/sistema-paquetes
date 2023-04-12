@@ -15,11 +15,11 @@ namespace Paqueteria.DataAccess.Repositories
         //public static string InsertarUsuario = "Acce.UDP_InsertUsuario";
         //#endregion
 
-        public static string ListarDepartamentos = " Gral.UDP_Departamentos";
+        public static string ListarDepartamentos = "Gral.UDP_Departamentos";
 
-        public static string ListarMunicipios = " Gral.UDP_Municipios";
+        public static string ListarMunicipios = "Gral.UDP_Municipios";
 
-        public static string ListarEstadoCiviles = " Gral.UDP_EstadoCivil";
+        public static string ListarEstadoCiviles = "Gral.UDP_EstadoCivil";
 
         #region Login
 
