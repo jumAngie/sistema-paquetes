@@ -52,7 +52,7 @@ class _ListadoUsuariosState extends State<ListadoUsuarios> {
 List<Widget> listado(List<dynamic> info){
   List<Widget> lista = [];
   info.forEach((element) { 
-    lista.add(Text(element["usua_Id"] + ' ' + element["usua_Usuario"] + ' ' + element['es_Admin']));
+    lista.add(Text(element["usua_Usuario"]));
    });
 
    return lista;
