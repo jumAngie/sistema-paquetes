@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Paqueteria.DataAccess;
 using Paqueteria.DataAccess.Repositories.Gral;
+using Paqueteria.DataAccess.Repositories.Paq;
 
 namespace Paqueteria.BusinessLogic
 {
@@ -18,6 +19,7 @@ namespace Paqueteria.BusinessLogic
 
             services.AddScoped<DepartamentosRepository>();
             services.AddScoped<UsuariosRepository>();
+            services.AddScoped<EnviosPorPaqueteRepository>();
 
             PaqueteriaConex.BuildConnectionString(connection);
 
@@ -28,6 +30,7 @@ namespace Paqueteria.BusinessLogic
         {
 
             services.AddScoped<GeneralesService>();
+            services.AddScoped<PaqueteriaServices>();
 
         }
     }
