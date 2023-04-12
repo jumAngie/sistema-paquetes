@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/util/iconos_menu.dart';
 
@@ -42,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                     height: 10,
                   ),
                   Text(
-                  '¡ Bienvenido a EcoPack™ !',
+                  '¡Bienvenido a EcoPack™!',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -213,8 +215,9 @@ class _HomePageState extends State<HomePage> {
                         Icon(Icons.more_horiz)
                       ],
                     ),
+
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
 
 
@@ -228,10 +231,11 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.green),
                           title: Text('Misión'),
                           subtitle: Text('Nuestra misión es ofrecer soluciones de envío y entrega ecológicas y responsables, protegiendo el medio ambiente y fomentando la sostenibilidad.',
-                          ),
+                          textAlign: TextAlign.justify,
+                          )
                           ),
                     ),
-
+                    
                     SizedBox(
                       height: 10,
                     ),
@@ -244,7 +248,8 @@ class _HomePageState extends State<HomePage> {
                           leading: Icon(Icons.remove_red_eye_rounded,
                           color: Colors.green),
                           title: Text('Visión'),
-                          subtitle: Text('Nuestra visión es liderar el camino hacia un futuro más sostenible y consciente del medio ambiente. Queremos ser reconocidos como la opción preferida para aquellos que buscan una alternativa ecológica y responsable en el envío y la entrega de paquetes.',
+                          subtitle: Text('Nuestra visión es liderar el camino hacia un futuro más sostenible y consciente del medio ambiente.',
+                          textAlign: TextAlign.justify,
                           ),
                           ),
                     )
