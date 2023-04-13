@@ -5,6 +5,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/util/iconos_menu.dart';
 import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
+import 'package:flutter_paqueteria/navigation/routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,7 +21,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.green[600],
       bottomNavigationBar: BNavigator(),
-      body: SafeArea(
+      body:
+      SafeArea(
         child: 
         Column(
           children: [

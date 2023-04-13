@@ -16,9 +16,8 @@ class _BNavigatorState extends State<BNavigator> {
       currentIndex: index,
         onTap: (int i){
           setState(() {
-            
+            index = i;
           });
-          index = i;
         },
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.green,

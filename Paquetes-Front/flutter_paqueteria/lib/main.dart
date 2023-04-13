@@ -8,6 +8,7 @@ import 'package:flutter_paqueteria/pages/index_page.dart';
 import 'package:flutter_paqueteria/pages/usuarios_index_page.dart';
 import 'package:flutter_paqueteria/pages/paquetes_index_page.dart';
 import 'package:flutter_paqueteria/pages/tracking_index_page.dart';
+import 'package:flutter_paqueteria/pages/usuario_perfil_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget{
         'home': ( _ ) => HomePage(),
         'envios_index_page': ( _ ) =>  ListadoEnvios(),
         'paquetes_index_page': ( _ ) => ListadoPaquetes(),
-        'tracking_index_page': ( _ ) => Tracking()
+        'tracking_index_page': ( _ ) => Tracking(),
+        'profile_index_page': ( _ ) => Profile()
       }
       
     );
