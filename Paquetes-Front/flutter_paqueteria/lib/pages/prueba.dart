@@ -72,4 +72,3 @@ class _ListadoUsuariosState extends State<ListadoUsuarios> {
     );
   }
 }
-

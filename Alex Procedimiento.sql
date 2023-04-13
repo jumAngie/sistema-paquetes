@@ -61,7 +61,7 @@ CREATE OR ALTER VIEW WV_tbLUsuarios
 AS
  SELECT usua.usua_Id, usua.usua_Usuario,
 		CASE usua.usua_EsAdmin
-		WHEN '1' THEN 'Sí'
+		WHEN '1' THEN 'Si'
 		WHEN '0' THEN 'No'
 		END AS 'Es_Admin' 
 		FROM Gral.tbLUsuarios usua 
