@@ -4,6 +4,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/util/iconos_menu.dart';
+import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,16 +14,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green[600],
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: ''),
-      ],
-      ),
+      bottomNavigationBar: BNavigator(),
       body: SafeArea(
         child: 
         Column(
@@ -141,8 +138,13 @@ class _HomePageState extends State<HomePage> {
                       // Icono de Paquetes
                       Column(
               children: [
-                IconoMenu(
-                  icono: '📦',
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, 'paquetes_index_page');
+                  },
+                  child: IconoMenu(
+                    icono: '📦',
+                  ),
                 ),
                 SizedBox(
                   height: 5,
@@ -156,8 +158,13 @@ class _HomePageState extends State<HomePage> {
                       // Icono de Tracking
                       Column(
               children: [
-                IconoMenu(
-                  icono: '🚛',
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, 'tracking_index_page');
+                  },
+                  child: IconoMenu(
+                    icono: '🚛',
+                  ),
                 ),
                 SizedBox(
                   height: 5,
@@ -171,8 +178,13 @@ class _HomePageState extends State<HomePage> {
                       // Icono de Ajustes
                       Column(
               children: [
-                IconoMenu(
-                  icono: '📩',
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, 'envios_index_page');
+                  },
+                  child: IconoMenu(
+                    icono: '📩',
+                  ),
                 ),
                 SizedBox(
                   height: 5,
