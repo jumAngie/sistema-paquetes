@@ -52,7 +52,16 @@ class _ListadoUsuariosState extends State<ListadoUsuarios> {
 List<Widget> listado(List<dynamic> info){
   List<Widget> lista = [];
   info.forEach((element) { 
-    lista.add(Text( element["usua_Id"] + element["usua_Usuario"]));
+    String EsAdmin = '';
+    if(element['es_Admin'] == 'No')
+    {
+        EsAdmin = 'No';
+    }
+    else
+    {
+      EsAdmin = "Sí";
+    }
+    lista.add(Text('${element["usua_Id"].toString()}  ${element["usua_Usuario"]}  $EsAdmin'));
    });
 
    return lista;
