@@ -21,6 +21,9 @@ namespace Paqueteria.BusinessLogic
             services.AddScoped<UsuariosRepository>();
             services.AddScoped<EnviosPorPaqueteRepository>();
 
+            services.AddScoped<EnviosRepository>();
+
+
             PaqueteriaConex.BuildConnectionString(connection);
 
         }

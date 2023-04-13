@@ -51,8 +51,19 @@ namespace Paqueteria.DataAccess.Repositories
 
         #endregion
 
+        #region Envios 
 
-        public static string EnviosTodos = " Paq.UDP_Envios_Mostrar";
+        public static string EnviosInsertar = "Paq.UDP_tblEnvios_Insertar";
+
+        public static string EnviosEditar = "Paq.UDP_tblEnvios_Editar";
+
+        public static string EnviosEliminar = "Paq.UDP_tblEnvios_Eliminar";
+
+        #endregion
+      
+        
+        
+        public static string EnviosTodos = " Paq.UDP_Envios_Mostrar";//Para ddl de Envios
 
     }
 }

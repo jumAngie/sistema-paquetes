@@ -3,8 +3,6 @@ USE Paqueteria
 GO
 
 
-
-
 CREATE OR ALTER PROCEDURE UDP_Inicio_Login
 @usua_Usuario	NVARCHAR(250),
 @usua_Clave		VARCHAR(250)
@@ -160,10 +158,12 @@ BEGIN TRY
 	
 	DELETE Gral.tblUsuarios where usua_Id = @usua_Id
 
+	SET @status = 1;
 END TRY
 BEGIN CATCH 
 	SET @status = 0;
 END CATCH 
+
 END;
 
 ----------------------------------------------------------------------------------------------------------------------
@@ -244,5 +244,90 @@ END CATCH
 
 END
 
+
+------------------------------------------------------------------------------------------------
+--------------------------------------ENVIOS---------------------------------------------------
+GO
+CREATE OR ALTER VIEW WV_tblEnvios
+AS
+ SELECT T1.envi_Id, 
+        T1.envi_Camion,
+		T3.pers_Nombres + ' ' + T3.pers_Apellidos AS Transportista,		
+		T1.envi_FechaSalida, 
+		T1.envi_FechaEntrega 
+		
+		FROM Paq.tblEnvios T1 INNER JOIN Paq.tblCamiones T2
+		ON T1.envi_Camion = T2.cami_Id INNER JOIN Gral.tblPersonas T3
+		ON T2.cami_Empleado = T3.pers_Id
+
+
+		GO
+CREATE OR ALTER PROCEDURE Paq.UDP_tblEnvios_Insertar
+@envi_Camion				INT	,	
+@envi_FechaSalida		DATETIME,
+@envi_FechaEntrega		DATETIME,
+@envi_UsuarioCrea        INT,
+@status				INT OUTPUT
+AS
+BEGIN
+
+BEGIN TRY
+INSERT INTO tblEnvios (envi_Camion, envi_FechaSalida, envi_FechaEntrega, envi_UsuarioCrea)
+VALUES(@envi_Camion,@envi_FechaSalida,@envi_FechaEntrega,@envi_UsuarioCrea)
+	SET @status = 1;
+END TRY
+BEGIN CATCH 
+	SET @status = 0;
+END CATCH 
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE Paq.UDP_tblEnvios_Editar
+@envi_Id				     INT,
+@envi_Camion				INT	,	
+@envi_FechaSalida		DATETIME,
+@envi_FechaEntrega		DATETIME,
+@envi_UsuarioModifica        INT,
+@status				INT OUTPUT
+AS
+BEGIN
+
+BEGIN TRY
+UPDATE tblEnvios
+    SET envi_Camion = @envi_Camion,
+    envi_FechaSalida = @envi_FechaSalida,
+	envi_FechaEntrega = @envi_FechaEntrega,
+	envi_UsuarioModifica = @envi_UsuarioModifica,
+	envi_FechaModifica = GETDATE()
+	WHERE envi_Id = @envi_Id
+	SET @status = 1;
+END TRY
+BEGIN CATCH 
+	SET @status = 0;
+END CATCH 
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE Paq.UDP_tblEnvios_Eliminar
+@envi_Id				     INT,	
+@envi_UsuarioModifica        INT,
+@status				INT OUTPUT
+AS
+BEGIN
+
+BEGIN TRY
+UPDATE tblEnvios
+    SET envi_UsuarioModifica = @envi_UsuarioModifica,
+		envi_FechaModifica = GETDATE(),
+		envi_Estado = 0 WHERE envi_Id = @envi_Id
+	
+	SET @status = 1;
+END TRY
+BEGIN CATCH 
+	SET @status = 0;
+END CATCH 
+END;
 
 

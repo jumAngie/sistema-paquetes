@@ -472,6 +472,9 @@ CREATE TABLE Paq.tblCamiones(
 		CONSTRAINT FK_Paq_Camiones_cami_Empleado_Gral_tblPersonas_pers_Id FOREIGN KEY (cami_Empleado) REFERENCES Gral.tblPersonas (pers_Id)
 );
 
+INSERT INTO Paq.tblCamiones
+VALUES (1),
+	   (2)
 
 CREATE TABLE Paq.tblEnvios
 (
@@ -490,6 +493,9 @@ CREATE TABLE Paq.tblEnvios
 		CONSTRAINT FK_Paq_tblEnvios_envi_UsuarioCrea_Gral_tblUsuarios_usua_Id	  FOREIGN KEY (envi_UsuarioCrea)		REFERENCES Gral.tblUsuarios	(usua_Id),
 		CONSTRAINT FK_Paq_tblEnvios_envi_UsuarioModifica_Gral_tblUsuarios_usua_Id FOREIGN KEY (envi_UsuarioModifica)	REFERENCES Gral.tblUsuarios	(usua_Id)
 );
+
+INSERT INTO  Paq.tblEnvios
+VALUES(1,'2023-04-03 08:40:22','2023-04-07 15:31:55',1,Getdate(),null,null,1)
 
 
 CREATE TABLE Paq.tblEnviosPorPaquetes
