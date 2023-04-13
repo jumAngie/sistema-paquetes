@@ -259,6 +259,7 @@ AS
 		FROM Paq.tblEnvios T1 INNER JOIN Paq.tblCamiones T2
 		ON T1.envi_Camion = T2.cami_Id INNER JOIN Gral.tblPersonas T3
 		ON T2.cami_Empleado = T3.pers_Id
+		Where t1.envi_Estado = 1
 
 
 		GO
