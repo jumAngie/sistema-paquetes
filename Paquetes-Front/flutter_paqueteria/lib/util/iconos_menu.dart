@@ -15,7 +15,11 @@ class IconoMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
               decoration: BoxDecoration(
-              color: Colors.green[400],
+                gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color.fromARGB(255, 155, 233, 117), Color.fromARGB(255, 114, 200, 88), Color.fromARGB(255, 85, 253, 90)],
+                                  ),
               borderRadius: BorderRadius.circular(12),
               ),
               padding: EdgeInsets.all(12),

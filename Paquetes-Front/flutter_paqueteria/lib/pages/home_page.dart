@@ -63,7 +63,11 @@ class _HomePageState extends State<HomePage> {
                       // Icono de Notificacion
                       Container(
               decoration: BoxDecoration(
-              color: Colors.green[400],
+                gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color.fromARGB(255, 155, 233, 117), Color.fromARGB(255, 114, 200, 88), Color.fromARGB(255, 85, 253, 90)],
+                                  ),
               borderRadius: BorderRadius.circular(12),
               ),
               padding: EdgeInsets.all(12),
@@ -81,7 +85,11 @@ class _HomePageState extends State<HomePage> {
                     // Barra de Búsqueda
                     Container(
                       decoration: BoxDecoration(
-              color: Colors.green[400],
+               gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color.fromARGB(255, 155, 233, 117), Color.fromARGB(255, 114, 200, 88), Color.fromARGB(255, 85, 253, 90)],
+                                  ),
               borderRadius: BorderRadius.circular(12),
               ),
               padding: EdgeInsets.all(12),
@@ -243,9 +251,17 @@ class _HomePageState extends State<HomePage> {
                         child: ListTile(
                           leading: Icon(Icons.check_circle_outline,
                           color: Colors.green),
-                          title: Text('Misión'),
+                          title: Text(
+                            'Misión',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                            ),
                           subtitle: Text('Nuestra misión es ofrecer soluciones de envío y entrega ecológicas y responsables, protegiendo el medio ambiente y fomentando la sostenibilidad.',
                           textAlign: TextAlign.justify,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
                           )
                           ),
                     ),
@@ -261,9 +277,17 @@ class _HomePageState extends State<HomePage> {
                         child: ListTile(
                           leading: Icon(Icons.remove_red_eye_rounded,
                           color: Colors.green),
-                          title: Text('Visión'),
+                          title: Text(
+                            'Visión',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                            ),
                           subtitle: Text('Nuestra visión es liderar el camino hacia un futuro más sostenible y consciente del medio ambiente.',
                           textAlign: TextAlign.justify,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
                           ),
                           ),
                     )
