@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -29,11 +29,13 @@ class ListadoUsuarios extends StatefulWidget {
 
 class _ListadoUsuariosState extends State<ListadoUsuarios> {
   Future<dynamic>? _futureListado;
+
   @override
   void initState() {
     super.initState();
     _futureListado = _getListado();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,22 +47,25 @@ class _ListadoUsuariosState extends State<ListadoUsuarios> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<dynamic> info = snapshot.data as List<dynamic>;
-            return DataTable(
-              columns: [
-                DataColumn(label: Text('ID')),
-                DataColumn(label: Text('Usuario')),
-                DataColumn(label: Text('Es Admin')),
-              ],
-              rows: info
-                  .map(
-                    (element) => DataRow(cells:
-                     [
-                      DataCell(Text(element['usua_Id'].toString())),
-                      DataCell(Text(element['usua_Usuario'])),
-                      DataCell(Text(element['es_Admin'].toString())),
-                    ]),
-                  )
-                  .toList(),
+            return Container(
+              margin: EdgeInsets.all(16.0),
+              child: DataTable(
+                columnSpacing: 16.0,
+                columns: [
+                  DataColumn(label: Text('ID')),
+                  DataColumn(label: Text('Usuario')),
+                  DataColumn(label: Text('Es Admin')),
+                ],
+                rows: info
+                    .map(
+                      (element) => DataRow(cells: [
+                        DataCell(Text(element['usua_Id'].toString())),
+                        DataCell(Text(element['usua_Usuario'])),
+                        DataCell(Text(element['es_Admin'].toString())),
+                      ]),
+                    )
+                    .toList(),
+              ),
             );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -72,4 +77,3 @@ class _ListadoUsuariosState extends State<ListadoUsuarios> {
     );
   }
 }
-
