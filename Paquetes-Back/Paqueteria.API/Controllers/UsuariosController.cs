@@ -38,8 +38,13 @@ namespace Paqueteria.API.Controllers
         {          
             
                 var item = _mapper.Map<tblUsuarios>(usuariosViewModel);
-                var listado = _generalServices.IniciarSesion(item);
-                return Ok(listado);
+               
+            var listado = _generalServices.IniciarSesion(item);
+
+            listado.Data = _mapper.Map<UsuariosViewModel>(listado.Data);
+
+
+            return Ok(listado);
             
            
 

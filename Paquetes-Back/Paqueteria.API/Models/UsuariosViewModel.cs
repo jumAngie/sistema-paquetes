@@ -9,6 +9,10 @@ namespace Paqueteria.API.Models
     public class UsuariosViewModel
     {
         public int usua_Id { get; set; }
+
+
+        [NotMapped]
+        public string pers_Nombres { get; set; }
         public string usua_Usuario { get; set; }
         public string usua_Clave { get; set; }
         public int usua_Empleado { get; set; }

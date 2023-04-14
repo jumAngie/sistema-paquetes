@@ -105,14 +105,14 @@ namespace Paqueteria.DataAccess.Repositories.Gral
 
 
 
-        public IEnumerable<tblUsuarios> IniciarSesion(tblUsuarios item)
+        public tblUsuarios IniciarSesion(tblUsuarios item)
         {
             using var db = new SqlConnection(PaqueteriaConex.ConnectionString);
             var parametro = new DynamicParameters();
             parametro.Add("@usua_Usuario", item.usua_Usuario, DbType.String, ParameterDirection.Input);
             parametro.Add("@usua_Clave", item.usua_Clave, DbType.String, ParameterDirection.Input);
 
-            return db.Query<tblUsuarios>(ScriptsDatabase.ValidarLogin, parametro, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<tblUsuarios>(ScriptsDatabase.ValidarLogin, parametro, commandType: CommandType.StoredProcedure);
         }
 
         //public RequestStatus RestablecerPassword(tblUsuarios item)
