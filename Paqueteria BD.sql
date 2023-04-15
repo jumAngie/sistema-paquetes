@@ -1,5 +1,5 @@
 
--- DROP DATABASE Paqueteria
+	-- DROP DATABASE Paqueteria
 
 CREATE DATABASE Paqueteria
 GO
@@ -410,6 +410,13 @@ VALUES ('Alex','Pineda','0501203401519',1,'M',1)
 INSERT INTO Gral.tblPersonas
 VALUES	('Prueba1', 'Prueba1', '0512200300736', 1, 'F', 1)
 
+INSERT INTO Gral.tblPersonas
+VALUES	('Carlos', 'Pineda', '0512200300966', 0, 'M', 1),
+        ('Marcos', 'Prez', '0512202300784', 0, 'M', 1)
+		
+
+
+
 CREATE TABLE Gral.tblUsuarios
 (
 		usua_Id			INT IDENTITY(1,1) PRIMARY KEY,
@@ -471,6 +478,17 @@ CREATE TABLE Paq.tblPaquetes
 		CONSTRAINT FK_Paq_tblPaquetes_paqu_UsuarioModifica_Gral_tblUsuarios_usua_Id FOREIGN KEY (paqu_UsuarioModifica)	REFERENCES Gral.tblUsuarios	(usua_Id)
 );
 
+
+INSERT INTO Paq.tblPaquetes
+VALUES(0101,4,12,'Casa Roja donde los olivos','Lo resibira una señora ingeniera','2023-12-03 8:15:00','2023-12-22 08:40:22', null,1,GETDATE(),null,null,1),
+      (0102,4,120,'Calle 12, Bloque 3','Lo resibira una señora ingeniera','2023-12-03 8:25:25','2023-12-22 08:40:22', null,1,GETDATE(),null,null,1),
+	  (0103,4,52,'Ave.16, NO, Calle 47, Casa 58, Bloque 25','Lo resibira una señora ingeniera','2023-12-03 8:55:59','2023-12-22 08:40:22', null,1,GETDATE(),null,null,1),
+	  (0104,5,84,'Ave.25, NO, Calle 63, Casa 20, Bloque 63','Casa verde con un arbol de mango','2023-12-03 9:30:55','2023-12-22 15:12:44', null,1,GETDATE(),null,null,1),
+	  (0105,5,96,'Ave.63, NO, Calle 32, Casa 51, Bloque 14','Casa Rosa con reja de metal','2023-12-03 12:55:25','2023-12-22 15:12:44', null,1,GETDATE(),null,null,1),
+	  (0106,5,48,'Ave.45, NO, Calle 45, Casa 62, Bloque 32','Casa Morada con rojo','2023-12-03 15:25:45','2023-12-22 15:12:44', null,1,GETDATE(),null,null,1)
+
+
+
 CREATE TABLE Paq.tblCamiones(
 		
 		cami_Id			INT IDENTITY (1,1) PRIMARY KEY,
@@ -481,15 +499,15 @@ CREATE TABLE Paq.tblCamiones(
 
 INSERT INTO Paq.tblCamiones
 VALUES (1),
-	   (2)
+	   (2),
+	   (3)
 
 CREATE TABLE Paq.tblEnvios
 (
 		envi_Id					INT IDENTITY (1,1) PRIMARY KEY,
 		envi_Camion				INT			NOT NULL,
 		envi_FechaSalida		DATETIME	NOT NULL,
-		envi_FechaEntrega		DATETIME	NOT NULL,
-
+		
 		envi_UsuarioCrea        INT					NOT NULL,
 		envi_FechaCrea          DATETIME			DEFAULT GETDATE(),
 		envi_UsuarioModifica    INT,
@@ -501,8 +519,9 @@ CREATE TABLE Paq.tblEnvios
 		CONSTRAINT FK_Paq_tblEnvios_envi_UsuarioModifica_Gral_tblUsuarios_usua_Id FOREIGN KEY (envi_UsuarioModifica)	REFERENCES Gral.tblUsuarios	(usua_Id)
 );
 
-INSERT INTO  Paq.tblEnvios
-VALUES(1,'2023-04-03 08:40:22','2023-04-07 15:31:55',1,Getdate(),null,null,1)
+INSERT INTO  Paq.tblEnvios(envi_Camion, envi_FechaSalida, envi_UsuarioCrea, envi_FechaCrea, envi_UsuarioModifica, envi_FechaModifica, envi_Estado)
+VALUES(1,'2023-12-22 08:40:22',1,Getdate(),null,null,1),
+      (2,'2023-12-22 15:12:44',1,Getdate(),null,null,1)
 
 
 CREATE TABLE Paq.tblEnviosPorPaquetes
@@ -522,3 +541,11 @@ CREATE TABLE Paq.tblEnviosPorPaquetes
 		CONSTRAINT FK_Paq_tblEnviosPorPaquetes_enpa_UsuarioCrea_Gral_tblUsuarios_usua_Id	  FOREIGN KEY (enpa_UsuarioCrea)		REFERENCES Gral.tblUsuarios	(usua_Id),
 		CONSTRAINT FK_Paq_tblEnviosPorPaquetes_enpa_UsuarioModifica_Gral_tblUsuarios_usua_Id FOREIGN KEY (enpa_UsuarioModifica)	REFERENCES Gral.tblUsuarios	(usua_Id)
 );
+
+INSERT INTO Paq.tblEnviosPorPaquetes(enpa_Envio, enpa_Paquete, enpa_UsuarioCrea)
+VALUES(1,1,1),
+      (1,2,1),
+	  (1,3,1),
+	  (2,4,1),
+	  (2,5,1),
+	  (2,6,1)

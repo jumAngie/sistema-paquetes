@@ -9,7 +9,7 @@ CREATE OR ALTER VIEW WV_tblPaquetes
 AS
  SELECT T1.paqu_Id, 
         T1.paqu_Cliente,
-		T1.paqu_Codigo,o
+		T1.paqu_Codigo,
 		T2.pers_Nombres + T2.pers_Apellidos AS Cliente,		
 		T1.paqu_Ciudad,
 		T3.ciud_Descri,
