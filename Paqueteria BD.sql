@@ -444,13 +444,18 @@ VALUES('No_Admin',@INCRI2,2,0)
 CREATE TABLE Paq.tblPaquetes
 (
 		paqu_Id					INT IDENTITY(1,1),
+		paqu_Codigo				INT					NOT NULL,
 		paqu_Cliente			INT					NOT NULL,
 		paqu_Ciudad				INT					NOT NULL,
 		paqu_DireccionExacta	NVARCHAR(150)		NOT NULL,
+		paqu_Observaciones		NVARCHAR(MAX)		NULL,
+
+		-- ESTADO DE ENVIO --
 		paqu_Bodega				DATETIME			DEFAULT GETDATE(),
 		paqu_EnCamino			DATETIME			NULL,
 		paqu_Entregado			DATETIME			NULL,
 
+		-- AUDI --
 		paqu_UsuarioCrea        INT					NOT NULL,
 		paqu_FechaCrea          DATETIME			DEFAULT GETDATE(),
 		paqu_UsuarioModifica    INT,
@@ -458,6 +463,7 @@ CREATE TABLE Paq.tblPaquetes
 		paqu_Estado				BIT NOT NULL		DEFAULT(1)
 
 		CONSTRAINT PK_Paq_tblPaquetes_paqu_Id										PRIMARY KEY (paqu_Id),
+		CONSTRAINT UQ_Paq_tblPaquetees_paqu_Codigo									UNIQUE	(paqu_Codigo),
 		CONSTRAINT FK_Paq_tblPaquetes_paqu_Cliente_Gral_tblPersonas_pers_Id			FOREIGN KEY (paqu_Cliente)			REFERENCES Gral.tblPersonas (pers_Id),
 		CONSTRAINT FK_Paq_tblPaquetes_paqu_Ciudad_Gral_tblCiudades_ciud_Id			FOREIGN KEY (paqu_Ciudad)			REFERENCES Gral.tblCiudades (ciud_Id),
 		CONSTRAINT FK_Paq_tblPaquetes_paqu_UsuarioCrea_Gral_tblUsuarios_usua_Id		FOREIGN KEY (paqu_UsuarioCrea)		REFERENCES Gral.tblUsuarios	(usua_Id),
@@ -467,7 +473,7 @@ CREATE TABLE Paq.tblPaquetes
 CREATE TABLE Paq.tblCamiones(
 		
 		cami_Id			INT IDENTITY (1,1) PRIMARY KEY,
-		cami_Empleado	INT
+		cami_Empleado	INT					NOT NULL,
 
 		CONSTRAINT FK_Paq_Camiones_cami_Empleado_Gral_tblPersonas_pers_Id FOREIGN KEY (cami_Empleado) REFERENCES Gral.tblPersonas (pers_Id)
 );
