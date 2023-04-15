@@ -30,8 +30,7 @@ namespace Paqueteria.DataAccess.Repositories.Paq
         public RequestStatus Insert(tblEnvios item)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@envi_Camion", item.envi_Camion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@envi_FechaEntrega", item.envi_FechaEntrega, DbType.DateTime, ParameterDirection.Input);
+            parameters.Add("@envi_Camion", item.envi_Camion, DbType.String, ParameterDirection.Input);            
             parameters.Add("@envi_FechaSalida", item.envi_FechaSalida, DbType.DateTime, direction: ParameterDirection.Input);
             parameters.Add("@envi_UsuarioCrea", item.envi_UsuarioCrea, DbType.String, direction: ParameterDirection.Input);
 

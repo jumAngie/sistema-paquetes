@@ -62,7 +62,7 @@ namespace Paqueteria.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(501);
 
-                entity.Property(e => e.envi_FechaEntrega).HasColumnType("datetime");
+                
 
                 entity.Property(e => e.envi_FechaSalida).HasColumnType("datetime");
             });

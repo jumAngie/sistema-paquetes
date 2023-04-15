@@ -253,9 +253,9 @@ AS
  SELECT T1.envi_Id, 
         T1.envi_Camion,
 		T3.pers_Nombres + ' ' + T3.pers_Apellidos AS Transportista,		
-		T1.envi_FechaSalida, 
-		T1.envi_FechaEntrega 
+		T1.envi_FechaSalida 
 		
+	
 		FROM Paq.tblEnvios T1 INNER JOIN Paq.tblCamiones T2
 		ON T1.envi_Camion = T2.cami_Id INNER JOIN Gral.tblPersonas T3
 		ON T2.cami_Empleado = T3.pers_Id
@@ -266,15 +266,14 @@ AS
 CREATE OR ALTER PROCEDURE Paq.UDP_tblEnvios_Insertar
 @envi_Camion				INT	,	
 @envi_FechaSalida		DATETIME,
-@envi_FechaEntrega		DATETIME,
 @envi_UsuarioCrea        INT,
 @status				INT OUTPUT
 AS
 BEGIN
 
 BEGIN TRY
-INSERT INTO tblEnvios (envi_Camion, envi_FechaSalida, envi_FechaEntrega, envi_UsuarioCrea)
-VALUES(@envi_Camion,@envi_FechaSalida,@envi_FechaEntrega,@envi_UsuarioCrea)
+INSERT INTO tblEnvios (envi_Camion, envi_FechaSalida, envi_UsuarioCrea)
+VALUES(@envi_Camion,@envi_FechaSalida,@envi_UsuarioCrea)
 	SET @status = 1;
 END TRY
 BEGIN CATCH 
@@ -288,7 +287,7 @@ CREATE OR ALTER PROCEDURE Paq.UDP_tblEnvios_Editar
 @envi_Id				     INT,
 @envi_Camion				INT	,	
 @envi_FechaSalida		DATETIME,
-@envi_FechaEntrega		DATETIME,
+
 @envi_UsuarioModifica        INT,
 @status				INT OUTPUT
 AS
@@ -298,7 +297,7 @@ BEGIN TRY
 UPDATE tblEnvios
     SET envi_Camion = @envi_Camion,
     envi_FechaSalida = @envi_FechaSalida,
-	envi_FechaEntrega = @envi_FechaEntrega,
+	
 	envi_UsuarioModifica = @envi_UsuarioModifica,
 	envi_FechaModifica = GETDATE()
 	WHERE envi_Id = @envi_Id
