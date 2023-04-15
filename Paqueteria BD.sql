@@ -3,6 +3,7 @@
 
 CREATE DATABASE Paqueteria
 GO
+
 USE Paqueteria
 
 GO
