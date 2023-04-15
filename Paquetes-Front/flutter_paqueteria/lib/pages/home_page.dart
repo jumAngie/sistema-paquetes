@@ -1,11 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/util/iconos_menu.dart';
 import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
-import 'package:flutter_paqueteria/navigation/routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -62,61 +60,32 @@ class _HomePageState extends State<HomePage> {
             
                       // Icono de Notificacion
                       Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color.fromARGB(255, 155, 233, 117), Color.fromARGB(255, 114, 200, 88), Color.fromARGB(255, 85, 253, 90)],
-                                  ),
-              borderRadius: BorderRadius.circular(12),
-              ),
-              padding: EdgeInsets.all(12),
-              child: Icon(
-                Icons.notifications,
-                color: Colors.white,
-              ),
-                      ) 
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [Color.fromARGB(255, 155, 233, 117), Color.fromARGB(255, 114, 200, 88), Color.fromARGB(255, 85, 253, 90)],
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      padding: EdgeInsets.all(12),
+                                      child: GestureDetector(
+                                          onTap: (){
+                                          Navigator.pushReplacementNamed(context, 'login_page');
+                                            }, 
+                                            child: Icon(
+                                              Icons.logout,
+                                              color: Colors.white,
+                                        ),
+                          ),
+                      ),
                     ],
                     ),
             
                     SizedBox(
                       height: 20,
                     ),
-                    // Barra de Búsqueda
-                    Container(
-                      decoration: BoxDecoration(
-               gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color.fromARGB(255, 155, 233, 117), Color.fromARGB(255, 114, 200, 88), Color.fromARGB(255, 85, 253, 90)],
-                                  ),
-              borderRadius: BorderRadius.circular(12),
-              ),
-              padding: EdgeInsets.all(12),
-                      child: 
-                      Row(children: 
-                      [
-              Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              SizedBox(
-               width: 10,
-              ),
-              Text(
-                'Buscar...',
-                style: TextStyle(
-                color: Colors.white),
-              ),
-              
-                      ],
-                    ),
-                    ),
-            
-            
-                    SizedBox(
-                      height: 20,
-                    ),
+                    
             
                     // Iconos
                      Row(

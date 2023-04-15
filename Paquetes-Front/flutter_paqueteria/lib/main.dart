@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget{
         'envios_index_page': ( _ ) =>  ListadoEnvios(),
         'paquetes_index_page': ( _ ) => ListadoPaquetes(),
         'tracking_index_page': ( _ ) => Tracking(),
-        'profile_index_page': ( _ ) => Profile()
+        'profile_index_page': ( _ ) => Profile(),
+        'login_page': ( _ ) => LoginPage()
       }
       
     );
