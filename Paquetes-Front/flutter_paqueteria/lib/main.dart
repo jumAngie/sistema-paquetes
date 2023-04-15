@@ -10,6 +10,7 @@ import 'package:flutter_paqueteria/pages/usuarios_index_page.dart';
 import 'package:flutter_paqueteria/pages/paquetes_index_page.dart';
 import 'package:flutter_paqueteria/pages/tracking_index_page.dart';
 import 'package:flutter_paqueteria/pages/usuario_perfil_page.dart';
+import 'package:flutter_paqueteria/pages/ejemplo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,8 +29,8 @@ class MyApp extends StatelessWidget{
       routes: {
            LoginPage.id : (context)  => LoginPage(),
 
-        'home': ( _ ) => ListadoUsuarios(),
-        'envios_index_page': ( _ ) =>  ListadoEnvios(),
+        'home': ( _ ) => HomePage(),
+        'envios_index_page': ( _ ) =>  ListadoEjemplo(),
         'paquetes_index_page': ( _ ) => ListadoPaquetes(),
         'tracking_index_page': ( _ ) => Tracking(),
         'profile_index_page': ( _ ) => Profile(),
