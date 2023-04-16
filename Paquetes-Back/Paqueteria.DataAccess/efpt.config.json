@@ -58,11 +58,15 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[WV_tblPaquetes]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[WV_tbLUsuarios]",
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-BDFGUVA\\SQLEXPRESS.Paqueteria",
+   "UiHint": "PC-ANGIE\\SQLEXPRESS.Paqueteria",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,
