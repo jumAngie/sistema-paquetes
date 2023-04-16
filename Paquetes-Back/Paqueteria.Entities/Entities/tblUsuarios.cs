@@ -20,13 +20,13 @@ namespace Paqueteria.Entities.Entities
         }
 
         public int usua_Id { get; set; }
-
-        [NotMapped]
-        public string pers_Nombres { get; set; }
         public string usua_Usuario { get; set; }
         public string usua_Clave { get; set; }
         public int usua_Empleado { get; set; }
         public bool usua_EsAdmin { get; set; }
+
+        [NotMapped]
+        public string pers_Nombres { get; set; }
 
         public virtual tblPersonas usua_EmpleadoNavigation { get; set; }
         public virtual ICollection<tblEnviosPorPaquetes> tblEnviosPorPaquetesenpa_UsuarioCreaNavigation { get; set; }

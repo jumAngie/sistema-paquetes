@@ -1,4 +1,4 @@
-	-- USE model
+
 	-- DROP DATABASE Paqueteria
 
 CREATE DATABASE Paqueteria

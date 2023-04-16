@@ -14,6 +14,10 @@
    "SelectedToBeGenerated": 2,
    "Tables": [
       {
+         "Name": "[dbo].[tbEstadoCivil]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[Gral].[tblCiudades]",
          "ObjectType": 0
       },
@@ -58,15 +62,11 @@
          "ObjectType": 3
       },
       {
-         "Name": "[dbo].[WV_tblPaquetes]",
-         "ObjectType": 3
-      },
-      {
          "Name": "[dbo].[WV_tbLUsuarios]",
          "ObjectType": 3
       }
    ],
-   "UiHint": "PC-ANGIE\\SQLEXPRESS.Paqueteria",
+   "UiHint": "DESKTOP-BDFGUVA\\SQLEXPRESS.Paqueteria",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,
