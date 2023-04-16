@@ -39,9 +39,22 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Listado de envíos"),
+          shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(30),
+      bottomRight: Radius.circular(30),
+          ),
+          ),
+            title: Center(child: Text("Listado de envíos",
+                                      style: TextStyle(
+                                        fontWeight: 
+                                        FontWeight.bold),
+                                        )
+                                        ),
+            backgroundColor: Colors.amber[400],
         ),
         body: FutureBuilder<dynamic>(
           future: _listado,
@@ -54,7 +67,7 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
                 itemBuilder: (context, index) {
                   Map<String, dynamic> envio = listaDeEnvios[index];
                   return Card(
-                    color: Colors.green[100],
+                    color: Color.fromARGB(255, 181, 255, 185),
                     margin: EdgeInsets.all(8),
                     child: Row(
                       children: [
@@ -62,10 +75,10 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
                           padding: EdgeInsets.all(8),
                           child: CircleAvatar(
                             radius: 30,
-                            backgroundColor: Colors.green,
+                            backgroundColor: Colors.amber[400],
                             child: Text(
                               "🚛",
-                              style: TextStyle(fontSize: 20, color: Colors.white),
+                              style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 8, 71, 0)),
                             ),
                           ),
                         ),
