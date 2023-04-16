@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+
+import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-String url = "https://api.thecatapi.com/v1/categories";
+String url = "http://empaquetadora-ecopack.somee.com/api/Clientes/List";
 
 Future<dynamic> _getListado() async{
   final respuesta = await http.get(Uri.parse(url));
@@ -17,42 +21,72 @@ Future<dynamic> _getListado() async{
   }
 }
 
-class MyWidget extends StatefulWidget {
+class Graficos extends StatefulWidget {
+  const Graficos({Key? key}) : super(key: key);
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<Graficos> createState() => _GraficosState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _GraficosState extends State<Graficos> {
+  Future<dynamic>? _futureListado;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureListado = _getListado();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Listado'),
+      bottomNavigationBar: BNavigator(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Gráfico de barras'),
+            SizedBox(height: 20),
+            SizedBox(
+              height: 300,
+              child: FutureBuilder<dynamic>(
+                future: _futureListado,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<dynamic> info = snapshot.data as List<dynamic>;
+                    final List<ChartData> data = info.map((element) => ChartData(element['cli_Nombre'], element['cli_Cantidad'])).toList();
+
+                    final series = [
+                      charts.Series(
+                        id: 'Valores',
+                        data: data,
+                        domainFn: (ChartData values, _) => values.cliente,
+                        measureFn: (ChartData values, _) => values.cantidad,
+                      ),
+                    ];
+
+                    return charts.BarChart(
+                      series,
+                      animate: true,
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
+            ),
+          ],
         ),
-        body: FutureBuilder<dynamic>(
-          future: _getListado(),
-          builder: (context, item){
-            if(item.hasData){
-            return ListView(
-                children: listado(item.data),
-              );
-            }
-            else
-            {
-              return Text('Sin Data');
-            }
-          }
-    ),
+      ),
     );
   }
 }
 
-List<Widget> listado(List<dynamic> info){
-  List<Widget> lista = [];
-  info.forEach((element) { 
-    lista.add(Text(element["name"]));
-   });
+class ChartData {
+  final String cliente;
+  final int cantidad;
 
-   return lista;
+  ChartData(this.cliente, this.cantidad);
 }
