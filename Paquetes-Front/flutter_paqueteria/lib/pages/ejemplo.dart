@@ -1,21 +1,21 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 void main() {
-  runApp(ListadoEjemplo());
+  runApp(ListadoEnvios());
 }
 
-class ListadoEjemplo extends StatefulWidget {
-  const ListadoEjemplo({Key? key}) : super(key: key);
+class ListadoEnvios extends StatefulWidget {
+  const ListadoEnvios({Key? key}) : super(key: key);
 
   @override
-  _ListadoEjemploState createState() => _ListadoEjemploState();
+  _ListadoEnviosState createState() => _ListadoEnviosState();
 }
 
-class _ListadoEjemploState extends State<ListadoEjemplo> {
+class _ListadoEnviosState extends State<ListadoEnvios> {
   late Future<dynamic> _listado;
 
   @override
@@ -39,37 +39,67 @@ class _ListadoEjemploState extends State<ListadoEjemplo> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Listado de envios"),
+          shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(30),
+      bottomRight: Radius.circular(30),
+          ),
+          ),
+            title: Center(child: Text("Listado de envíos",
+                                      style: TextStyle(
+                                        fontWeight: 
+                                        FontWeight.bold),
+                                        )
+                                        ),
+            backgroundColor: Colors.amber[400],
         ),
         body: FutureBuilder<dynamic>(
           future: _listado,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.hasData) {
-              List<dynamic> listaDePaquetes = snapshot.data;
+              List<dynamic> listaDeEnvios = snapshot.data;
 
               return ListView.builder(
-                itemCount: listaDePaquetes.length,
+                itemCount: listaDeEnvios.length,
                 itemBuilder: (context, index) {
-                  Map<String, dynamic> paquete = listaDePaquetes[index];
+                  Map<String, dynamic> envio = listaDeEnvios[index];
                   return Card(
-                    color: Colors.green[50], // Color de fondo de la carta
-                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16), // Margen de la carta
-                    child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 8), // Padding del ListTile
-                      title: Text(
-                        paquete["envi_Id"].toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.green[900]), // Estilo del título
-                      ),
-                      subtitle: Text(
-                        paquete["transportista"],
-                        style: TextStyle(fontSize: 16, color: Colors.green[900]), // Estilo del subtítulo
-                      ),
-                      trailing: Text(
-                        "⌛ ${paquete["envi_FechaSalida"]}",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.yellow[900]), // Estilo del texto del precio
-                      ),
+                    color: Color.fromARGB(255, 181, 255, 185),
+                    margin: EdgeInsets.all(8),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8),
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.amber[400],
+                            child: Text(
+                              "🚛",
+                              style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 8, 71, 0)),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ListTile(
+                                title: Text(
+                                  "Envío ID: ${envio["envi_Id"]}",
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                ),
+                                subtitle: Text(
+                                  "ID del Camión: ${envio["envi_Camion"]}\nNombre del transportista: ${envio["transportista"]}\nFecha de salida: ${envio["envi_FechaSalida"]}",
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 },
@@ -78,7 +108,6 @@ class _ListadoEjemploState extends State<ListadoEjemplo> {
               return Text("${snapshot.error}");
             }
 
-            // Por defecto, muestra un indicador de progreso
             return Center(
               child: CircularProgressIndicator(),
             );

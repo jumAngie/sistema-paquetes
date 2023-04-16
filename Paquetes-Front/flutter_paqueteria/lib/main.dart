@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_paqueteria/pages/envios_index_page.dart';
 import 'package:flutter_paqueteria/pages/home_page.dart';
 import 'package:flutter_paqueteria/pages/index_page.dart';
 import 'package:flutter_paqueteria/pages/login_page.dart';
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget{
            LoginPage.id : (context)  => LoginPage(),
 
         'home': ( _ ) => HomePage(),
-        'envios_index_page': ( _ ) =>  ListadoEjemplo(),
+        'envios_index_page': ( _ ) =>  ListadoEnvios(),
         'paquetes_index_page': ( _ ) => ListadoPaquetes(),
         'tracking_index_page': ( _ ) => Tracking(),
         'profile_index_page': ( _ ) => Profile(),
