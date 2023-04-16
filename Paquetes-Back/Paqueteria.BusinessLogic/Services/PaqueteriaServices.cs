@@ -8,20 +8,16 @@ using Paqueteria.Entities.Entities;
 
 namespace Paqueteria.BusinessLogic.Services
 {
-    public class PaqueteriaServices
+   public class PaqueteriaServices
     {
 
         private readonly EnviosPorPaqueteRepository _enviosPorPaquetesRepository;
         private readonly EnviosRepository _enviosRepository;
-        private readonly PaquetesRepository _paquetesRepository;
 
-        public PaqueteriaServices(EnviosPorPaqueteRepository enviosPorPaqueteRepository, 
-                                  EnviosRepository enviosRepository,
-                                  PaquetesRepository paquetesRepository)
+        public PaqueteriaServices(EnviosPorPaqueteRepository enviosPorPaqueteRepository, EnviosRepository enviosRepository)
         {
             _enviosPorPaquetesRepository = enviosPorPaqueteRepository;
             _enviosRepository = enviosRepository;
-            _paquetesRepository = paquetesRepository;
         }
 
 
@@ -54,17 +50,17 @@ namespace Paqueteria.BusinessLogic.Services
         {
             var result = new ServiceResult();
             try
-            {
-                var map = _enviosPorPaquetesRepository.Insert(item);
-                if (map.CodeStatus > 0)
-                {
-                    return result.Ok(map);
-                }
-                else
-                {
-                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
-                    return result.Error(map);
-                }
+            {               
+                    var map = _enviosPorPaquetesRepository.Insert(item);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }           
             }
             catch (Exception ex)
             {
@@ -102,16 +98,6 @@ namespace Paqueteria.BusinessLogic.Services
 
         #endregion
 
-        #region Paquetes
-        public IEnumerable<WV_tblPaquetes> ListarPaquetes()
-        {
-            var result = new ServiceResult();
-
-            var list = _paquetesRepository.List();
-            return list;
-        }
-
-        #endregion
 
         #region Envios
 
