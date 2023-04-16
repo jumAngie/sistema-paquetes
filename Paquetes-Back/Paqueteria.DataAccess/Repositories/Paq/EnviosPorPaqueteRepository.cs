@@ -56,7 +56,12 @@ namespace Paqueteria.DataAccess.Repositories.Paq
             return db.Query<tblEnviosPorPaquetes>(ScriptsDatabase.PaquetesPorEnvio, parametro, commandType: CommandType.StoredProcedure);
         }
 
-        
+        PaqueteriaConex con = new PaqueteriaConex();
+        public IEnumerable<V_Grafico_Paquetes_Por_Cliente> Grafico()
+        {
+            return con.V_Grafico_Paquetes_Por_Cliente.AsList();
+        }
+
 
         public RequestStatus Update(tblEnviosPorPaquetes item, int id)
         {

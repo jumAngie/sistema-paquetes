@@ -14,7 +14,7 @@ namespace Paqueteria.Entities.Entities
         }
 
         public int cami_Id { get; set; }
-        public int? cami_Empleado { get; set; }
+        public int cami_Empleado { get; set; }
 
         public virtual tblPersonas cami_EmpleadoNavigation { get; set; }
         public virtual ICollection<tblEnvios> tblEnvios { get; set; }

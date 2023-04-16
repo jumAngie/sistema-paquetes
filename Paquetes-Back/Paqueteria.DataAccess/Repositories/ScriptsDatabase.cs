@@ -60,10 +60,10 @@ namespace Paqueteria.DataAccess.Repositories
         public static string EnviosEliminar = "Paq.UDP_tblEnvios_Eliminar";
 
         #endregion
-      
-        
-        
-        public static string EnviosTodos = " Paq.UDP_Envios_Mostrar";//Para ddl de Envios
+
+        public static string Grafico = "UDP_Grafico_Paquetes_Por_Cliente";//Para el grafico
+
+        public static string EnviosTodos = "Paq.UDP_Envios_Mostrar";//Para ddl de Envios
 
     }
 }

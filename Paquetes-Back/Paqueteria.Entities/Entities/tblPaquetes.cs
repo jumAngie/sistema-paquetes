@@ -14,9 +14,11 @@ namespace Paqueteria.Entities.Entities
         }
 
         public int paqu_Id { get; set; }
+        public int paqu_Codigo { get; set; }
         public int paqu_Cliente { get; set; }
         public int paqu_Ciudad { get; set; }
         public string paqu_DireccionExacta { get; set; }
+        public string paqu_Observaciones { get; set; }
         public DateTime? paqu_Bodega { get; set; }
         public DateTime? paqu_EnCamino { get; set; }
         public DateTime? paqu_Entregado { get; set; }

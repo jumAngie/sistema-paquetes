@@ -331,3 +331,25 @@ END CATCH
 END;
 
 
+GO
+
+CREATE VIEW V_Grafico_Paquetes_Por_Cliente
+AS
+Select T3.pers_Nombres + ' '+ T3.pers_Apellidos AS Cliente, COUNT(t2.paqu_Id) AS Cantidad from Paq.tblEnviosPorPaquetes T1 INNER JOIN Paq.tblPaquetes T2
+ON T1.enpa_Paquete = T2.paqu_Id INNER JOIN Gral.tblPersonas T3
+ON T2.paqu_Cliente = T3.pers_Id
+GROUP BY pers_Nombres, pers_Apellidos
+
+GO
+
+CREATE PROCEDURE UDP_Grafico_Paquetes_Por_Cliente
+AS
+BEGIN
+
+Select T3.pers_Nombres + ' '+ T3.pers_Apellidos AS Cliente, COUNT(t2.paqu_Id) AS Cantidad from Paq.tblEnviosPorPaquetes T1 INNER JOIN Paq.tblPaquetes T2
+ON T1.enpa_Paquete = T2.paqu_Id INNER JOIN Gral.tblPersonas T3
+ON T2.paqu_Cliente = T3.pers_Id
+GROUP BY pers_Nombres, pers_Apellidos
+
+
+END

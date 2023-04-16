@@ -184,6 +184,16 @@ namespace Paqueteria.BusinessLogic.Services
         #endregion
 
 
+        public IEnumerable<V_Grafico_Paquetes_Por_Cliente> Grafico()
+        {
+            var result = new ServiceResult();
+
+
+            var list = _enviosPorPaquetesRepository.Grafico();
+            return list;
+
+        }
+
 
 
     }

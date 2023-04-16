@@ -16,6 +16,8 @@ namespace Paqueteria.Entities.Entities
         }
 
         public int pers_Id { get; set; }
+
+      
         public string pers_Nombres { get; set; }
         public string pers_Apellidos { get; set; }
         public string pers_DNI { get; set; }

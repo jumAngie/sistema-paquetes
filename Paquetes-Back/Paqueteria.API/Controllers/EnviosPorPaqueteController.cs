@@ -16,6 +16,7 @@ namespace Paqueteria.API.Controllers
     public class EnviosPorPaqueteController : ControllerBase
     {
         private readonly PaqueteriaServices _paqueteriaServices;
+
         private readonly IMapper _mapper;
 
         public EnviosPorPaqueteController(PaqueteriaServices paqueteriaServices, IMapper mapper)
@@ -40,6 +41,13 @@ namespace Paqueteria.API.Controllers
             }
         }
 
+        [HttpGet("Grafico")]
+        public IEnumerable<V_Grafico_Paquetes_Por_Cliente> Grafico()
+        {
+            var list = _paqueteriaServices.Grafico();
+            return list;
+        }
+
         [HttpPost("Delete")]
         public IActionResult Delete(EnviosPorPaqueteViewModel  enviosPorPaqueteViewModel)
         {
@@ -55,6 +63,9 @@ namespace Paqueteria.API.Controllers
             var response = _paqueteriaServices.InsertarEnvioPorPaquete(item);
             return Ok(response);
         }
+
+
+        
 
 
     }
