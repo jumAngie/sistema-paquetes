@@ -21,21 +21,9 @@ Future<dynamic> _getListado() async{
   }
 }
 
-class Graficos extends StatefulWidget {
-  const Graficos({Key? key}) : super(key: key);
 
-  @override
-  State<Graficos> createState() => _GraficosState();
-}
-
-class _GraficosState extends State<Graficos> {
-  Future<dynamic>? _futureListado;
-
-  @override
-  void initState() {
-    super.initState();
-    _futureListado = _getListado();
-  }
+class Graficos extends StatelessWidget {
+ const Graficos({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,34 +33,20 @@ class _GraficosState extends State<Graficos> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Paquetes Solicitados por Cliente'),
+            Text('Gráfico de barras'),
             SizedBox(height: 20),
             SizedBox(
               height: 300,
               child: FutureBuilder<dynamic>(
-                future: _futureListado,
-                builder: (context, snapshot) {
+                future: _getListado(),
+                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.hasData) {
-                    List<dynamic> info = snapshot.data as List<dynamic>;
-                    final List<ChartData> data = info.map((element) => ChartData(element['cliente'], element['cantidad'])).toList();
-
-                    final series = [
-                      charts.Series(
-                        id: 'Valores',
-                        data: data,
-                        domainFn: (ChartData values, _) => values.cliente,
-                        measureFn: (ChartData values, _) => values.cantidad,
-                      ),
-                    ];
-
-                    return charts.BarChart(
-                      series,
-                      animate: true,
-                    );
+                    final List<dynamic> data = snapshot.data;
+                    return _buildBarChart(data);
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return CircularProgressIndicator();
                   }
                 },
               ),
@@ -82,11 +56,18 @@ class _GraficosState extends State<Graficos> {
       ),
     );
   }
-}
 
-class ChartData {
-  final String cliente;
-  final int cantidad;
+  Widget _buildBarChart(List<dynamic> data) {
+    final series = charts.Series.fromList(
+      data,
+      id: 'Valores',
+      domainFn: (dynamic values, _) => values['cliente'] as String,
+      measureFn: (dynamic values, _) => values['cantidad'] as int,
+    );
 
-  ChartData(this.cliente, this.cantidad);
+    return charts.BarChart(
+      [series],
+      animate: true,
+    );
+  }
 }
