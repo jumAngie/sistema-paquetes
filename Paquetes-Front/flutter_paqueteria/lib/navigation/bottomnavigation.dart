@@ -26,7 +26,7 @@ class _BNavigatorState extends State<BNavigator> {
         unselectedFontSize: 12.0,
       items: const[
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Principal'),
-         BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
         BottomNavigationBarItem(icon: Icon(Icons.add_chart), label: 'Gráficos')
       ]);
   }
