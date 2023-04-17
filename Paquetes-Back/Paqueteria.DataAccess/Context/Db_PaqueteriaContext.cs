@@ -86,7 +86,7 @@ namespace Paqueteria.DataAccess.Context
 
                 entity.Property(e => e.Cliente)
                     .IsRequired()
-                    .HasMaxLength(500);
+                    .HasMaxLength(501);
 
                 entity.Property(e => e.ciud_Descri)
                     .IsRequired()
