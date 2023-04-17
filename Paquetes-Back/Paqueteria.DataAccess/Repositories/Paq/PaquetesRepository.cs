@@ -48,15 +48,26 @@ namespace Paqueteria.DataAccess.Repositories.Paq
             return result;
         }
 
+        public RequestStatus Delete(tblPaquetes item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@paqu_Id", item.paqu_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@paqu_UsuarioModifica", item.paqu_UsuarioModifica, DbType.Int32, direction: ParameterDirection.Input);
+
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(PaqueteriaConex.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.EliminarPaquete, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+
+
         public IEnumerable<WV_tblPaquetes> List()
         {
             return con.WV_tblPaquetes.AsList();
         }
         // //  //// ///// /// // ///
-        public RequestStatus Delete(tblPaquetes item)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public tblPaquetes Find(int? id)
         {

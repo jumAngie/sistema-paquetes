@@ -10,7 +10,7 @@ AS
  SELECT T1.paqu_Id, 
         T1.paqu_Cliente,
 		T1.paqu_Codigo,
-		T2.pers_Nombres + T2.pers_Apellidos AS Cliente,		
+		T2.pers_Nombres + ' '+ T2.pers_Apellidos AS Cliente,		
 		T1.paqu_Ciudad,
 		T3.ciud_Descri,
 		T4.depa_Descri,

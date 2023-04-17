@@ -38,6 +38,13 @@ namespace Paqueteria.API.Controllers
             return Ok(response);
         }
 
+        [HttpPost("Eliminar")]
+        public IActionResult EliminarPaquete(PaquetesViewModel paquetesViewModel)
+        {
+            var item = _mapper.Map<tblPaquetes>(paquetesViewModel);
+            var response = _paqueteriaServices.EliminarPaquete(item);
+            return Ok(response);
+        }
 
         [HttpPost("Editar")]
         public IActionResult ActualizarPaquete(PaquetesViewModel paquetesViewModel)
