@@ -24,5 +24,12 @@ namespace Paqueteria.API.Models
         public string paqu_DireccionExacta { get; set; }
         public string paqu_Observaciones { get; set; }
         public DateTime? paqu_Bodega { get; set; }
+        public DateTime? paqu_EnCamino { get; set; }
+        public DateTime? paqu_Entregado { get; set; }
+        public int paqu_UsuarioCrea { get; set; }
+        public DateTime? paqu_FechaCrea { get; set; }
+        public int? paqu_UsuarioModifica { get; set; }
+        public DateTime? paqu_FechaModifica { get; set; }
+        public bool? paqu_Estado { get; set; }
     }
 }
