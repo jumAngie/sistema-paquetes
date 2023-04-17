@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -56,64 +56,94 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
                                         ),
             backgroundColor: Colors.amber[400],
         ),
-        body: FutureBuilder<dynamic>(
-          future: _listado,
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            if (snapshot.hasData) {
-              List<dynamic> listaDeEnvios = snapshot.data;
-
-              return ListView.builder(
-                itemCount: listaDeEnvios.length,
-                itemBuilder: (context, index) {
-                  Map<String, dynamic> envio = listaDeEnvios[index];
-                  return Card(
-                    color: Color.fromARGB(255, 181, 255, 185),
-                    margin: EdgeInsets.all(8),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(8),
-                          child: CircleAvatar(
-                            radius: 30,
-                            backgroundColor: Colors.amber[400],
-                            child: Text(
-                              "🚛",
-                              style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 8, 71, 0)),
+        body:
+        Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.green[400]!,
+                  style: BorderStyle.solid,
+                  width: 1.0,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              margin: EdgeInsets.all(8),
+              padding: EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.add),
+                  SizedBox(width: 8),
+                  Text(
+                    "Añadir Envio",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
+        Expanded(
+          child: FutureBuilder<dynamic>(
+            future: _listado,
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              if (snapshot.hasData) {
+                List<dynamic> listaDeEnvios = snapshot.data;
+        
+                return ListView.builder(
+                  itemCount: listaDeEnvios.length,
+                  itemBuilder: (context, index) {
+                    Map<String, dynamic> envio = listaDeEnvios[index];
+                    return Card(
+                      color: Color.fromARGB(255, 181, 255, 185),
+                      margin: EdgeInsets.all(8),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.amber[400],
+                              child: Text(
+                                "🚛",
+                                style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 8, 71, 0)),
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ListTile(
-                                title: Text(
-                                  "Envío ID: ${envio["envi_Id"]}",
-                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ListTile(
+                                  title: Text(
+                                    "Envío ID: ${envio["envi_Id"]}",
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                  ),
+                                  subtitle: Text(
+                                    "ID del Camión: ${envio["envi_Camion"]}\nNombre del transportista: ${envio["transportista"]}\nFecha de salida: ${envio["envi_FechaSalida"]}",
+                                    style: TextStyle(fontSize: 14),
+                                  ),
                                 ),
-                                subtitle: Text(
-                                  "ID del Camión: ${envio["envi_Camion"]}\nNombre del transportista: ${envio["transportista"]}\nFecha de salida: ${envio["envi_FechaSalida"]}",
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                        ],
+                      ),
+                    );
+                  },
+                );
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+        
+              return Center(
+                child: CircularProgressIndicator(),
               );
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
-
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+            },
+          ),
         ),
-      ),
+       ],
+        )
+       ),
     );
   }
 }
