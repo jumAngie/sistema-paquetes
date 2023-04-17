@@ -13,17 +13,10 @@ namespace Paqueteria.API.Extensions
     {
         public MappingProfileExntensions()
         {
-
-
             CreateMap<tblDepartamentos, DepartamentoViewModel>().ReverseMap();
-
-
-
+            CreateMap<tblPaquetes, PaquetesViewModel>().ReverseMap();
             CreateMap<tblUsuarios, UsuariosViewModel>().ReverseMap();
-
             CreateMap<tblEnviosPorPaquetes, EnviosPorPaqueteViewModel>().ReverseMap();
-
-
             CreateMap<tblEnvios, EnviosViewModel>().ReverseMap();
         }
     }

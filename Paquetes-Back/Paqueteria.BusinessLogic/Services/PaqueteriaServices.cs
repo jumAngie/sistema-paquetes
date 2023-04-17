@@ -13,11 +13,14 @@ namespace Paqueteria.BusinessLogic.Services
 
         private readonly EnviosPorPaqueteRepository _enviosPorPaquetesRepository;
         private readonly EnviosRepository _enviosRepository;
-
-        public PaqueteriaServices(EnviosPorPaqueteRepository enviosPorPaqueteRepository, EnviosRepository enviosRepository)
+        private readonly PaquetesRepository _paquetesRepository;
+        public PaqueteriaServices(EnviosPorPaqueteRepository enviosPorPaqueteRepository, 
+                                  EnviosRepository enviosRepository,
+                                  PaquetesRepository paquetesRepository)
         {
             _enviosPorPaquetesRepository = enviosPorPaqueteRepository;
             _enviosRepository = enviosRepository;
+            _paquetesRepository = paquetesRepository;
         }
 
 
@@ -95,6 +98,63 @@ namespace Paqueteria.BusinessLogic.Services
         }
 
 
+
+        #endregion
+
+
+        #region Paquetes
+        public IEnumerable<WV_tblPaquetes> ListarPaquetes()
+        {
+            var result = new ServiceResult();
+            var list = _paquetesRepository.List();
+            return list;
+        }
+
+        public ServiceResult InsertarPaquetes(tblPaquetes item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _paquetesRepository.Insert(item);
+                if (map.CodeStatus > 0)
+                {
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult EditarPaquete(tblPaquetes item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _paquetesRepository.Update(item);
+                if (map.CodeStatus > 0)
+                {
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
 
         #endregion
 
