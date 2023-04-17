@@ -15,15 +15,27 @@ Future<dynamic> _getListado() async{
     final json = respuesta.body;
     return jsonDecode(json);
   }
-  else  
+  else
   {
     print("Error con la respuesta");
   }
 }
 
+class Graficos extends StatefulWidget {
+  const Graficos({Key? key}) : super(key: key);
 
-class Graficos extends StatelessWidget {
- const Graficos({Key? key}) : super(key: key);
+  @override
+  State<Graficos> createState() => _GraficosState();
+}
+
+class _GraficosState extends State<Graficos> {
+  Future<dynamic>? _futureListado;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureListado = _getListado();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +50,29 @@ class Graficos extends StatelessWidget {
             SizedBox(
               height: 300,
               child: FutureBuilder<dynamic>(
-                future: _getListado(),
-                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                future: _futureListado,
+                builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    final List<dynamic> data = snapshot.data;
-                    return _buildBarChart(data);
+                    List<dynamic> info = snapshot.data as List<dynamic>;
+                    final List<ChartData> data = info.map((element) => ChartData(element['cliente'], element['cantidad'])).toList();
+
+                    final series = [
+                      charts.Series(
+                        id: 'Valores',
+                        data: data,
+                        domainFn: (ChartData values, _) => values.cliente,
+                        measureFn: (ChartData values, _) => values.cantidad,
+                      ),
+                    ];
+
+                    return charts.BarChart(
+                      series,
+                      animate: true,
+                    );
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else {
-                    return CircularProgressIndicator();
+                    return Center(child: CircularProgressIndicator());
                   }
                 },
               ),
@@ -56,18 +82,12 @@ class Graficos extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildBarChart(List<dynamic> data) {
-    final series = charts.Series.fromList(
-      data,
-      id: 'Valores',
-      domainFn: (dynamic values, _) => values['cliente'] as String,
-      measureFn: (dynamic values, _) => values['cantidad'] as int,
-    );
-
-    return charts.BarChart(
-      [series],
-      animate: true,
-    );
-  }
 }
+
+class ChartData {
+  final String cliente;
+  final int cantidad;
+
+  ChartData(this.cliente, this.cantidad);
+}
+
