@@ -20,7 +20,7 @@ namespace Paqueteria.BusinessLogic
             services.AddScoped<DepartamentosRepository>();
             services.AddScoped<UsuariosRepository>();
             services.AddScoped<EnviosPorPaqueteRepository>();
-
+            services.AddScoped<PaquetesRepository>();
             services.AddScoped<EnviosRepository>();
 
 

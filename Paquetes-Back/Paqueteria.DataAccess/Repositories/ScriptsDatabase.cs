@@ -39,6 +39,11 @@ namespace Paqueteria.DataAccess.Repositories
 
         #endregion
 
+        #region Paquetes
+        public static string InsertarPaquete = "Paq.UDP_tblPaquetes_Insertar";
+        public static string EditarPaquete = "Paq.UDP_tblPaquetes_Editar";
+        public static string EliminarPaquete = "Paq.UDP_tblPaquetes_Eliminar";
+        #endregion
 
         #region Envios Por Paquetes
 
