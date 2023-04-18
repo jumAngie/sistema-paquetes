@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -41,11 +43,43 @@ class _GraficosState extends State<Graficos> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BNavigator(),
+      appBar: AppBar(
+          shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(30),
+      bottomRight: Radius.circular(30),
+          ),
+          ),
+            title: Center(
+                          ),
+            leading: IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: () {
+                                        Navigator.pop(context);
+                                              },
+                                              ),
+            backgroundColor: Colors.green[400],
+        ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text('Gráfico de barras'),
+            SizedBox(
+              height: 15,
+            ),
+            Center(
+                child: Image.asset(
+                  'images/Logo02.png', height: 90),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Center(child:
+                Text(
+                              'Cantidad de paquetes por Clientes',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+            ),
             SizedBox(height: 20),
             SizedBox(
               height: 300,

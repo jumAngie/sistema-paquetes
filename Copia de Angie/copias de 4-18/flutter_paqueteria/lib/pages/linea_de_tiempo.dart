@@ -33,7 +33,7 @@ class VerPaquetePage extends StatelessWidget {
           children: [
             Image.asset('images/paquete.gif', height: 250),
             SizedBox(height: 20),
-            Text('Ingrese el código para ver el paquete', style: TextStyle(fontSize: 18)),
+            Text('Ingrese el código para ver el estado del paquete', style: TextStyle(fontSize: 18)),
             SizedBox(height: 20),
             Container(
               width: 200,

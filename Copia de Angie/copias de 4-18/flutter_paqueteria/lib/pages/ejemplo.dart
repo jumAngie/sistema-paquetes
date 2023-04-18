@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -140,12 +140,12 @@ class EnvioCard extends StatelessWidget {
                     "Envío ID: ${envio["envi_Id"]}",
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                   subtitle: Text(
-                    "ID del Camión: ${envio["envi_Camion"]}\nNombre del transportista: ${envio["transportista"]}\nFecha de salida: ${envio["envi_FechaSalida"]}",
-                    style: TextStyle(fontSize: 14),
+                    "ID del Camión: ${envio["envi_Camion"]}\nTransportista: ${envio["transportista"]}\nFecha de salida: ${envio["envi_FechaSalida"]}",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                   ),
                 ),
               ],
