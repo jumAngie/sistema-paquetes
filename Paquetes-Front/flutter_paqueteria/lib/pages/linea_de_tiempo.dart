@@ -25,7 +25,7 @@ class VerPaquetePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('lib/assets/images/gif_image.gif', height: 100),
+            Image.asset('lib/assets/images/opcion.gif', height: 150),
             SizedBox(height: 20),
             Text('Ingrese el código para ver el paquete', style: TextStyle(fontSize: 18)),
             SizedBox(height: 20),
