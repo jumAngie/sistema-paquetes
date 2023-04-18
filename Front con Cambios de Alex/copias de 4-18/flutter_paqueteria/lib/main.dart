@@ -10,6 +10,7 @@ import 'package:flutter_paqueteria/pages/paquetes_index_page.dart';
 import 'package:flutter_paqueteria/pages/tracking_index_page.dart';
 import 'package:flutter_paqueteria/pages/usuario_perfil_page.dart';
 import 'package:flutter_paqueteria/pages/ejemplo.dart';
+import 'package:flutter_paqueteria/pages/linea_de_tiempo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Paquetería EcoPack',
-      initialRoute: 'Listado',
+      initialRoute: LoginPage.id,
       routes: {
            LoginPage.id : (context)  => LoginPage(),
             'home': ( _ ) => HomePage(),
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget{
         'Listado': ( _ ) => ListadoEnvios(),
         'envios_index_page': ( _ ) =>  ListadoEnvios(),
         'paquetes_index_page': ( _ ) => ListadoPaquetes(),
-        'tracking_index_page': ( _ ) => Tracking(),
+        'tracking_index_page': ( _ ) => VerPaquetePage(),
         'profile_index_page': ( _ ) => Profile(),
         'login_page': ( _ ) => LoginPage()
       }

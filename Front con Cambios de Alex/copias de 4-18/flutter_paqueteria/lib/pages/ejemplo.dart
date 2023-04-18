@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -55,7 +57,13 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
               ),
             ),
           ),
-          backgroundColor: Colors.amber[400],
+           leading: IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: () {
+                                        Navigator.pop(context);
+                                              },
+                                              ),
+          backgroundColor: Colors.green[400],
         ),
         body: FutureBuilder<dynamic>(
           future: _listado,
@@ -113,7 +121,7 @@ class EnvioCard extends StatelessWidget {
             padding: EdgeInsets.all(8),
             child: CircleAvatar(
               radius: 30,
-              backgroundColor: Colors.amber[400],
+              backgroundColor:Colors.green[400],
               child: Text(
                 "🚛",
                 style: TextStyle(

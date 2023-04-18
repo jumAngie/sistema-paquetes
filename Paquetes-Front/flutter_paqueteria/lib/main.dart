@@ -11,6 +11,7 @@ import 'package:flutter_paqueteria/pages/linea_de_tiempo.dart';
 import 'package:flutter_paqueteria/pages/tracking_index_page.dart';
 import 'package:flutter_paqueteria/pages/usuario_perfil_page.dart';
 import 'package:flutter_paqueteria/pages/ejemplo.dart';
+import 'package:flutter_paqueteria/pages/envios_index_page.dart';
 
 void main() {
   runApp(const MyApp());
