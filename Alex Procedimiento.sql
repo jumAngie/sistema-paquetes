@@ -356,8 +356,8 @@ END
 
 Go
 
-CREATE VIEW V_ddl_Camiones
+CREATE OR ALTER VIEW V_ddl_Camiones
 AS
-SELECT T2.pers_Nombres + ' ' + T2.pers_Apellidos AS Transportista FROM Paq.tblCamiones T1 INNER JOIN Gral.tblPersonas T2 ON  T1.cami_Empleado = T2.pers_Id
+SELECT T1.cami_Id, T2.pers_Nombres + ' ' + T2.pers_Apellidos AS Transportista FROM Paq.tblCamiones T1 INNER JOIN Gral.tblPersonas T2 ON  T1.cami_Empleado = T2.pers_Id
 
 GO

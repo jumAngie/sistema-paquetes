@@ -1,155 +1,161 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-void main() {
-  runApp(ListadoEnvios());
-}
+import 'package:flutter_paqueteria/util/ResponseApi.dart';
+import 'package:flutter_paqueteria/util/envios.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-class ListadoEnvios extends StatefulWidget {
-  const ListadoEnvios({Key? key}) : super(key: key);
-
+class AddEnvioForm extends StatefulWidget {
   @override
-  _ListadoEnviosState createState() => _ListadoEnviosState();
+  _AddEnvioFormState createState() => _AddEnvioFormState();
 }
 
-class _ListadoEnviosState extends State<ListadoEnvios> {
-  late Future<dynamic> _listado;
+class _AddEnvioFormState extends State<AddEnvioForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _camionController = TextEditingController();
+  final TextEditingController _fechaSalidaController = TextEditingController();
+  final TextEditingController _usuarioCreaController = TextEditingController();
+  int _selectedCamion = -1;
+  List<dynamic> _camiones = [];
+  DateTime _selectedDate = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    _listado = _getListado();
-  }
-
-  String url = "http://empaquetadora-ecopack.somee.com/api/Envios/List";
-
-  Future<dynamic> _getListado() async {
-    final respuesta = await http.get(Uri.parse(url));
-    if (respuesta.statusCode == 200) {
-      final json = respuesta.body;
-      return jsonDecode(json);
-    } else {
-      print("Error con la respuesta");
-    }
+    Cargarddl();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          shape: ContinuousRectangleBorder(
-          borderRadius: BorderRadius.only(
-      bottomLeft: Radius.circular(30),
-      bottomRight: Radius.circular(30),
-          ),
-          ),
-            title: Center(child: Text("Listado de envíos",
-                                      style: TextStyle(
-                                        fontWeight: 
-                                        FontWeight.bold),
-                                        )
-                                        ),
-            leading: IconButton(
-                                icon: Icon(Icons.arrow_back),
-                                onPressed: () {
-                                        Navigator.pop(context);
-                                              },
-                                              ),
-            backgroundColor: Colors.amber[400],
-        ),
-        body:
-        Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.green[400]!,
-                  style: BorderStyle.solid,
-                  width: 1.0,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Agregar envío'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DropdownButtonFormField(
+                value: _selectedCamion,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedCamion = value;
+                  });
+                },
+                items: _camiones.map<DropdownMenuItem<dynamic>>((camion) {
+                  return DropdownMenuItem<dynamic>(
+                    value: camion['cami_Id'],
+                    child: Text(camion['transportista']),
+                  );
+                }).toList(),
+                decoration: InputDecoration(
+                  labelText: 'Camión',
                 ),
-                borderRadius: BorderRadius.circular(10),
+                validator: (value) {
+                  if (value == null) {
+                    return 'Por favor, seleccione un camión';
+                  }
+                  return null;
+                },
               ),
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.add),
-                  SizedBox(width: 8),
-                  Text(
-                    "Añadir Envio",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
+              TextFormField(
+                controller: _fechaSalidaController,
+                keyboardType: TextInputType.datetime,
+                decoration: InputDecoration(
+                  labelText: 'Fecha de salida',
+                ),
+                validator: (value) {
+                  if (value?.isEmpty ?? true) {
+                    return 'Por favor, ingrese la fecha de salida';
+                  }
+                  return null;
+                },
               ),
-            ),
-        Expanded(
-          child: FutureBuilder<dynamic>(
-            future: _listado,
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.hasData) {
-                List<dynamic> listaDeEnvios = snapshot.data;
-        
-                return ListView.builder(
-                  itemCount: listaDeEnvios.length,
-                  itemBuilder: (context, index) {
-                    Map<String, dynamic> envio = listaDeEnvios[index];
-                    return Card(
-                      color: Color.fromARGB(255, 181, 255, 185),
-                      margin: EdgeInsets.all(8),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8),
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.amber[400],
-                              child: Text(
-                                "🚛",
-                                style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 8, 71, 0)),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ListTile(
-                                  title: Text(
-                                    "Envío ID: ${envio["envi_Id"]}",
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                  ),
-                                  subtitle: Text(
-                                    "ID del Camión: ${envio["envi_Camion"]}\nNombre del transportista: ${envio["transportista"]}\nFecha de salida: ${envio["envi_FechaSalida"]}",
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
+              TextFormField(
+                controller: _usuarioCreaController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Usuario que crea el envío',
+                ),
+                validator: (value) {
+                  if (value?.isEmpty ?? true) {
+                    return 'Por favor, ingrese el usuario que crea el envío';
+                  }
+                  return null;
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _enviarDatos();
+                    }
                   },
-                );
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-        
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            },
+                  child: Text('Agregar'),
+                ),
+              ),
+            ],
           ),
         ),
-       ],
-        )
-       ),
+      ),
     );
   }
+
+
+
+
+  void _enviarDatos() async { 
+    final url = 'https://tu-api.com/envios';
+    final response = await http.post(Uri.parse(url), body: {
+      'envi_Camion': _camionController.text,
+      'envi_FechaSalida': _fechaSalidaController.text,
+      'envi_UsuarioCrea': _usuarioCreaController.text,
+    });
+    if (response.statusCode == 200) {
+      // Si el servidor devuelve un OK response, puedes mostrar una notificación o redirigir a la página de envíos
+    } else {
+      // Si el servidor devuelve un response diferente a OK, debes manejar el error
+    }
+  }
+
+
+Future<Map<String, dynamic>> Cargarddl() async {
+  try {
+    final response = await http.get(
+      Uri.parse('http://empaquetadora-ecopack.somee.com/api/Camiones/DDLCamiones'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body) as List<dynamic>;
+      if (data.isNotEmpty) {
+        setState(() {
+          _camiones = data;
+          _selectedCamion = data[0]['cami_Id'];
+        });
+        return data[0];
+      } else {
+        throw Exception('La respuesta es nula');
+      }
+    } else {
+      throw Exception('Error en la solicitud: ${response.statusCode}');
+    }
+  } catch (e) {
+    throw Exception(e);
+  }
+}
+
+
+
+
+
+
 }
