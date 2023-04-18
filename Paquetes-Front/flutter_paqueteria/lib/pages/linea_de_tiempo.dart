@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 
@@ -6,14 +6,26 @@ class VerPaquetePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Ver paquete'),
-      ),
+       appBar: AppBar(
+          shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(30),
+      bottomRight: Radius.circular(30),
+          ),
+          ),
+            title: Center(child: Text("Buscar Paquete",
+                                      style: TextStyle(
+                                        fontWeight: 
+                                        FontWeight.bold),
+                                        )
+                                        ),
+            backgroundColor: Colors.green[400],
+        ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.local_shipping, size: 100),
+            Image.asset('lib/assets/images/gif_image.gif', height: 100),
             SizedBox(height: 20),
             Text('Ingrese el código para ver el paquete', style: TextStyle(fontSize: 18)),
             SizedBox(height: 20),
@@ -31,4 +43,3 @@ class VerPaquetePage extends StatelessWidget {
     );
   }
 }
-
