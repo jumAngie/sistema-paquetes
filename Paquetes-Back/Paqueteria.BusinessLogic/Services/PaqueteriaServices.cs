@@ -14,13 +14,17 @@ namespace Paqueteria.BusinessLogic.Services
         private readonly EnviosPorPaqueteRepository _enviosPorPaquetesRepository;
         private readonly EnviosRepository _enviosRepository;
         private readonly PaquetesRepository _paquetesRepository;
+        private readonly CamionesRepository _camionesRepository;
+
         public PaqueteriaServices(EnviosPorPaqueteRepository enviosPorPaqueteRepository, 
                                   EnviosRepository enviosRepository,
-                                  PaquetesRepository paquetesRepository)
+                                  PaquetesRepository paquetesRepository,
+                                  CamionesRepository camionesRepository)
         {
             _enviosPorPaquetesRepository = enviosPorPaqueteRepository;
             _enviosRepository = enviosRepository;
             _paquetesRepository = paquetesRepository;
+            _camionesRepository = camionesRepository;
         }
 
 
@@ -273,6 +277,16 @@ namespace Paqueteria.BusinessLogic.Services
 
 
             var list = _enviosPorPaquetesRepository.Grafico();
+            return list;
+
+        }
+
+        public IEnumerable<V_ddl_Camiones> Camionesddl()
+        {
+            var result = new ServiceResult();
+
+
+            var list = _camionesRepository.Camionesddl();
             return list;
 
         }
