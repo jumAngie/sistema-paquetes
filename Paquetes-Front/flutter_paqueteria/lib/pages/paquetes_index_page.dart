@@ -54,6 +54,12 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
                                         FontWeight.bold),
                                         )
                                         ),
+            leading: IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: () {
+                                        Navigator.pop(context);
+                                              },
+                                              ),
             backgroundColor: Colors.green[400],
         ),
         body:
