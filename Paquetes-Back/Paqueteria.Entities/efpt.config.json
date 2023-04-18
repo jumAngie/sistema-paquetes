@@ -50,6 +50,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[V_ddl_Camiones]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[V_Grafico_Paquetes_Por_Cliente]",
          "ObjectType": 3
       },
@@ -66,7 +70,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "PC-ANGIE\\SQLEXPRESS.Paqueteria",
+   "UiHint": "DESKTOP-BDFGUVA\\SQLEXPRESS.Paqueteria",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

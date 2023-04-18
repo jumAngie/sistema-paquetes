@@ -19,6 +19,7 @@ namespace Paqueteria.Entities.Entities
         public int paqu_Cliente { get; set; }
         public int paqu_Ciudad { get; set; }
 
+
         [NotMapped]
         public string depa_Descri { get; set; }
 

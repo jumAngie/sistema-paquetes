@@ -353,3 +353,11 @@ GROUP BY pers_Nombres, pers_Apellidos
 
 
 END
+
+Go
+
+CREATE VIEW V_ddl_Camiones
+AS
+SELECT T2.pers_Nombres + ' ' + T2.pers_Apellidos AS Transportista FROM Paq.tblCamiones T1 INNER JOIN Gral.tblPersonas T2 ON  T1.cami_Empleado = T2.pers_Id
+
+GO
