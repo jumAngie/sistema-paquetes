@@ -97,7 +97,8 @@ class _GraficosState extends State<Graficos> {
                         data: data,
                         domainFn: (ChartData values, _) => values.cliente,
                         measureFn: (ChartData values, _) => values.cantidad,
-                         colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault
+                        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+                        labelAccessorFn: (ChartData values, _) => '${values.cantidad}',
                       ),
                     ];
 
