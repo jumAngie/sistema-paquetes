@@ -1,4 +1,6 @@
 
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 
@@ -11,12 +13,29 @@ class DetallePaquetePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalle del paquete $codigo'),
-      ),
+          shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(30),
+      bottomRight: Radius.circular(30),
+          ),
+          ),
+            title: Center(child: Text('Detalle del paquete $codigo',
+                                      style: TextStyle(
+                                        fontWeight: 
+                                        FontWeight.bold),
+                                        )
+                                        ),
+            leading: IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: () {
+                                        Navigator.pop(context);
+                                              },
+                                              ),
+            backgroundColor: Colors.green[400],
+        ),
       body: Center(
         child:  
-         Text('Aquí puedes mostrar los detalles del paquete con código $codigo'),
-         
+         Image.asset("/images/bodega-circulo.png", height: 100, width: 100,)
       ),
     );
   }
