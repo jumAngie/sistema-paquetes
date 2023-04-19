@@ -14,7 +14,9 @@ class DetallePaquetePage extends StatelessWidget {
         title: Text('Detalle del paquete $codigo'),
       ),
       body: Center(
-        child: Text('Aquí puedes mostrar los detalles del paquete con código $codigo'),
+        child:  
+         Text('Aquí puedes mostrar los detalles del paquete con código $codigo'),
+         
       ),
     );
   }

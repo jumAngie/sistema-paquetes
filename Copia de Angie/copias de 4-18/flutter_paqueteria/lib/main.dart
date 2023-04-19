@@ -3,9 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_paqueteria/pages/home_page.dart';
-import 'package:flutter_paqueteria/pages/index_page.dart';
 import 'package:flutter_paqueteria/pages/login_page.dart';
-import 'package:flutter_paqueteria/pages/usuarios_index_page.dart';
 import 'package:flutter_paqueteria/pages/paquetes_index_page.dart';
 import 'package:flutter_paqueteria/pages/tracking_index_page.dart';
 import 'package:flutter_paqueteria/pages/usuario_perfil_page.dart';
