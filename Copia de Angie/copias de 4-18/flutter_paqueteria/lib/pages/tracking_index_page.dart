@@ -1,16 +1,21 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
 
-class Tracking extends StatelessWidget {
-  const Tracking({super.key});
+
+class DetallePaquetePage extends StatelessWidget {
+  final String codigo;
+
+  const DetallePaquetePage({Key? key, required this.codigo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       bottomNavigationBar: BNavigator(),
-       body: Center(child: Text('Tracking')),
+      appBar: AppBar(
+        title: Text('Detalle del paquete $codigo'),
+      ),
+      body: Center(
+        child: Text('Aquí puedes mostrar los detalles del paquete con código $codigo'),
+      ),
     );
   }
 }
