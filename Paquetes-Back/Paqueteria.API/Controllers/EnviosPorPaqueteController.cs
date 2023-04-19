@@ -41,6 +41,20 @@ namespace Paqueteria.API.Controllers
             }
         }
 
+        [HttpPost("PaquetesPorEnvio")]
+        public IActionResult PaquetesPorEnvio(EnviosPorPaqueteViewModel item)
+        {
+
+            var item2 = _mapper.Map<tblEnviosPorPaquetes>(item);
+            
+            var response = _paqueteriaServices.ListarPaquetesPorEnvio(item2);
+          
+            response.Data = _mapper.Map<EnviosPorPaqueteViewModel>(response.Data);
+
+            return Ok(response);
+
+        }
+
         [HttpGet("Grafico")]
         public IEnumerable<V_Grafico_Paquetes_Por_Cliente> Grafico()
         {

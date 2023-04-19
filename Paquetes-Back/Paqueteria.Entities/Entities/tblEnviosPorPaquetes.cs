@@ -16,11 +16,17 @@ namespace Paqueteria.Entities.Entities
         public DateTime? enpa_FechaCrea { get; set; }
         public int? enpa_UsuarioModifica { get; set; }
         public DateTime? enpa_FechaModifica { get; set; }
+       
         [NotMapped]
         public string Cliente { get; set; }
-
+   
         [NotMapped]
-        public string Cantidad { get; set; }
+        public string ciud_Descri { get; set; }
+       
+        [NotMapped]
+        public string estadoViaje { get; set; }
+
+
         public bool? enpa_Estado { get; set; }
 
         public virtual tblEnvios enpa_EnvioNavigation { get; set; }

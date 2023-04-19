@@ -178,14 +178,16 @@ BEGIN
 
 SELECT t2.paqu_Id,
        t2.paqu_Codigo,
-       t4.pers_Nombres, t4.pers_Apellidos as Cliente,
+       t4.pers_Nombres + ' ' + t4.pers_Apellidos as Cliente,
 	   t3.ciud_Descri, 
+	   t2.paqu_Observaciones,
 	   t2.paqu_DireccionExacta,
+	   
 	   CASE 
            WHEN t2.paqu_EnCamino IS NULL THEN 'En Bodega'
 		   WHEN t2.paqu_Entregado IS not NULL THEN 'Entregado'
            ELSE 'En Camino'
-       END AS paqu_EnCamino
+       END AS estadoViaje
 FROM Paq.tblEnviosPorPaquetes T1 
 INNER JOIN Paq.tblPaquetes t2 ON t1.enpa_Paquete = t2.paqu_Id 
 INNER JOIN Gral.tblCiudades t3 ON t2.paqu_Ciudad = t3.ciud_ID  
