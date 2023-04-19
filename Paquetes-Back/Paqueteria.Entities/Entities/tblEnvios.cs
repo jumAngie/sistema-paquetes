@@ -16,7 +16,7 @@ namespace Paqueteria.Entities.Entities
 
         public int envi_Id { get; set; }
         public int envi_Camion { get; set; }
-        public DateTime envi_FechaSalida { get; set; }
+        public string envi_FechaSalida { get; set; }
         public int envi_UsuarioCrea { get; set; }
         public DateTime? envi_FechaCrea { get; set; }
         public int? envi_UsuarioModifica { get; set; }

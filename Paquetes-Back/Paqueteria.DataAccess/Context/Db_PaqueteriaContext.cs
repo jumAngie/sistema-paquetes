@@ -87,7 +87,7 @@ namespace Paqueteria.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(501);
 
-                entity.Property(e => e.envi_FechaSalida).HasColumnType("datetime");
+                entity.Property(e => e.envi_FechaSalida).HasColumnType("string");
             });
 
             modelBuilder.Entity<WV_tblPaquetes>(entity =>
@@ -187,7 +187,7 @@ namespace Paqueteria.DataAccess.Context
 
                 entity.Property(e => e.envi_FechaModifica).HasColumnType("datetime");
 
-                entity.Property(e => e.envi_FechaSalida).HasColumnType("datetime");
+                entity.Property(e => e.envi_FechaSalida).HasColumnType("string");
 
                 entity.HasOne(d => d.envi_CamionNavigation)
                     .WithMany(p => p.tblEnvios)

@@ -1,49 +1,74 @@
 import 'dart:async';
-import 'dart:html';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_paqueteria/pages/ejemplo.dart';
+
+import 'dart:html';
+
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 import 'package:flutter_paqueteria/util/ResponseApi.dart';
 import 'package:flutter_paqueteria/util/camiones.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_paqueteria/util/envios.dart';
-import 'package:flutter_paqueteria/pages/ejemplo.dart';
 
 
-class AddEnvioForm extends StatefulWidget {
+
+
+class EditForm extends StatefulWidget {
+  final int id;
+  EditForm({Key? key, required this.id}) : super(key: key);
+
   @override
-  _AddEnvioFormState createState() => _AddEnvioFormState();
+  _EditFormState createState() => _EditFormState();
 }
 
-class _AddEnvioFormState extends State<AddEnvioForm> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-
+class _EditFormState extends State<EditForm> {
+  final _formKey = GlobalKey<FormState>();
+  
   int _selectedCamion = -1;
   List<dynamic> _camiones = [];
   DateTime _selectedDate = DateTime.now();
    late DateTime _fechaEnvio;
   
+  
+  Future<Map<String, dynamic>> _CargarDatos() async {
+    final response = await http.get(
+        Uri.parse('https://jsonplaceholder.typicode.com/posts/${widget.id}'));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      _selectedCamion = data['title'];
+      _selectedDate = data['body'];
+      return data;
+    } else {
+      throw Exception('Failed to load post');
+    }
+  }
+
+
 
   @override
   void initState() {
     super.initState();
+    print(widget.id);
+    _CargarDatos();
+
     Cargarddl();
     _fechaEnvio = DateTime.now();
      
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agregar envío'),
+        title: Text('Edit Post'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -75,7 +100,7 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
                   return null;
                 },
               ),
-             Container(
+              Container(
   margin: EdgeInsets.symmetric(vertical: 20),
   padding: EdgeInsets.all(10),
   decoration: BoxDecoration(
@@ -118,8 +143,7 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
     ],
   ),
 ),
-           
-              Padding(
+               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton(
                   onPressed: () {
@@ -138,7 +162,8 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
     );
   }
 
-Future<Map<String, dynamic>> Cargarddl() async {
+
+  Future<Map<String, dynamic>> Cargarddl() async {
   try {
     final response = await http.get(
       //Uri.parse('http://empaquetadora-ecopack.somee.com/api/Camiones/DDLCamiones'),

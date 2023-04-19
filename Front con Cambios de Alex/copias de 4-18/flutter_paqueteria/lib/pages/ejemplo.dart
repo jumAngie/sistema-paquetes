@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_paqueteria/pages/formulario_envios.dart';
+import 'package:flutter_paqueteria/pages/formulario_editar_envio.dart';
 
 void main() {
   runApp(ListadoEnvios());
@@ -25,7 +26,8 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
     _listado = _getListado();
   }
 
-  String url = "http://empaquetadora-ecopack.somee.com/api/Envios/List";
+ // String url = "http://empaquetadora-ecopack.somee.com/api/Envios/List";
+    String url = "https://localhost:44356/api/Envios/List";
 
   Future<dynamic> _getListado() async {
     final respuesta = await http.get(Uri.parse(url));
@@ -103,6 +105,9 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
       ),
     );
   }
+ 
+  
+
 }
 
 class EnvioCard extends StatelessWidget {
@@ -161,7 +166,7 @@ class EnvioCard extends StatelessWidget {
                   _verDetalles(envio);
                   break;
                 case "editar":
-                  _editarEnvio(envio);
+                  _editarEnvio(context, envio);
                   break;
               }
             },
@@ -205,6 +210,11 @@ class EnvioCard extends StatelessWidget {
     );
   }
 
+ void _editarEnvio(BuildContext context, Map<String, dynamic> envio) {
+ print(envio);
+}
+
+
  void _eliminarEnvio(BuildContext context, int envioId) {
   showDialog(
     context: context,
@@ -233,6 +243,7 @@ class EnvioCard extends StatelessWidget {
             child: Text("Eliminar"),
             onPressed: () {
               // TODO: Implementar lógica de eliminación de envío
+              print(envioId);
               Navigator.of(context).pop();
             },
           ),
@@ -245,9 +256,6 @@ class EnvioCard extends StatelessWidget {
     // TODO: Implementar lógica de visualización de detalles de envío
   }
 
-  void _editarEnvio(Map<String, dynamic> envio) {
-    // TODO: Implementar lógica de edición de envío
-  }
 
 
   

@@ -172,7 +172,6 @@ END;
 
 GO
 CREATE OR ALTER PROCEDURE Paq.UDP_Envios_Por_Paquete_Mostrar
-
 @enpa_Envio				INT
 AS
 BEGIN
@@ -205,14 +204,18 @@ CREATE OR ALTER PROCEDURE Paq.UDP_Envios_Por_Paquete_Insertar
 AS
 BEGIN
 
-
-
-
 BEGIN TRY
 	
 	INSERT INTO Paq.tblEnviosPorPaquetes(enpa_Envio, enpa_Paquete, enpa_UsuarioCrea)
 VALUES(@enpa_Envio,@enpa_Paquete,@enpa_UsuarioCrea)
 	SET @status = 1;
+
+
+UPDATE Paq.tblPaquetes
+SET paqu_EnCamino = GETDATE()
+WHERE paqu_Id = @enpa_Paquete
+
+
 
 END TRY
 BEGIN CATCH 
@@ -234,8 +237,15 @@ BEGIN
 
 BEGIN TRY
 	
-	DELETE Paq.tblEnviosPorPaquetes where enpa_Envio = @enpa_Envio AND enpa_Paquete = @enpa_Paquete
-		SET @status = 1;
+	DELETE Paq.tblEnviosPorPaquetes 
+	where enpa_Envio = @enpa_Envio AND 
+	      enpa_Paquete = @enpa_Paquete
+
+	UPDATE Paq.tblPaquetes
+	SET paqu_EnCamino = null
+	WHERE paqu_Id = @enpa_Paquete
+	
+	SET @status = 1;
 END TRY
 BEGIN CATCH 
 	SET @status = 0;
@@ -286,7 +296,7 @@ GO
 CREATE OR ALTER PROCEDURE Paq.UDP_tblEnvios_Editar
 @envi_Id				     INT,
 @envi_Camion				INT	,	
-@envi_FechaSalida		DATETIME,
+@envi_FechaSalida		NVARCHAR(100),
 
 @envi_UsuarioModifica        INT,
 @status				INT OUTPUT
@@ -321,14 +331,27 @@ BEGIN TRY
 UPDATE tblEnvios
     SET envi_UsuarioModifica = @envi_UsuarioModifica,
 		envi_FechaModifica = GETDATE(),
-		envi_Estado = 0 WHERE envi_Id = @envi_Id
+		envi_Estado = 0 
+		WHERE envi_Id = @envi_Id
 	
+	DELETE Paq.tblEnviosPorPaquetes 
+	where enpa_Envio = @envi_Id
+	   
+
 	SET @status = 1;
 END TRY
 BEGIN CATCH 
 	SET @status = 0;
 END CATCH 
 END;
+
+exec Paq.UDP_tblEnvios_Eliminar 2,1,1
+
+SELECT * FROM Paq.tblPaquetes
+
+SELECT * FROM Paq.tblEnviosPorPaquetes
+
+selec
 
 
 GO
