@@ -6796,23 +6796,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
+    "C:\\Users\\LAB02\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
       "projectName": "Paqueteria.DataAccess",
-      "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\obj\\",
+      "projectPath": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
+      "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6827,8 +6827,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj"
+            "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj": {
+              "projectPath": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj"
             }
           }
         }
@@ -6883,7 +6883,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -214,7 +214,8 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://empaquetadora-ecopack.somee.com/api/Usuarios/Login'),
+        //Uri.parse('http://empaquetadora-ecopack.somee.com/api/Usuarios/Login'),
+          Uri.parse('https://localhost:44356/api/Usuarios/Login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
