@@ -24,7 +24,8 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
     _listado = _getListado();
   }
 
-  String url = "http://empaquetadora-ecopack.somee.com/api/Paquetes/List";
+ // String url = "http://empaquetadora-ecopack.somee.com/api/Paquetes/List";
+  String url = "https://localhost:44356/api/Paquetes/List";
 
   Future<dynamic> _getListado() async {
     final respuesta = await http.get(Uri.parse(url));

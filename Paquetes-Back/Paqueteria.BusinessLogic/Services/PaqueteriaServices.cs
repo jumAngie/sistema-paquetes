@@ -292,6 +292,22 @@ namespace Paqueteria.BusinessLogic.Services
         }
 
 
+        public ServiceResult ListarPaquetesPorEnvio (tblEnviosPorPaquetes item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _enviosPorPaquetesRepository.PaquetesPorEnvio(item);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
 
     }
 }

@@ -47,13 +47,13 @@ namespace Paqueteria.DataAccess.Repositories.Paq
             return result;
         }
 
-        public IEnumerable<tblEnviosPorPaquetes> PaquetesPorEnvio(tblEnviosPorPaquetes item)
+        public tblEnviosPorPaquetes PaquetesPorEnvio(tblEnviosPorPaquetes item)
         {
             using var db = new SqlConnection(PaqueteriaConex.ConnectionString);
             var parametro = new DynamicParameters();
             parametro.Add("@enpa_Envio", item.enpa_Envio, DbType.String, ParameterDirection.Input);
 
-            return db.Query<tblEnviosPorPaquetes>(ScriptsDatabase.PaquetesPorEnvio, parametro, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<tblEnviosPorPaquetes>(ScriptsDatabase.PaquetesPorEnvio, parametro, commandType: CommandType.StoredProcedure);
         }
 
         PaqueteriaConex con = new PaqueteriaConex();

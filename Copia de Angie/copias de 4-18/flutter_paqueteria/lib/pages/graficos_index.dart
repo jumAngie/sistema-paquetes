@@ -63,7 +63,7 @@ class _GraficosState extends State<Graficos> {
         ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 15,
@@ -73,11 +73,12 @@ class _GraficosState extends State<Graficos> {
                   'images/Logo02.png', height: 90),
             ),
             SizedBox(
-              height: 5,
+              height: 19,
             ),
             Center(child:
+              
                 Text(
-                              'Cantidad de paquetes por Clientes',
+                              'Cantidad de paquetes enviados por Clientes' + ['cantidad'].toString(),
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
             ),
@@ -97,7 +98,10 @@ class _GraficosState extends State<Graficos> {
                         data: data,
                         domainFn: (ChartData values, _) => values.cliente,
                         measureFn: (ChartData values, _) => values.cantidad,
-                         colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault
+                         colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+                         labelAccessorFn: (ChartData values, _) => '${values.cantidad}',
+                         insideLabelStyleAccessorFn: (ChartData values , _) => 
+                         charts.TextStyleSpec(color: charts.MaterialPalette.white, fontSize: 12),
                       ),
                     ];
 

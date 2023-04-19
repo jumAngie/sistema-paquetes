@@ -45,8 +45,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   timeline_tile:
   
-  flutter_form_builder: ^7.0.0
-
+  flutter_form_builder: ^7.0.0 
   http:
 
 dev_dependencies:
