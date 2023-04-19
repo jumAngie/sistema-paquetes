@@ -8,6 +8,7 @@ class Envios {
     final   int envi_UsuarioModifica;
     final   DateTime envi_FechaModifica;
     final   bool envi_Estado;
+    final   String transportista;
 
 
 
@@ -20,6 +21,7 @@ class Envios {
     required this.envi_UsuarioModifica,
     required this.envi_FechaModifica, 
     required this.envi_Estado,
+      required this.transportista,
    
   
   
@@ -35,6 +37,7 @@ class Envios {
       envi_UsuarioModifica: json["envi_UsuarioModifica"], 
       envi_FechaModifica: json["envi_FechaModifica"], 
       envi_Estado: json["envi_Estado"], 
+      transportista: json["transportista"], 
      
     );
   }

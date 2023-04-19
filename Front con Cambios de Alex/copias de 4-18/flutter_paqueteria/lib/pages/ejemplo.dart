@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_paqueteria/util/envios.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_paqueteria/pages/formulario_envios.dart';
@@ -210,10 +211,24 @@ class EnvioCard extends StatelessWidget {
     );
   }
 
- void _editarEnvio(BuildContext context, Map<String, dynamic> envio) {
- print(envio);
+void _editarEnvio(BuildContext context, Map<String, dynamic> envio) {
+  
+  List<Envioss> envios = [
+    Envioss(
+      envi_Id: envio['envi_Id'],
+      envi_Camion: envio['envi_Camion'],
+      transportista: envio['transportista'],
+      envi_FechaSalida: envio['envi_FechaSalida'],
+    ),
+  ];
+  print(envio);
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => EditForm(envios: envios),
+    ),
+  );
 }
-
 
  void _eliminarEnvio(BuildContext context, int envioId) {
   showDialog(
@@ -259,4 +274,21 @@ class EnvioCard extends StatelessWidget {
 
 
   
+}
+
+
+class Envioss {
+  final int? envi_Id;
+  final int? envi_Camion;
+  final String? transportista;
+  final String? envi_FechaSalida;
+ 
+
+  Envioss({
+    required this.envi_Id,
+    required this.envi_Camion,
+    required this.transportista,
+    required this.envi_FechaSalida,
+    
+  });
 }

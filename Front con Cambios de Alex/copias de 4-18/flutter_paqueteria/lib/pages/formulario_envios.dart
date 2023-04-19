@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:html';
+
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -97,24 +97,24 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
         ),
       ),
       SizedBox(height: 10),
-      GestureDetector(
-        child: Text(
-          _fechaEnvio == null ? 'Seleccione una fecha y hora' : DateFormat('yyyy-MM-dd HH:mm').format(_fechaEnvio),
-          style: TextStyle(fontSize: 16),
-        ),
-        onTap: () {
-          DatePicker.showDateTimePicker(
-            context,
-            showTitleActions: true,
-            onConfirm: (date) {
-              setState(() {
-                _fechaEnvio = date;
-              });
-            },
-            currentTime: DateTime.now(),
-          );
-        },
-      ),
+     GestureDetector(
+  child: Text(
+    _fechaEnvio == null ? 'Seleccione una fecha y hora' : DateFormat('yyyy-MM-dd HH:mm:ss').format(_fechaEnvio),
+    style: TextStyle(fontSize: 16),
+  ),
+  onTap: () {
+    DatePicker.showDateTimePicker(
+      context,
+      showTitleActions: true,
+      onConfirm: (date) {
+        setState(() {
+          _fechaEnvio = date;
+        });
+      },
+      currentTime: DateTime.now(),
+    );
+  },
+),
     ],
   ),
 ),
@@ -125,7 +125,7 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       
-                      _enviarDatos(0,_selectedCamion,_selectedDate.toString(),1,DateTime.parse("2023-04-18T19:30:45.375Z"),0,DateTime.parse("2023-04-18T19:30:45.375Z"),true);
+                      _enviarDatos(0,_selectedCamion,_selectedDate.toString(),1,DateTime.parse("2023-04-18T19:30:45.375Z"),0,DateTime.parse("2023-04-18T19:30:45.375Z"),true,'s');
                     }
                   },
                   child: Text('Agregar'),
@@ -169,7 +169,7 @@ Future<Map<String, dynamic>> Cargarddl() async {
 
 Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
       String envi_FechaSalida, int envi_UsuarioCrea , DateTime envi_FechaCrea, 
-      int envi_UsuarioModifica, DateTime envi_FechaModifica, bool envi_Estado) async {
+      int envi_UsuarioModifica, DateTime envi_FechaModifica, bool envi_Estado, String transportista) async {
         print(envi_FechaSalida);
       Map<String, dynamic> DatosUser = {
           "envi_Id": 0,
@@ -212,7 +212,7 @@ Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
   final responseData = jsonDecode(response.body);
   final responseApi = ResponseApi.fromJson(responseData);
   Fluttertoast.showToast(
-    msg: responseApi.message ?? 'Ha ocurrido un error',
+    msg:  'Ha ocurrido un error',
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 4, 
@@ -235,7 +235,8 @@ Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
                     envi_FechaCrea: envi_FechaCrea,
                     envi_UsuarioModifica: envi_UsuarioModifica,
                     envi_FechaModifica: envi_FechaModifica,
-                    envi_Estado: envi_Estado)
+                    envi_Estado: envi_Estado,
+                    transportista:transportista)
         );
     } catch (e) {
       throw Exception(e);
