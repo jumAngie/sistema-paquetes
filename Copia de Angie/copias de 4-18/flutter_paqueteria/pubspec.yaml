@@ -71,6 +71,8 @@ flutter:
   - assets/images/gif_image.gif
   - assets/images/opcion.gif
   - assets/images/bodega-circulo.png
+  - assets/images/encamino-circul.png
+  - assets/images/entregado-circulo.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

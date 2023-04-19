@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
 
 class VerPaquetePage extends StatelessWidget {
   final _codigoController = TextEditingController(); // controlador para obtener el valor del TextField
@@ -8,6 +9,7 @@ class VerPaquetePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BNavigator(),
       appBar: AppBar(
         shape: ContinuousRectangleBorder(
           borderRadius: BorderRadius.only(
