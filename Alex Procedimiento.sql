@@ -176,12 +176,29 @@ CREATE OR ALTER PROCEDURE Paq.UDP_Envios_Por_Paquete_Mostrar
 AS
 BEGIN
 
-SELECT t2.paqu_Id,t2.paqu_EnCamino, t2.paqu_Ciudad, t2.paqu_DireccionExacta 
-FROM Paq.tblEnviosPorPaquetes T1 INNER JOIN Paq.tblPaquetes t2 
-ON t1.enpa_Id = t2.paqu_Id WHERE t1.enpa_Envio = @enpa_Envio
+SELECT t2.paqu_Id,
+       t2.paqu_Codigo,
+       t4.pers_Nombres, t4.pers_Apellidos as Cliente,
+	   t3.ciud_Descri, 
+	   t2.paqu_DireccionExacta,
+	   CASE 
+           WHEN t2.paqu_EnCamino IS NULL THEN 'En Bodega'
+		   WHEN t2.paqu_Entregado IS not NULL THEN 'Entregado'
+           ELSE 'En Camino'
+       END AS paqu_EnCamino
+FROM Paq.tblEnviosPorPaquetes T1 
+INNER JOIN Paq.tblPaquetes t2 ON t1.enpa_Paquete = t2.paqu_Id 
+INNER JOIN Gral.tblCiudades t3 ON t2.paqu_Ciudad = t3.ciud_ID  
+INNER JOIN Gral.tblPersonas t4 ON t2.paqu_Cliente = t4.pers_Id
+WHERE t1.enpa_Envio = @enpa_Envio;
 
 
 END
+
+
+SELECT * FROM Paq.tblPaquetes
+SELECT * FROM Paq.tblEnviosPorPaquetes
+EXEC Paq.UDP_Envios_Por_Paquete_Mostrar 1
 
 GO
 CREATE OR ALTER PROCEDURE Paq.UDP_Envios_Mostrar
@@ -345,18 +362,10 @@ BEGIN CATCH
 END CATCH 
 END;
 
-exec Paq.UDP_tblEnvios_Eliminar 2,1,1
-
-SELECT * FROM Paq.tblPaquetes
-
-SELECT * FROM Paq.tblEnviosPorPaquetes
-
-selec
-
 
 GO
 
-CREATE VIEW V_Grafico_Paquetes_Por_Cliente
+CREATE OR ALTER VIEW  V_Grafico_Paquetes_Por_Cliente
 AS
 Select T3.pers_Nombres + ' '+ T3.pers_Apellidos AS Cliente, COUNT(t2.paqu_Id) AS Cantidad from Paq.tblEnviosPorPaquetes T1 INNER JOIN Paq.tblPaquetes T2
 ON T1.enpa_Paquete = T2.paqu_Id INNER JOIN Gral.tblPersonas T3
@@ -365,7 +374,7 @@ GROUP BY pers_Nombres, pers_Apellidos
 
 GO
 
-CREATE PROCEDURE UDP_Grafico_Paquetes_Por_Cliente
+CREATE OR ALTER PROCEDURE UDP_Grafico_Paquetes_Por_Cliente
 AS
 BEGIN
 

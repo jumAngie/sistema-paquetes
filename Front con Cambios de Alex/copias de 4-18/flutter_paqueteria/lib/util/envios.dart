@@ -1,14 +1,14 @@
 class Envios {
 
-    final   int envi_Id;
-    final   int envi_Camion;
-    final   String envi_FechaSalida;
-    final   int envi_UsuarioCrea ;
-    final   DateTime envi_FechaCrea;
-    final   int envi_UsuarioModifica;
-    final   DateTime envi_FechaModifica;
-    final   bool envi_Estado;
-    final   String transportista;
+    final   int? envi_Id;
+    final   int? envi_Camion;
+    final   String? envi_FechaSalida;
+    final   int? envi_UsuarioCrea ;
+    final   DateTime? envi_FechaCrea;
+    final   int? envi_UsuarioModifica;
+    final   DateTime? envi_FechaModifica;
+    final   bool? envi_Estado;
+    final   String? transportista;
 
 
 

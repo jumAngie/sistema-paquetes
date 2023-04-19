@@ -170,7 +170,7 @@ Future<Map<String, dynamic>> Cargarddl() async {
 Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
       String envi_FechaSalida, int envi_UsuarioCrea , DateTime envi_FechaCrea, 
       int envi_UsuarioModifica, DateTime envi_FechaModifica, bool envi_Estado, String transportista) async {
-        print(envi_FechaSalida);
+      
       Map<String, dynamic> DatosUser = {
           "envi_Id": 0,
           "envi_Camion": envi_Camion,
@@ -203,9 +203,10 @@ Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 4, 
-    backgroundColor: Colors.green,
+    backgroundColor: Colors.blueAccent,
     textColor: Colors.white,
     fontSize: 16.0,
+ 
   ).then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ListadoEnvios()))); // Recarga la página después de que se haya agregado el envío exitosamente
   return responseApi.fromJson(jsonDecode(response.body));
 } else {
