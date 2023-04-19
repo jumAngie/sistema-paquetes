@@ -172,7 +172,7 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
     final responseData = jsonDecode(response.body);
     final responseApi = ResponseApi.fromJson(responseData);
     Fluttertoast.showToast(
-      msg: responseApi.message ?? 'Ha ocurrido un error',
+      msg: responseApi.message,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
