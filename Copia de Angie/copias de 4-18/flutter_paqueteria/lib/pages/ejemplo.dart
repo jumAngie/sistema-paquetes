@@ -1,9 +1,17 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:intl/intl.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_paqueteria/util/responseApi.dart';
+import 'package:flutter_paqueteria/util/envios.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
 import 'package:flutter_paqueteria/pages/formulario_envios.dart';
+import 'package:flutter_paqueteria/pages/formulario_editar_envio.dart';
+import 'package:flutter_paqueteria/pages/ejemplo.dart';
 
 void main() {
   runApp(ListadoEnvios());
@@ -25,7 +33,8 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
     _listado = _getListado();
   }
 
-  String url = "http://empaquetadora-ecopack.somee.com/api/Envios/List";
+ // String url = "http://empaquetadora-ecopack.somee.com/api/Envios/List";
+    String url = "https://localhost:44356/api/Envios/List";
 
   Future<dynamic> _getListado() async {
     final respuesta = await http.get(Uri.parse(url));
@@ -103,6 +112,26 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
       ),
     );
   }
+ 
+   
+
+
+
+
+}
+
+ class ResponseApi {
+  final int status;
+  final String message;
+
+  ResponseApi({required this.status, required this.message});
+
+  factory ResponseApi.fromJson(Map<String, dynamic> json) {
+    return ResponseApi(
+      status: json['status'],
+      message: json['message'],
+    );
+  }
 }
 
 class EnvioCard extends StatelessWidget {
@@ -140,12 +169,12 @@ class EnvioCard extends StatelessWidget {
                     "Envío ID: ${envio["envi_Id"]}",
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   subtitle: Text(
-                    "ID del Camión: ${envio["envi_Camion"]}\nTransportista: ${envio["transportista"]}\nFecha de salida: ${envio["envi_FechaSalida"]}",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                    "ID del Camión: ${envio["envi_Camion"]}\nNombre del transportista: ${envio["transportista"]}\nFecha de salida: ${envio["envi_FechaSalida"]}",
+                    style: TextStyle(fontSize: 14),
                   ),
                 ),
               ],
@@ -161,7 +190,7 @@ class EnvioCard extends StatelessWidget {
                   _verDetalles(envio);
                   break;
                 case "editar":
-                  _editarEnvio(envio);
+                  _editarEnvio(context, envio);
                   break;
               }
             },
@@ -205,6 +234,25 @@ class EnvioCard extends StatelessWidget {
     );
   }
 
+void _editarEnvio(BuildContext context, Map<String, dynamic> envio) {
+  
+  List<Envioss> envios = [
+    Envioss(
+      envi_Id: envio['envi_Id'],
+      envi_Camion: envio['envi_Camion'],
+      transportista: envio['transportista'],
+      envi_FechaSalida: envio['envi_FechaSalida'],
+    ),
+  ];
+  print(envio);
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => EditForm(envios: envios),
+    ),
+  );
+}
+
  void _eliminarEnvio(BuildContext context, int envioId) {
   showDialog(
     context: context,
@@ -232,7 +280,10 @@ class EnvioCard extends StatelessWidget {
           TextButton(
             child: Text("Eliminar"),
             onPressed: () {
-              // TODO: Implementar lógica de eliminación de envío
+            
+                                              
+               _Eliminar(context,envioId,0,'',1,DateTime.parse("2023-04-18T19:30:45.375Z"),0,DateTime.parse("2023-04-18T19:30:45.375Z"),true,'s');
+            
               Navigator.of(context).pop();
             },
           ),
@@ -241,14 +292,112 @@ class EnvioCard extends StatelessWidget {
     },
   );
 }
+
+Future<responseApi> _Eliminar(BuildContext context,int envi_Id, int envi_Camion,
+      String envi_FechaSalida, int envi_UsuarioCrea , DateTime envi_FechaCrea, 
+      int envi_UsuarioModifica, DateTime envi_FechaModifica, bool envi_Estado, String transportista) async {
+        print(envi_FechaSalida);
+      Map<String, dynamic> DatosUser = {
+          "envi_Id": envi_Id,
+          "envi_Camion": envi_Camion,
+          "envi_FechaSalida": envi_FechaSalida,
+          "envi_UsuarioCrea": envi_UsuarioCrea,
+          "envi_FechaCrea": "2023-04-18T21:38:28.813Z",
+          "envi_UsuarioModifica": 1,
+          "envi_FechaModifica": "2023-04-18T21:38:28.813Z",
+          "envi_Estado": true
+
+        
+    };
+
+    String date = jsonEncode(DatosUser);
+   
+    try {
+     // final response = await http.post(Uri.parse('http://empaquetadora-ecopack.somee.com/api/Envios/Insertar'),
+      final response = await http.post(Uri.parse('https://localhost:44356/api/Envios/Eliminar'),
+       
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },  
+        body: date);
+
+      if (response.statusCode == 200) {
+  
+       if (responseApi.fromJson(jsonDecode(response.body)).data != null) {
+  Fluttertoast.showToast(
+    msg: "Envío agregado exitosamente",
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 4, 
+    backgroundColor: Colors.blueAccent,
+    textColor: Colors.white,
+    fontSize: 16.0,
+ 
+  ).then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ListadoEnvios()))); // Recarga la página después de que se haya agregado el envío exitosamente
+  return responseApi.fromJson(jsonDecode(response.body));
+} else {
+  final responseData = jsonDecode(response.body);
+  final responseApi = ResponseApi.fromJson(responseData);
+  Fluttertoast.showToast(
+    msg:  'Ha ocurrido un error',
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 4, 
+    backgroundColor: Colors.red,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
+}
+    
+      } 
+        return new responseApi(
+          code: 0, 
+          success: false, 
+          message: "Nada", 
+          data: new Envios(
+                    envi_Id: envi_Id,
+                    envi_Camion: envi_Camion,
+                    envi_FechaSalida: envi_FechaSalida,
+                    envi_UsuarioCrea: envi_UsuarioCrea ,
+                    envi_FechaCrea: envi_FechaCrea,
+                    envi_UsuarioModifica: envi_UsuarioModifica,
+                    envi_FechaModifica: envi_FechaModifica,
+                    envi_Estado: envi_Estado,
+                    transportista:transportista)
+        );
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   void _verDetalles(Map<String, dynamic> envio) {
     // TODO: Implementar lógica de visualización de detalles de envío
   }
 
-  void _editarEnvio(Map<String, dynamic> envio) {
-    // TODO: Implementar lógica de edición de envío
-  }
-
-
-  
 }
+
+
+
+
+
+
+class Envioss {
+  final int? envi_Id;
+  final int? envi_Camion;
+  final String? transportista;
+  final String? envi_FechaSalida;
+ 
+
+  Envioss({
+    required this.envi_Id,
+    required this.envi_Camion,
+    required this.transportista,
+    required this.envi_FechaSalida,
+    
+  });
+}
+
+
+
+
+

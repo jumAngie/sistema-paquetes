@@ -1,12 +1,14 @@
 import 'dart:async';
-
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_paqueteria/pages/ejemplo.dart';
+
+
+
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 import 'package:flutter_paqueteria/util/ResponseApi.dart';
 import 'package:flutter_paqueteria/util/camiones.dart';
@@ -16,34 +18,36 @@ import 'package:flutter_paqueteria/util/envios.dart';
 import 'package:flutter_paqueteria/pages/ejemplo.dart';
 
 
-class AddEnvioForm extends StatefulWidget {
+
+
+class EditForm extends StatefulWidget {
+   final List<Envioss> envios;
+  EditForm({Key? key, required this.envios}) : super(key: key);
+
   @override
-  _AddEnvioFormState createState() => _AddEnvioFormState();
+  _EditFormState createState() => _EditFormState();
 }
 
-class _AddEnvioFormState extends State<AddEnvioForm> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _EditFormState extends State<EditForm> {
+  final _formKey = GlobalKey<FormState>();
 
-
-  int _selectedCamion = -1;
-  List<dynamic> _camiones = [];
-  DateTime _selectedDate = DateTime.now();
-   late DateTime _fechaEnvio;
-  
+  int? _selectedCamion;
+  DateTime? _selectedDate = DateTime.now();
+  late DateTime? _fechaEnvio;
 
   @override
   void initState() {
     super.initState();
-    Cargarddl();
-    _fechaEnvio = DateTime.now();
-     
+
+    _fechaEnvio = DateFormat("MMM dd yyyy hh:mma").parse(widget.envios[0].envi_FechaSalida!);
+    _selectedCamion = widget.envios[0].envi_Camion;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agregar envío'),
+        title: Text('Edit Post'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -52,17 +56,17 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DropdownButtonFormField(
+              DropdownButtonFormField<int>(
                 value: _selectedCamion,
                 onChanged: (value) {
                   setState(() {
                     _selectedCamion = value;
                   });
                 },
-                items: _camiones.map<DropdownMenuItem<dynamic>>((camion) {
-                  return DropdownMenuItem<dynamic>(
-                    value: camion['cami_Id'],
-                    child: Text(camion['transportista']),
+                items: widget.envios.map<DropdownMenuItem<int>>((envio) {
+                  return DropdownMenuItem<int>(
+                    value: envio.envi_Camion,
+                    child: Text(envio.transportista!),
                   );
                 }).toList(),
                 decoration: InputDecoration(
@@ -75,62 +79,77 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
                   return null;
                 },
               ),
-             Container(
-  margin: EdgeInsets.symmetric(vertical: 20),
-  padding: EdgeInsets.all(10),
-  decoration: BoxDecoration(
-    border: Border.all(
-      color: Colors.grey,
-      width: 1.0,
-    ),
-    borderRadius: BorderRadius.circular(5.0),
-  ),
-  child: Column(
-    children: [
-      Center(
-        child: Text(
-          'Fecha y hora de salida',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      SizedBox(height: 10),
-     GestureDetector(
-  child: Text(
-    _fechaEnvio == null ? 'Seleccione una fecha y hora' : DateFormat('yyyy-MM-dd HH:mm:ss').format(_fechaEnvio),
-    style: TextStyle(fontSize: 16),
-  ),
-  onTap: () {
-    DatePicker.showDateTimePicker(
-      context,
-      showTitleActions: true,
-      onConfirm: (date) {
-        setState(() {
-          _fechaEnvio = date;
-        });
-      },
-      currentTime: DateTime.now(),
-    );
-  },
-),
-    ],
-  ),
-),
-           
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        'Fecha y hora de salida',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    GestureDetector(
+                      child: Text(
+                        _fechaEnvio == null
+                            ? 'Seleccione una fecha y hora'
+                            : DateFormat('MMM d yyyy hh:mma').format(_fechaEnvio!),
+                                
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      onTap: () {
+                        DatePicker.showDateTimePicker(
+                          context,
+                          showTitleActions: true,
+                          onConfirm: (date) {
+                            setState(() {
+                              _fechaEnvio = date;
+                            });
+                          },
+                          currentTime: DateTime.now(),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      
-                      _enviarDatos(0,_selectedCamion,_selectedDate.toString(),1,DateTime.parse("2023-04-18T19:30:45.375Z"),0,DateTime.parse("2023-04-18T19:30:45.375Z"),true,'s');
+                      _enviarDatos(
+                        0,
+                        _selectedCamion!,
+                        _selectedDate.toString(),
+                        1,
+                        _fechaEnvio!,
+                        0,
+                        DateTime.parse("2023-04-18T19:30:45.375Z"),
+                        true,
+                        's',
+                      );
                     }
                   },
                   child: Text('Agregar'),
                 ),
               ),
+           
+
+               
+              
             ],
           ),
         ),
@@ -138,7 +157,8 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
     );
   }
 
-Future<Map<String, dynamic>> Cargarddl() async {
+
+  /*Future<Map<String, dynamic>> Cargarddl() async {
   try {
     final response = await http.get(
       //Uri.parse('http://empaquetadora-ecopack.somee.com/api/Camiones/DDLCamiones'),
@@ -165,12 +185,12 @@ Future<Map<String, dynamic>> Cargarddl() async {
   } catch (e) {
     throw Exception(e);
   }
-}
+}*/
 
 Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
       String envi_FechaSalida, int envi_UsuarioCrea , DateTime envi_FechaCrea, 
       int envi_UsuarioModifica, DateTime envi_FechaModifica, bool envi_Estado, String transportista) async {
-      
+        print(envi_FechaSalida);
       Map<String, dynamic> DatosUser = {
           "envi_Id": 0,
           "envi_Camion": envi_Camion,
@@ -203,17 +223,16 @@ Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 4, 
-    backgroundColor: Colors.blueAccent,
+    backgroundColor: Colors.green,
     textColor: Colors.white,
     fontSize: 16.0,
- 
   ).then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ListadoEnvios()))); // Recarga la página después de que se haya agregado el envío exitosamente
   return responseApi.fromJson(jsonDecode(response.body));
 } else {
   final responseData = jsonDecode(response.body);
   final responseApi = ResponseApi.fromJson(responseData);
   Fluttertoast.showToast(
-    msg:  'Ha ocurrido un error',
+    msg: 'Ha ocurrido un error',
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.CENTER,
     timeInSecForIosWeb: 4, 
@@ -237,7 +256,7 @@ Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
                     envi_UsuarioModifica: envi_UsuarioModifica,
                     envi_FechaModifica: envi_FechaModifica,
                     envi_Estado: envi_Estado,
-                    transportista:transportista)
+                    transportista: transportista)
         );
     } catch (e) {
       throw Exception(e);
