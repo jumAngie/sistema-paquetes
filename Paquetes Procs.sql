@@ -105,19 +105,16 @@ CREATE OR ALTER PROC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo
 		@Codigo INT
 AS
 BEGIN
-	SELECT	paqu_Id, paqu_Codigo, paqu_Cliente, paqu_Ciudad, paqu_DireccionExacta, paqu_Observaciones, 
+	SELECT	paqu_Id, paqu_Codigo, paqu_Cliente, paqu_Ciudad, paqu_DireccionExacta, paqu_Observaciones, paqu_Bodega, paqu_EnCamino, paqu_Entregado,
 	CASE
-	WHEN paqu_Bodega IS NULL THEN 'Pendiente'
-	WHEN paqu_Bodega IS NOT NULL THEN paqu_Bodega  END AS paqu_Bodega, 
-	CASE
-	WHEN paqu_EnCamino IS NULL THEN 'Pendiente'
-	WHEN paqu_EnCamino IS NOT NULL THEN paqu_EnCamino END AS paqu_EnCamino,
-	CASE
-	WHEN paqu_Entregado IS NULL THEN 'Pendiente' 
-	WHEN paqu_Entregado IS NOT NULL THEN paqu_Entregado END AS paqu_Entregado
+	WHEN paqu_Entregado IS NULL AND paqu_EnCamino IS NULL THEN 'En Bodega'
+	WHEN paqu_Entregado IS NULL AND paqu_EnCamino IS NOT NULL THEN 'En Camino'
+	WHEN paqu_Entregado IS NOT NULL AND paqu_EnCamino IS NOT NULL THEN 'Entregado'
+	
+	END AS 'Estado'
 	FROM	Paq.tblPaquetes
 	WHERE	paqu_Codigo = @Codigo
 
 END;
 
-EXEC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo 102
+EXEC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo 106
