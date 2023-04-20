@@ -53,7 +53,7 @@ class VerPaquetePage extends StatelessWidget {
       // muestra un mensaje de error si el campo está vacío
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: Colors.red,
+          backgroundColor: Color.fromARGB(255, 173, 39, 30),
           content: Center(child: Text('Debe ingresar un código.', style:
           TextStyle( 
             color: Color.fromARGB(255, 255, 255, 255),

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/pages/graficos_index.dart';
 import 'package:flutter_paqueteria/pages/usuario_perfil_page.dart';
@@ -33,7 +35,7 @@ class _BNavigatorState extends State<BNavigator> {
               onPressed: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => HomePage())),
 
-         icon: Icon(Icons.add_chart)
+         icon: Icon(Icons.home_sharp)
          ), 
          label: 'Principal'
          ),
@@ -43,7 +45,7 @@ class _BNavigatorState extends State<BNavigator> {
               onPressed: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => Profile())),
 
-         icon: Icon(Icons.add_chart)
+         icon: Icon(Icons.person)
          ), 
          label: 'Perfil'
          ),

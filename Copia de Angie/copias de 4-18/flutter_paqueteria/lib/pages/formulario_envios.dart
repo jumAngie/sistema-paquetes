@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, unnecessary_new
+
 import 'dart:async';
 
 
@@ -52,29 +54,29 @@ class _AddEnvioFormState extends State<AddEnvioForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DropdownButtonFormField(
-                value: _selectedCamion,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedCamion = value;
-                  });
+               DropdownButtonFormField(
+                 value: _selectedCamion,
+                 onChanged: (value) {
+                   setState(() {
+                     _selectedCamion = value;
+                   });
+                 },
+                 items: _camiones.map<DropdownMenuItem<dynamic>>((camion) {
+                   return DropdownMenuItem<dynamic>(
+                     value: camion['cami_Id'],
+                     child: Text(camion['transportista']),
+                   );
+                 }).toList(),
+                 decoration: InputDecoration(
+                   labelText: 'Camión',
+                 ),
+                 validator: (value) {
+                   if (value == null) {
+                     return 'Por favor, seleccione un camión';
+                   }
+                   return null;
                 },
-                items: _camiones.map<DropdownMenuItem<dynamic>>((camion) {
-                  return DropdownMenuItem<dynamic>(
-                    value: camion['cami_Id'],
-                    child: Text(camion['transportista']),
-                  );
-                }).toList(),
-                decoration: InputDecoration(
-                  labelText: 'Camión',
-                ),
-                validator: (value) {
-                  if (value == null) {
-                    return 'Por favor, seleccione un camión';
-                  }
-                  return null;
-                },
-              ),
+               ),
              Container(
   margin: EdgeInsets.symmetric(vertical: 20),
   padding: EdgeInsets.all(10),

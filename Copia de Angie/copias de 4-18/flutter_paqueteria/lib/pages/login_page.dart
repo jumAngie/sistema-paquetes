@@ -1,5 +1,5 @@
 
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, unnecessary_new, deprecated_member_use, use_build_context_synchronously, unused_element, non_constant_identifier_names, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,6 +13,8 @@ import 'package:flutter_paqueteria/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   static String id = 'loginpage';
+
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -45,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     width: 150.0,
                     height: 150.0,
-                    child: Image.asset('images/Logo02.png'),
+                    child: Image.asset('assets/images/Logo02.png'),
                   ),
                 ),
                   Center(
@@ -87,58 +89,65 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _usuarioTextField() {
-    return StreamBuilder(
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              Container(
-                child: TextFormField(
-                  controller: usuario,
-                  validator: _validateRequired,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.text_fields),
-                    hintText: 'Nombre de Usuario',
-                    labelText: 'Usuario',
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+  return StreamBuilder(
+    builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: Card(
+          elevation: 5.0,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  child: TextFormField(
+                    controller: usuario,
+                    validator: _validateRequired,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.person_pin_rounded),
+                      hintText: 'Nombre de Usuario',
+                      labelText: 'Usuario',
+                      border: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                      fillColor: Colors.white,
+                      filled: true,
                     ),
-                    fillColor: Colors.white,
-                    filled: true,
+                    style: TextStyle(color: Colors.black),
                   ),
-                  style: TextStyle(color: Colors.black),
                 ),
-              ),
-              SizedBox(height: 10.0),
-              Container(
-                child: TextFormField(
-                  controller: clave,
-                  validator: _validateRequired,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.lock),
-                    hintText: 'Clave de Usuario',
-                    labelText: 'Clave',
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+                SizedBox(height: 10.0),
+                Container(
+                  child: TextFormField(
+                    controller: clave,
+                    validator: _validateRequired,
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.lock),
+                      hintText: 'Clave de Usuario',
+                      labelText: 'Clave',
+                      border: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                      fillColor: Colors.white,
+                      filled: true,
                     ),
-                    fillColor: Colors.white,
-                    filled: true,
+                    style: TextStyle(color: Colors.black),
                   ),
-                  style: TextStyle(color: Colors.black),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
+
 
 
   Widget _buttonlogin() {

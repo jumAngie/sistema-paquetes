@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, unused_import, duplicate_import, prefer_const_constructors, non_constant_identifier_names, avoid_print, unnecessary_new, duplicate_ignore, unused_local_variable, prefer_final_fields, library_private_types_in_public_api, prefer_const_constructors_in_immutables
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -243,6 +245,7 @@ Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
 }
     
       } 
+        // ignore: unnecessary_new
         return new responseApi(
           code: 0, 
           success: false, 

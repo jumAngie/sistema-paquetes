@@ -97,3 +97,27 @@ BEGIN CATCH
 	SET @status = 0;
 END CATCH 
 END;
+
+GO
+
+-- AÑADIRLO A LA API 
+CREATE OR ALTER PROC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo
+		@Codigo INT
+AS
+BEGIN
+	SELECT	paqu_Id, paqu_Codigo, paqu_Cliente, paqu_Ciudad, paqu_DireccionExacta, paqu_Observaciones, 
+	CASE
+	WHEN paqu_Bodega IS NULL THEN 'Pendiente'
+	WHEN paqu_Bodega IS NOT NULL THEN paqu_Bodega  END AS paqu_Bodega, 
+	CASE
+	WHEN paqu_EnCamino IS NULL THEN 'Pendiente'
+	WHEN paqu_EnCamino IS NOT NULL THEN paqu_EnCamino END AS paqu_EnCamino,
+	CASE
+	WHEN paqu_Entregado IS NULL THEN 'Pendiente' 
+	WHEN paqu_Entregado IS NOT NULL THEN paqu_Entregado END AS paqu_Entregado
+	FROM	Paq.tblPaquetes
+	WHERE	paqu_Codigo = @Codigo
+
+END;
+
+EXEC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo 102

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
 
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
@@ -43,6 +43,7 @@ class _GraficosState extends State<Graficos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 213, 250, 216),
       bottomNavigationBar: BNavigator(),
       appBar: AppBar(
           shape: ContinuousRectangleBorder(
@@ -78,16 +79,22 @@ class _GraficosState extends State<Graficos> {
             Center(child:
               
                 Text(
-                              'Cantidad de paquetes enviados por Clientes' + ['cantidad'].toString(),
+                              'Cantidad de paquetes enviados por Clientes',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
             ),
             SizedBox(height: 20),
-            SizedBox(
-              height: 300,
-              child: FutureBuilder<dynamic>(
-                future: _futureListado,
-                builder: (context, snapshot) {
+            Card(
+              
+            borderOnForeground: true,
+            elevation: 5,
+            margin: EdgeInsets.all(20),
+            
+                   child: SizedBox(
+                        height: 300,
+                              child: FutureBuilder<dynamic>(
+                                          future: _futureListado,
+                                              builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<dynamic> info = snapshot.data as List<dynamic>;
                     final List<ChartData> data = info.map((element) => ChartData(element['cliente'], element['cantidad'])).toList();
@@ -98,10 +105,10 @@ class _GraficosState extends State<Graficos> {
                         data: data,
                         domainFn: (ChartData values, _) => values.cliente,
                         measureFn: (ChartData values, _) => values.cantidad,
-                         colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-                         labelAccessorFn: (ChartData values, _) => '${values.cantidad}',
-                         insideLabelStyleAccessorFn: (ChartData values , _) => 
-                         charts.TextStyleSpec(color: charts.MaterialPalette.white, fontSize: 12),
+                        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+                        labelAccessorFn: (ChartData values, _) => '${values.cantidad}',
+                        insideLabelStyleAccessorFn: (ChartData values, _) =>
+                        charts.TextStyleSpec(color: charts.MaterialPalette.white, fontSize: 12),
                       ),
                     ];
 
@@ -116,6 +123,7 @@ class _GraficosState extends State<Graficos> {
                   }
                 },
               ),
+            ),
             ),
           ],
         ),

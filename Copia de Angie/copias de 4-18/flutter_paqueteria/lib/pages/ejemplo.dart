@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_import, depend_on_referenced_packages, avoid_print, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, use_key_in_widget_constructors, non_constant_identifier_names, unused_local_variable, unnecessary_new
 
 import 'dart:async';
 import 'package:intl/intl.dart';
