@@ -105,16 +105,18 @@ CREATE OR ALTER PROC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo
 		@Codigo INT
 AS
 BEGIN
-	SELECT	paqu_Id, paqu_Codigo, paqu_Cliente, paqu_Ciudad, paqu_DireccionExacta, paqu_Observaciones, paqu_Bodega, paqu_EnCamino, paqu_Entregado,
+	SELECT	paqu_Id, paqu_Codigo, paqu_Cliente, paqu_Ciudad, ciudad.ciud_Descri, depto.depa_Descri, paqu_DireccionExacta, paqu_Observaciones, paqu_Bodega, paqu_EnCamino, paqu_Entregado,
 	CASE
 	WHEN paqu_Entregado IS NULL AND paqu_EnCamino IS NULL THEN 'En Bodega'
 	WHEN paqu_Entregado IS NULL AND paqu_EnCamino IS NOT NULL THEN 'En Camino'
 	WHEN paqu_Entregado IS NOT NULL AND paqu_EnCamino IS NOT NULL THEN 'Entregado'
 	
 	END AS 'Estado'
-	FROM	Paq.tblPaquetes
+	FROM	Paq.tblPaquetes paquetes INNER JOIN  [Gral].[tblCiudades] ciudad
+	ON		paquetes.paqu_Ciudad = ciudad.ciud_ID INNER JOIN [Gral].[tblDepartamentos] depto
+	ON		ciudad.depa_ID = depto.depa_ID
 	WHERE	paqu_Codigo = @Codigo
 
 END;
 
-EXEC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo 106
+EXEC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo 105
