@@ -1,4 +1,6 @@
 
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -43,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     width: 150.0,
                     height: 150.0,
-                    child: Image.asset('images/eco.jpg'),
+                    child: Image.asset('images/Logo02.png'),
                   ),
                 ),
                   Center(
@@ -212,7 +214,8 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://empaquetadora-ecopack.somee.com/api/Usuarios/Login'),
+        //Uri.parse('http://empaquetadora-ecopack.somee.com/api/Usuarios/Login'),
+          Uri.parse('https://localhost:44356/api/Usuarios/Login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

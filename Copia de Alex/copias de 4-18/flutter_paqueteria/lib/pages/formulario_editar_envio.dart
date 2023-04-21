@@ -158,35 +158,6 @@ class _EditFormState extends State<EditForm> {
   }
 
 
-  /*Future<Map<String, dynamic>> Cargarddl() async {
-  try {
-    final response = await http.get(
-      //Uri.parse('http://empaquetadora-ecopack.somee.com/api/Camiones/DDLCamiones'),
-          Uri.parse('https://localhost:44356/api/Camiones/DDLCamiones'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body) as List<dynamic>;
-      if (data.isNotEmpty) {
-        setState(() {
-          _camiones = data;
-          _selectedCamion = data[0]['cami_Id'];
-        });
-        return data[0];
-      } else {
-        throw Exception('La respuesta es nula');
-      }
-    } else {
-      throw Exception('Error en la solicitud: ${response.statusCode}');
-    }
-  } catch (e) {
-    throw Exception(e);
-  }
-}*/
-
 Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
       String envi_FechaSalida, int envi_UsuarioCrea , DateTime envi_FechaCrea, 
       int envi_UsuarioModifica, DateTime envi_FechaModifica, bool envi_Estado, String transportista) async {

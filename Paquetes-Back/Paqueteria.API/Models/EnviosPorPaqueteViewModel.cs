@@ -16,6 +16,17 @@ namespace Paqueteria.API.Models
         public int? enpa_UsuarioModifica { get; set; }
         public DateTime? enpa_FechaModifica { get; set; }
 
+
+        [NotMapped]
+        public int paqu_Id { get; set; }
+        [NotMapped]
+        public int paqu_Codigo { get; set; }
+
+        [NotMapped]
+        public string paqu_DireccionExacta { get; set; }
+        [NotMapped]
+        public string paqu_Observaciones { get; set; }
+
         [NotMapped]
         public string Cliente { get; set; }
 

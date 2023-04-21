@@ -48,9 +48,7 @@ namespace Paqueteria.API.Controllers
             var item2 = _mapper.Map<tblEnviosPorPaquetes>(item);
             
             var response = _paqueteriaServices.ListarPaquetesPorEnvio(item2);
-          
-            response.Data = _mapper.Map<EnviosPorPaqueteViewModel>(response.Data);
-
+                 
             return Ok(response);
 
         }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -6,8 +8,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-String url = "http://empaquetadora-ecopack.somee.com/api/EnviosPorPaquete/Grafico";
+//String url = "http://empaquetadora-ecopack.somee.com/api/EnviosPorPaquete/Grafico";
 
+String url = "https://localhost:44356/api/EnviosPorPaquete/Grafico";
 Future<dynamic> _getListado() async{
   final respuesta = await http.get(Uri.parse(url));
   if(respuesta.statusCode == 200)
@@ -41,11 +44,44 @@ class _GraficosState extends State<Graficos> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BNavigator(),
+      appBar: AppBar(
+          shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(30),
+      bottomRight: Radius.circular(30),
+          ),
+          ),
+            title: Center(
+                          ),
+            leading: IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: () {
+                                        Navigator.pop(context);
+                                              },
+                                              ),
+            backgroundColor: Colors.green[400],
+        ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Gráfico de barras'),
+            SizedBox(
+              height: 15,
+            ),
+            Center(
+                child: Image.asset(
+                  'images/Logo02.png', height: 90),
+            ),
+            SizedBox(
+              height: 19,
+            ),
+            Center(child:
+              
+                Text(
+                              'Cantidad de paquetes enviados por Clientes' + ['cantidad'].toString(),
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+            ),
             SizedBox(height: 20),
             SizedBox(
               height: 300,
@@ -62,6 +98,10 @@ class _GraficosState extends State<Graficos> {
                         data: data,
                         domainFn: (ChartData values, _) => values.cliente,
                         measureFn: (ChartData values, _) => values.cantidad,
+                         colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+                         labelAccessorFn: (ChartData values, _) => '${values.cantidad}',
+                         insideLabelStyleAccessorFn: (ChartData values , _) => 
+                         charts.TextStyleSpec(color: charts.MaterialPalette.white, fontSize: 12),
                       ),
                     ];
 

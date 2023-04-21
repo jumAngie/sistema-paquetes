@@ -3,9 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_paqueteria/pages/home_page.dart';
-import 'package:flutter_paqueteria/pages/index_page.dart';
 import 'package:flutter_paqueteria/pages/login_page.dart';
-import 'package:flutter_paqueteria/pages/usuarios_index_page.dart';
 import 'package:flutter_paqueteria/pages/paquetes_index_page.dart';
 import 'package:flutter_paqueteria/pages/tracking_index_page.dart';
 import 'package:flutter_paqueteria/pages/usuario_perfil_page.dart';
@@ -25,7 +23,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Paquetería EcoPack',
-      initialRoute: 'envios_index_page',
+      initialRoute:  'envios_index_page',
       routes: {
            LoginPage.id : (context)  => LoginPage(),
             'home': ( _ ) => HomePage(),
@@ -35,7 +33,11 @@ class MyApp extends StatelessWidget{
         'paquetes_index_page': ( _ ) => ListadoPaquetes(),
         'tracking_index_page': ( _ ) => VerPaquetePage(),
         'profile_index_page': ( _ ) => Profile(),
-        'login_page': ( _ ) => LoginPage()
+        'login_page': ( _ ) => LoginPage(),
+        '/detallePaquete': (context) {
+                                  final codigo = ModalRoute.of(context)!.settings.arguments as String;
+                                  return DetallePaquetePage(codigo: codigo);},
+
       }
       
     );

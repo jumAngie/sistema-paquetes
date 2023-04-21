@@ -1,40 +1,62 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:flutter/material.dart';
+import 'package:flutter_paqueteria/pages/ejemplo.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-void main() {
-  runApp(ListadoPaquetes());
-}
 
-class ListadoPaquetes extends StatefulWidget {
-  const ListadoPaquetes({Key? key}) : super(key: key);
+class EnviosDetalle extends StatefulWidget {
+  final int envios;
+  
+
+  const EnviosDetalle({Key? key, required this.envios}) : super(key: key);
+  
 
   @override
-  _ListadoPaquetesState createState() => _ListadoPaquetesState();
+  _EnviosDetalleState createState() => _EnviosDetalleState();
+  
 }
 
-class _ListadoPaquetesState extends State<ListadoPaquetes> {
-  late Future<dynamic> _listado;
+class _EnviosDetalleState extends State<EnviosDetalle> {
+  
+  late Future<List<Envio>> _listado;
 
   @override
   void initState() {
     super.initState();
-    _listado = _getListado();
+   _listado = _getListado(widget.envios);
+   
   }
 
-  String url = "http://empaquetadora-ecopack.somee.com/api/Paquetes/List";
+ // String url = "http://empaquetadora-ecopack.somee.com/api/Paquetes/List";
+ 
+Future<List<Envio>> _getListado(int envio) async {
+  final url = "https://localhost:44356/api/EnviosPorPaquete/PaquetesPorEnvio";
+  final headers = {'Content-Type': 'application/json'};
+  final body = jsonEncode({'enpa_Envio': envio});
 
-  Future<dynamic> _getListado() async {
-    final respuesta = await http.get(Uri.parse(url));
-    if (respuesta.statusCode == 200) {
-      final json = respuesta.body;
-      return jsonDecode(json);
+  final respuesta = await http.post(Uri.parse(url), headers: headers, body: body);
+  if (respuesta.statusCode == 200) {
+     print("Datos recibidos: ${respuesta.body}");
+
+    final dynamic json = jsonDecode(respuesta.body);
+    if (json is List<dynamic>) {
+      final envios = json.map((e) => Envio.fromJson(e)).toList();
+      return envios;
+    } else if (json is Map<String, dynamic>) {
+      final envio = Envio.fromJson(json);
+      return [envio];
     } else {
-      print("Error con la respuesta");
+      print("Error al decodificar la respuesta");
+      return [];
     }
+  } else {
+    print("Error con la respuesta");
+    return [];
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +70,7 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
       bottomRight: Radius.circular(30),
           ),
           ),
-            title: Center(child: Text("Listado de Paquetes",
+            title: Center(child: Text("Listado de Paquetes del envio #${widget.envios}",
                                       style: TextStyle(
                                         fontWeight: 
                                         FontWeight.bold),
@@ -121,66 +143,19 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
                               children: [
                                 ListTile(
                                   title: Text(
-                                    "Código: ${envio["paqu_Codigo"]}",
+                                    "Código: #${widget.envios}",
                                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                   ),
                                   subtitle: Text(
-                                    "Cliente: ${envio["cliente"]}\nDepartamento: ${envio["depa_Descri"]}\nCiudad: ${envio["ciud_Descri"]}",
+                                    "Hola",
+                                    //"Cliente: ${envio["cliente"]}\nDepartamento: ${envio["depa_Descri"]}\nCiudad: ${envio["ciud_Descri"]}",
                                     style: TextStyle(fontSize: 14),
                                   ),
                                 ),
                               ],
                             ),
                           ),
-            PopupMenuButton<String>(
-            onSelected: (value) {
-              switch (value) {
-                case "eliminar":
-                  _eliminarEnvio(context,envio["envi_Id"]);
-                  break;
-                case "detalles":
-                  _verDetalles(envio);
-                  break;
-                case "editar":
-                  _editarEnvio(envio);
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem<String>(
-                  value: "eliminar",
-                  child: Row(
-                    children: [
-                      Icon(Icons.delete),
-                      SizedBox(width: 8),
-                      Text("Eliminar"),
-                    ],
-                  ),
-                ),
-                PopupMenuItem<String>(
-                  value: "detalles",
-                  child: Row(
-                    children: [
-                      Icon(Icons.details),
-                      SizedBox(width: 8),
-                      Text("Detalles"),
-                    ],
-                  ),
-                ),
-                PopupMenuItem<String>(
-                  value: "editar",
-                  child: Row(
-                    children: [
-                      Icon(Icons.edit),
-                      SizedBox(width: 8),
-                      Text("Editar"),
-                    ],
-                  ),
-                ),
-              ];
-            },
-          ),
+           
                         ],
                       ),
                     );
@@ -188,8 +163,7 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
                 );
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
-              }
-        
+              }       
               return Center(
                 child: CircularProgressIndicator(),
               );
@@ -237,15 +211,61 @@ void _eliminarEnvio(BuildContext context, int envioId) {
     },
   );
 }
-  void _verDetalles(Map<String, dynamic> envio) {
-    // TODO: Implementar lógica de visualización de detalles de envío
+ 
+}
+
+class Envio {
+  final int? enpa_Id;
+  final int? enpa_Envio;
+  final int? enpa_Paquete;
+  final int? enpa_UsuarioCrea;
+  final DateTime? enpa_FechaCrea;
+  final int? enpa_UsuarioModifica;
+  final DateTime? enpa_FechaModifica;
+  final int? paqu_Id;
+  final int? paqu_Codigo;
+  final String? paqu_DireccionExacta;
+  final String? paqu_Observaciones;
+  final String? cliente;
+  final String? ciud_Descri;
+  final String? estadoViaje;
+  final bool? enpa_Estado;
+
+  Envio({
+    required this.enpa_Id,
+    required this.enpa_Envio,
+    required this.enpa_Paquete,
+    required this.enpa_UsuarioCrea,
+    required this.enpa_FechaCrea,
+    required this.enpa_UsuarioModifica,
+    required this.enpa_FechaModifica,
+    required this.paqu_Id,
+    required this.paqu_Codigo,
+    required this.paqu_DireccionExacta,
+    required this.paqu_Observaciones,
+    required this.cliente,
+    required this.ciud_Descri,
+    required this.estadoViaje,
+    required this.enpa_Estado,
+  });
+
+  factory Envio.fromJson(Map<String, dynamic> json) {
+    return Envio(
+      enpa_Id: json['enpa_Id'],
+      enpa_Envio: json['enpa_Envio'],
+      enpa_Paquete: json['enpa_Paquete'],
+      enpa_UsuarioCrea: json['enpa_UsuarioCrea'],
+      enpa_FechaCrea: DateTime.parse(json['enpa_FechaCrea']),
+      enpa_UsuarioModifica: json['enpa_UsuarioModifica'],
+      enpa_FechaModifica: DateTime.parse(json['enpa_FechaModifica']),
+      paqu_Id: json['paqu_Id'],
+      paqu_Codigo: json['paqu_Codigo'],
+      paqu_DireccionExacta: json['paqu_DireccionExacta'],
+      paqu_Observaciones: json['paqu_Observaciones'],
+      cliente: json['cliente'],
+      ciud_Descri: json['ciud_Descri'],
+      estadoViaje: json['estadoViaje'],
+      enpa_Estado: json['enpa_Estado'],
+    );
   }
-
-  void _editarEnvio(Map<String, dynamic> envio) {
-    // TODO: Implementar lógica de edición de envío
-  }
-
-
-
-
 }

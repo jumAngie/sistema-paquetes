@@ -1,12 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_label
 
 import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-
-
 import 'package:flutter_paqueteria/util/responseApi.dart';
-
 import 'package:flutter_paqueteria/util/envios.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -14,8 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
 import 'package:flutter_paqueteria/pages/formulario_envios.dart';
 import 'package:flutter_paqueteria/pages/formulario_editar_envio.dart';
-
-import 'package:flutter_paqueteria/pages/ejemplo.dart';
+import 'package:flutter_paqueteria/pages/detalles_envios.dart';
 
 void main() {
   runApp(ListadoEnvios());
@@ -191,7 +187,7 @@ class EnvioCard extends StatelessWidget {
                   _eliminarEnvio(context,envio["envi_Id"]);
                   break;
                 case "detalles":
-                  _verDetalles(envio);
+                  _verDetalles(context, envio["envi_Id"].toString());
                   break;
                 case "editar":
                   _editarEnvio(context, envio);
@@ -216,7 +212,7 @@ class EnvioCard extends StatelessWidget {
                     children: [
                       Icon(Icons.details),
                       SizedBox(width: 8),
-                      Text("Detalles"),
+                      Text("Pantallas"),
                     ],
                   ),
                 ),
@@ -238,6 +234,19 @@ class EnvioCard extends StatelessWidget {
     );
   }
 
+void _verDetalles(BuildContext context, String envio) {
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => EnviosDetalle(envios: int.parse(envio),
+      ),
+    ),
+  );
+}
+
+
+
 void _editarEnvio(BuildContext context, Map<String, dynamic> envio) {
   
   List<Envioss> envios = [
@@ -248,7 +257,7 @@ void _editarEnvio(BuildContext context, Map<String, dynamic> envio) {
       envi_FechaSalida: envio['envi_FechaSalida'],
     ),
   ];
-  print(envio);
+
   Navigator.push(
     context,
     MaterialPageRoute(
@@ -300,7 +309,7 @@ void _editarEnvio(BuildContext context, Map<String, dynamic> envio) {
 Future<responseApi> _Eliminar(BuildContext context,int envi_Id, int envi_Camion,
       String envi_FechaSalida, int envi_UsuarioCrea , DateTime envi_FechaCrea, 
       int envi_UsuarioModifica, DateTime envi_FechaModifica, bool envi_Estado, String transportista) async {
-        print(envi_FechaSalida);
+      
       Map<String, dynamic> DatosUser = {
           "envi_Id": envi_Id,
           "envi_Camion": envi_Camion,
@@ -374,9 +383,7 @@ Future<responseApi> _Eliminar(BuildContext context,int envi_Id, int envi_Camion,
     }
   }
 
-  void _verDetalles(Map<String, dynamic> envio) {
-    // TODO: Implementar lógica de visualización de detalles de envío
-  }
+  
 
 }
 
