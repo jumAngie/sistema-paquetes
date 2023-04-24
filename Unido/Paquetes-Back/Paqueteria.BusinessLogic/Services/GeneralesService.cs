@@ -29,19 +29,12 @@ namespace Paqueteria.BusinessLogic.Services
 
 
         #region Departamentos
-        public ServiceResult ListarDepartamentos()
+        public IEnumerable<tblDepartamentos> ListarDepartamentos()
         {
-            var result = new ServiceResult();
-
-            try
-            {
+           
                 var list = _departamentosRepository.ListarDepartamentos();
-                return result.Ok(list);
-            }
-            catch (Exception ex)
-            {
-                return result.Error(ex.Message);
-            }
+                return list;
+          
         }
         #endregion
 
@@ -206,20 +199,13 @@ namespace Paqueteria.BusinessLogic.Services
         #endregion
 
         #region Empleado
-        public ServiceResult ListarCiudadesPorDepto(tblCiudades item)
+        public IEnumerable<tblCiudades> ListarCiudadesPorDepto(tblCiudades item)
         {
             var result = new ServiceResult();
 
-            try
-            {
                 var list = _empleadosRepository.ListadoCiudadesPorDepto(item);
-                return result.Ok(list);
-            }
-            catch (Exception ex)
-            {
-
-                return result.Error(ex.Message);
-            }
+                return list;
+          
         }
 
         public IEnumerable<VW_Clientes> ClientesDDL()

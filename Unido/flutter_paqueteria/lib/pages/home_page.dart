@@ -4,6 +4,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/util/iconos_menu.dart';
 import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
+import 'package:flutter_paqueteria/pages/paquetes_index_page.dart';
+import 'package:flutter_paqueteria/pages/linea_de_tiempo.dart';
+import 'package:flutter_paqueteria/pages/ejemplo.dart';
+
 import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 extension StringExtension on String {
-  String get capitalizeFirst {
+  String get capitalizeFirst2 {
     if (this.isEmpty) {
       return this;
     }
@@ -66,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                     height: 5,
                     ),
                   Text(
-                formatterLetra.format(DateTime.now()).capitalizeFirst,
+                formatterLetra.format(DateTime.now()).capitalizeFirst2,
                 style: TextStyle(color: Colors.green[200]),
                 ),
 
@@ -132,14 +136,18 @@ class _HomePageState extends State<HomePage> {
                       // Icono de Paquetes
                       Column(
               children: [
-                GestureDetector(
-                  onTap: (){
-                    Navigator.pushNamed(context, 'paquetes_index_page');
+               GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ListadoPaquetes()),
+                    );
                   },
                   child: IconoMenu(
                     icono: '📦',
                   ),
                 ),
+
                 SizedBox(
                   height: 5,
                       ),
@@ -154,7 +162,10 @@ class _HomePageState extends State<HomePage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, 'tracking_index_page');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => VerPaquetePage()),
+                    );
                   },
                   child: IconoMenu(
                     icono: '🚛',
@@ -174,7 +185,10 @@ class _HomePageState extends State<HomePage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, 'envios_index_page');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ListadoEnvios()),
+                    );
                   },
                   child: IconoMenu(
                     icono: '📩',

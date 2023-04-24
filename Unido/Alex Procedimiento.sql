@@ -439,11 +439,9 @@ SELECT T1.cami_Id, T2.pers_Nombres + ' ' + T2.pers_Apellidos AS Transportista FR
 
 GO
 
-INSERT INTO Paq.tblPaquetes
-VALUES(0107,4,12,'Casa Roja donde los olivos','Lo resibira una se�ora ingeniera',Getdate(),null, null,1,GETDATE(),null,null,1),
-      (0108,4,120,'Calle 12, Bloque 3','Lo resibira una se�ora ingeniera',GETDATE(),null, null,1,GETDATE(),null,null,1)
+
 	 
-go
+
 
 
 CREATE OR ALTER VIEW WV_tblPaquetes_Libres
