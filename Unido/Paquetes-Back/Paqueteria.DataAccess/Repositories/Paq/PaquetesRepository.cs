@@ -21,6 +21,7 @@ namespace Paqueteria.DataAccess.Repositories.Paq
             parameters.Add("@paqu_Ciudad", item.paqu_Ciudad, DbType.Int32, direction: ParameterDirection.Input);
             parameters.Add("@paqu_Codigo", item.paqu_Codigo, DbType.Int32, direction: ParameterDirection.Input);
             parameters.Add("@paqu_DireccionExacta", item.paqu_DireccionExacta, DbType.String, direction: ParameterDirection.Input);
+            parameters.Add("@paqu_Observaciones", item.paqu_Observaciones, DbType.String, direction: ParameterDirection.Input);
             parameters.Add("@paqu_UsuarioCrea", item.paqu_UsuarioCrea, DbType.Int32, direction: ParameterDirection.Input);
 
             parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);

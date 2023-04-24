@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_paqueteria/util/responseApi.dart';
+import 'package:flutter_paqueteria/pages/formulario_agregar_paquete.dart';
 
 void main() {
   runApp(ListadoPaquetes());
@@ -13,6 +16,25 @@ class ListadoPaquetes extends StatefulWidget {
 
   @override
   _ListadoPaquetesState createState() => _ListadoPaquetesState();
+}
+
+class Paquetes{
+  final int? codigo;
+  final int? cliente;
+  final int? ciudad;
+  final String? direccion;
+  final String? observaciones;
+ 
+
+  Paquetes({
+    this.observaciones,
+    required this.codigo,
+    required this.cliente,
+    required this.ciudad,
+    required this.direccion,
+  });
+
+  
 }
 
 class _ListadoPaquetesState extends State<ListadoPaquetes> {
@@ -66,34 +88,7 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
         body:
         Column(
           children: [
-            GestureDetector(
-              onTap: () {
-                    Navigator.pushNamed(context, 'agregarpaquete');
-                  },
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.green[400]!,
-                    style: BorderStyle.solid,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: EdgeInsets.all(8),
-                padding: EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.add),
-                    SizedBox(width: 8),
-                    Text(
-                      "Añadir Paquete",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+           
         Expanded(
           child: FutureBuilder<dynamic>(
             future: _listado,
@@ -138,55 +133,14 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
                               ],
                             ),
                           ),
-            PopupMenuButton<String>(
-            onSelected: (value) {
-              switch (value) {
-                case "eliminar":
-                  _eliminarEnvio(context,envio["envi_Id"]);
-                  break;
-                case "detalles":
-                  _verDetalles(envio);
-                  break;
-                case "editar":
-                  _editarEnvio(envio);
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem<String>(
-                  value: "eliminar",
-                  child: Row(
-                    children: [
-                      Icon(Icons.delete),
-                      SizedBox(width: 8),
-                      Text("Eliminar"),
-                    ],
-                  ),
-                ),
-                PopupMenuItem<String>(
-                  value: "detalles",
-                  child: Row(
-                    children: [
-                      Icon(Icons.details),
-                      SizedBox(width: 8),
-                      Text("Detalles"),
-                    ],
-                  ),
-                ),
-                PopupMenuItem<String>(
-                  value: "editar",
-                  child: Row(
-                    children: [
-                      Icon(Icons.edit),
-                      SizedBox(width: 8),
-                      Text("Editar"),
-                    ],
-                  ),
-                ),
-              ];
-            },
-          ),
+           IconButton(
+  icon: Icon(Icons.delete),
+  onPressed: () {
+    _eliminarEnvio(context, envio["paqu_Id"]);
+  },
+),
+            
+          
                         ],
                       ),
                     );
@@ -200,14 +154,28 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
                 child: CircularProgressIndicator(),
               );
             },
+            
           ),
+          
         ),
        ],
-        )
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+  backgroundColor: Colors.green,
+  icon: Icon(Icons.add),
+  label: Text("Agregar"),
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyForm()),
+    );
+  },
+),
        ),
     );
   }
 void _eliminarEnvio(BuildContext context, int envioId) {
+  print(envioId);
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -234,7 +202,7 @@ void _eliminarEnvio(BuildContext context, int envioId) {
           TextButton(
             child: Text("Eliminar"),
             onPressed: () {
-              // TODO: Implementar lógica de eliminación de envío
+             Eliminar(int.parse(envioId.toString()));
               Navigator.of(context).pop();
             },
           ),
@@ -243,14 +211,104 @@ void _eliminarEnvio(BuildContext context, int envioId) {
     },
   );
 }
-  void _verDetalles(Map<String, dynamic> envio) {
-    // TODO: Implementar lógica de visualización de detalles de envío
-  }
+  Future<responseApi> Eliminar(int paqu_Id) async {
+      
+     
+     
+      Map<String, dynamic> Datos = {
+         
+            "paqu_Id": paqu_Id,
+            "paqu_Codigo": 0,
+            "paqu_Cliente": 0,
+            "paqu_Ciudad": 0,
+            "depa_Descri": "string",
+            "ciud_Descri": "string",
+            "cliente": "string",
+            "paqu_DireccionExacta": "",
+            "paqu_Observaciones": "Observaciones",
+            "paqu_Bodega": "2023-04-22T20:31:04.472Z",
+            "paqu_EnCamino": "2023-04-22T20:31:04.472Z",
+            "paqu_Entregado": "2023-04-22T20:31:04.472Z",
+            "paqu_UsuarioCrea": 0,
+            "paqu_FechaCrea": "2023-04-22T20:31:04.472Z",
+            "paqu_UsuarioModifica": 1,
+            "paqu_FechaModifica": "2023-04-22T20:31:04.472Z",
+            "paqu_Estado": true
 
-  void _editarEnvio(Map<String, dynamic> envio) {
-    // TODO: Implementar lógica de edición de envío
-  }
+        
+    };
 
+    String date = jsonEncode(Datos);
+   
+    try {
+     // final response = await http.post(Uri.parse('http://empaquetadora-ecopack.somee.com/api/Envios/Insertar'),
+      final response = await http.post(Uri.parse('https://localhost:44356/api/Paquetes/Eliminar'),
+       
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },  
+        body: date);
+
+      if (response.statusCode == 200) {
+  
+       if (responseApi.fromJson(jsonDecode(response.body)).data != null) {
+     
+        Fluttertoast.showToast(
+    msg:  'Paquete eliminado Exitosamente',
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 4, 
+    backgroundColor: Colors.red,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  
+ 
+  ).then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ListadoPaquetes()))); // Recarga la página después de que se haya agregado el envío exitosamente
+  return responseApi.fromJson(jsonDecode(response.body));
+} else {
+  final responseData = jsonDecode(response.body);
+  final responseApi = ResponseApi.fromJson(responseData);
+  Fluttertoast.showToast(
+    msg:  'Ha ocurrido un error',
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.CENTER,
+    timeInSecForIosWeb: 4, 
+    backgroundColor: Colors.red,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
+}
+    
+      } 
+        return new responseApi(
+          code: 0, 
+          success: false, 
+          message: "Nada", 
+          data: new Paquetes(
+                    codigo: 0,
+                    cliente: 0,
+                    ciudad: 0,
+                    direccion: "",
+                    observaciones: "Observaciones"
+                    )
+        );
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }
 
 
+class ResponseApi {
+  final int status;
+  final String message;
+
+  ResponseApi({required this.status, required this.message});
+
+  factory ResponseApi.fromJson(Map<String, dynamic> json) {
+    return ResponseApi(
+      status: json['status'],
+      message: json['message'],
+    );
+  }
+}

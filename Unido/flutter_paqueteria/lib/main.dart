@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Paquetería EcoPack',
-      initialRoute:  LoginPage.id,
+      initialRoute:  'home',
       routes: {
            LoginPage.id : (context)  => LoginPage(),
             'home': ( _ ) => HomePage(),

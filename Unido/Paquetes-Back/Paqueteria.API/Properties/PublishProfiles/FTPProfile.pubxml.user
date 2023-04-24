@@ -6,16 +6,16 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword />
-    <_PublishTargetUrl>ftp://198.37.116.25/www.Empaquetadora-EcoPack.somee.com</_PublishTargetUrl>
-    <History>False|2023-04-17T20:47:03.3224912Z;False|2023-04-17T14:45:09.6873415-06:00;False|2023-04-17T14:42:39.9876485-06:00;True|2023-04-15T19:23:50.3075177-06:00;False|2023-04-15T19:23:16.7972418-06:00;True|2023-04-15T17:26:32.1215827-06:00;False|2023-04-15T17:25:58.8251432-06:00;True|2023-04-15T13:02:10.2708278-06:00;False|2023-04-15T13:01:38.7550441-06:00;True|2023-04-13T15:14:17.2186480-06:00;True|2023-04-12T16:20:29.9339093-06:00;False|2023-04-12T16:19:08.6537738-06:00;True|2023-04-12T16:13:17.7101500-06:00;False|2023-04-12T16:09:36.9486911-06:00;False|2023-04-12T16:08:14.5803261-06:00;</History>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAArscPKiJNaUeo4b3yzMevJgAAAAACAAAAAAAQZgAAAAEAACAAAADFu7+W8Hf3vu/JGdVAT2V+M2dm8J2lUvl3KCOnBVSWMQAAAAAOgAAAAAIAACAAAAA/5AeoR2RzLLNagEW974ua5Mvto6pDJ8mrdNBBednh4yAAAAC2VVcPdG+OLu0TBiOHeOos1d+IPVYKKA2QRq1otChb/0AAAACuPlS9UodZG2gjYJ314aqZZ1DVFplLqbEiXou7rMw0eQJVZ1zCIPwgECDuO6CTxffytzHXgFUVo9vfv83QljpL</EncryptedPassword>
+    <_PublishTargetUrl>ftp://198.37.116.25/www.EcoPack.somee.com</_PublishTargetUrl>
+    <History>True|2023-04-24T05:50:24.7635850Z;False|2023-04-23T23:50:08.8191939-06:00;True|2023-04-23T23:36:19.0319682-06:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>04/10/2023 20:37:31</publishTime>
+      <publishTime>04/19/2023 12:18:40</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>04/12/2023 20:40:48</publishTime>
+      <publishTime>04/23/2023 23:45:09</publishTime>
     </File>
     <File Include="AutoMapper.dll">
       <publishTime>01/05/2022 09:27:54</publishTime>
@@ -36,16 +36,16 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>05/15/2018 15:01:34</publishTime>
     </File>
     <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>10/24/2020 00:39:40</publishTime>
     </File>
     <File Include="Microsoft.EntityFrameworkCore.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>10/24/2020 00:40:02</publishTime>
     </File>
     <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>10/24/2020 00:40:08</publishTime>
     </File>
     <File Include="Microsoft.EntityFrameworkCore.SqlServer.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>10/24/2020 00:41:00</publishTime>
     </File>
     <File Include="Microsoft.Extensions.DependencyModel.dll">
       <publishTime>05/15/2018 15:01:34</publishTime>
@@ -54,7 +54,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>03/16/2021 16:42:46</publishTime>
     </File>
     <File Include="Microsoft.Identity.Client.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/18/2020 14:11:54</publishTime>
     </File>
     <File Include="Microsoft.IdentityModel.JsonWebTokens.dll">
       <publishTime>10/18/2019 17:39:24</publishTime>
@@ -72,43 +72,43 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/18/2019 17:43:40</publishTime>
     </File>
     <File Include="Microsoft.OpenApi.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/29/2020 14:14:12</publishTime>
     </File>
     <File Include="Newtonsoft.Json.dll">
       <publishTime>03/20/2017 14:03:18</publishTime>
     </File>
     <File Include="Paqueteria.API.deps.json">
-      <publishTime>04/17/2023 14:45:40</publishTime>
+      <publishTime>04/23/2023 23:50:14</publishTime>
     </File>
     <File Include="Paqueteria.API.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>04/23/2023 23:50:14</publishTime>
     </File>
     <File Include="Paqueteria.API.exe">
-      <publishTime>04/17/2023 14:45:39</publishTime>
+      <publishTime>04/23/2023 23:50:14</publishTime>
     </File>
     <File Include="Paqueteria.API.pdb">
-      <publishTime>04/17/2023 14:45:39</publishTime>
+      <publishTime>04/23/2023 23:50:14</publishTime>
     </File>
     <File Include="Paqueteria.API.runtimeconfig.json">
-      <publishTime>04/17/2023 14:41:01</publishTime>
+      <publishTime>04/23/2023 23:04:52</publishTime>
     </File>
     <File Include="Paqueteria.BusinessLogic.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>04/23/2023 23:19:17</publishTime>
     </File>
     <File Include="Paqueteria.BusinessLogic.pdb">
-      <publishTime>04/17/2023 14:40:58</publishTime>
+      <publishTime>04/23/2023 23:19:17</publishTime>
     </File>
     <File Include="Paqueteria.DataAccess.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>04/23/2023 23:19:16</publishTime>
     </File>
     <File Include="Paqueteria.DataAccess.pdb">
-      <publishTime>04/17/2023 14:40:55</publishTime>
+      <publishTime>04/23/2023 23:19:16</publishTime>
     </File>
     <File Include="Paqueteria.Entities.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>04/23/2023 23:04:48</publishTime>
     </File>
     <File Include="Paqueteria.Entities.pdb">
-      <publishTime>04/17/2023 14:40:52</publishTime>
+      <publishTime>04/23/2023 23:04:48</publishTime>
     </File>
     <File Include="runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll">
       <publishTime>08/25/2020 17:25:12</publishTime>
@@ -156,7 +156,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>01/11/2023 00:49:00</publishTime>
     </File>
     <File Include="System.Configuration.ConfigurationManager.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>11/15/2019 02:37:04</publishTime>
     </File>
     <File Include="System.IdentityModel.Tokens.Jwt.dll">
       <publishTime>10/18/2019 17:38:18</publishTime>
@@ -171,7 +171,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/15/2019 02:37:42</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>04/17/2023 14:45:40</publishTime>
+      <publishTime>04/23/2023 23:50:15</publishTime>
     </File>
   </ItemGroup>
 </Project>
