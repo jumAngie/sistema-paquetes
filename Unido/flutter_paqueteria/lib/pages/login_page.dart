@@ -1,5 +1,7 @@
 
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, unnecessary_new
+
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,56 +32,71 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            return Container(
-              color: Colors.grey[300],
-              child: Stack(
+           return Stack(
+  children: [
+    Container(
+      color: Colors.grey[300],
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'images/300.gif',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Center(
+            child: Container(
+              width: constraints.maxWidth * 0.8,
+              margin: EdgeInsets.symmetric(horizontal: 30.0),
+              padding: EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.0),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Positioned.fill(
-                    child: Image.asset(
-                      'images/300.gif',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Positioned(
-                  top: 20.0,
-                  right: 20.0,
-                  child: SizedBox(
-                    width: 150.0,
-                    height: 150.0,
-                    child: Image.asset('images/Logo02.png'),
-                  ),
-                ),
-                  Center(
-                    child: Container(
-                      width: constraints.maxWidth * 0.8,
-                      margin: EdgeInsets.symmetric(horizontal: 30.0),
-                      padding: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.0),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                          'Iniciar Sesión',
-                          style: TextStyle(
-                            fontSize: 50.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                       
-                          SizedBox(height: 20.0),
-                          _usuarioTextField(),
-                          SizedBox(height: 20.0),
-                          _buttonlogin(),
-                        ],
-                      ),
-                    ),
-                  ),
+                  SizedBox(height: 20.0),
+                  _usuarioTextField(),
+                  SizedBox(height: 20.0),
+                  _buttonlogin(),
                 ],
               ),
+            ),
+          ),
+        ],
+      ),
+    ),
+    Positioned(
+      top: 30.0,
+      left: 10.0,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, 'loginprincipal');
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(255, 173, 248, 135),
+                Color.fromARGB(255, 98, 179, 73),
+                Color.fromARGB(255, 95, 248, 100)
+              ],
+            ),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: EdgeInsets.all(12),
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ),
+  ],
+
             );
           },
         ),
@@ -87,67 +104,85 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _usuarioTextField() {
-    return StreamBuilder(
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return Form(
-          key: _formKey,
+Widget _usuarioTextField() {
+  return StreamBuilder(
+    builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return 
+      BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           child: Column(
             children: <Widget>[
-              Container(
-                child: TextFormField(
-                  controller: usuario,
-                  validator: _validateRequired,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.text_fields),
-                    hintText: 'Nombre de Usuario',
-                    labelText: 'Usuario',
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  style: TextStyle(color: Colors.black),
+              Text(
+                'Iniciar Sesión',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30.0,
+                  color: Colors.green[900]
                 ),
               ),
-              SizedBox(height: 10.0),
-              Container(
-                child: TextFormField(
-                  controller: clave,
-                  validator: _validateRequired,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.lock),
-                    hintText: 'Clave de Usuario',
-                    labelText: 'Clave',
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+              SizedBox(height: 20.0),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      controller: usuario,
+                      validator: _validateRequired,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.text_fields),
+                        hintText: 'Nombre de Usuario',
+                        labelText: 'Usuario',
+                        border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.black),
                     ),
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                  style: TextStyle(color: Colors.black),
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      controller: clave,
+                      validator: _validateRequired,
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.lock),
+                        hintText: 'Clave de Usuario',
+                        labelText: 'Clave',
+                        border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 
 
-  Widget _buttonlogin() {
+
+
+ Widget _buttonlogin() {
   return StreamBuilder(
     builder: (BuildContext context, AsyncSnapshot snapshot) {
       return ElevatedButton(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+          padding: EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
           child: Text(
             'Ingresar',
             style: TextStyle(
@@ -161,21 +196,18 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(18),
           ),
           elevation: 18.8,
-          primary: Colors.green,
+          primary: Color.fromARGB(255, 80, 167, 40),
         ),
         onPressed: () {
           if (_formKey.currentState!.validate()) {
-            
-          ValidarLogin(0,0, usuario.text, clave.text, 0, "");
-           
-       
-
+            ValidarLogin(0,0, usuario.text, clave.text, 0, "");
           }
         },
       );
     },
   );
 }
+
   
   
   void showToast() {

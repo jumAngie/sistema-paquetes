@@ -11,6 +11,8 @@ import 'package:flutter_paqueteria/pages/ejemplo.dart';
 import 'package:flutter_paqueteria/pages/linea_de_tiempo.dart';
 import 'package:flutter_paqueteria/pages/formulario_agregar_paquete.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_paqueteria/pages/Invitado Pages/invitado_linea_tiempo.dart';
+import 'package:flutter_paqueteria/pages/Invitado Pages/invitado_tracking_page.dart';
 
 void main() {
    initializeDateFormatting();
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Paquetería EcoPack',
-      initialRoute:  LoginPage.id,
+      initialRoute:  LoginPage.id
+      ,
       routes: {
            LoginPage.id : (context)  => LoginPage(),
             'home': ( _ ) => HomePage(),
@@ -41,7 +44,11 @@ class MyApp extends StatelessWidget{
                                   final codigo = ModalRoute.of(context)!.settings.arguments as String;
                                   return DetallePaquetePage(codigo: codigo);},
         'agregarpaquete': ( _ ) => MyForm(),
-        'loginprincipal': ( _ ) => LoginPageIndex()
+        'loginprincipal': ( _ ) => LoginPageIndex(),
+        'invitadoTracking': ( _ ) => IVerPaquetePage(),
+        '/IdetallePaquete': (context) {
+                                  final codigo = ModalRoute.of(context)!.settings.arguments as String;
+                                  return IDetallePaquetePage(codigo: codigo);}
 
       }
       

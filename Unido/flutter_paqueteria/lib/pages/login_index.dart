@@ -45,8 +45,8 @@ Widget build(BuildContext context) {
               Center(
                 child: Image.asset(
                   'assets/images/Logo02.png',
-                  width: 150.0,
-                  height: 150.0,
+                  width: 170.0,
+                  height: 170.0,
                 ),
               ),
             ],
@@ -61,8 +61,10 @@ Widget build(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ElevatedButton.icon(
-          onPressed: () {},
-          icon: Icon(Icons.login),
+          onPressed: () {
+             Navigator.pushReplacementNamed(context, 'login_page');
+          },
+          icon: Icon(Icons.login_rounded),
           label: Text(
             'Inicia Sesión',
             style: TextStyle(fontSize: 20.0),
@@ -84,7 +86,9 @@ Widget build(BuildContext context) {
           height: 10,
         ),
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, 'invitadoTracking');
+          },
           icon: Icon(Icons.person),
           label: Text(
             'Invitado',

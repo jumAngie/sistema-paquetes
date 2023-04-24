@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/pages/login_page.dart';
@@ -61,32 +63,52 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Perfil'),
+          shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(30),
+      bottomRight: Radius.circular(30),
+          ),
+          ),
+          title: Center(
+            child: Text('Perfil',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ), 
+          ),
+          leading: IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: () {
+                                        Navigator.pop(context);
+                                              },
+                                              ),
             backgroundColor: Colors.green,
         ),
         body: Center(
-            child: Stack(children: [
-          // Imagen encima de la tarjeta
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Image.asset(
-              'images/jeje.jpg',
-              fit: BoxFit.cover,
-              height: 200, // Altura deseada
-              width: 100, // Ancho deseado
+        child: Stack(
+          children: [
+            Positioned(
+              top: 15,
+              left: 0,
+              right: 0,
+              child: ClipOval(
+                child: Image.asset(
+                  'images/jeje.jpg',
+                  fit: BoxFit.cover,
+                  height: 150,
+                  width: 150,
+                ),
+              ),
             ),
-          ),
 
           Card(
-            margin: EdgeInsets.only(top: 200, left: 16, right: 16, bottom: 100),
-            color: Colors.grey,
+            margin: EdgeInsets.only(top: 199, left: 16, right: 16, bottom: 100),
+            color: Color.fromARGB(255, 236, 236, 236),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: SizedBox(
-              width: 300, // Cambie el valor para ajustar el ancho deseado
+              width: 280, // Cambie el valor para ajustar el ancho deseado
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -100,7 +122,7 @@ class _ProfileState extends State<Profile> {
                           if (snapshot.hasData) {
                             dynamic userData = snapshot.data;
                             return Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Text(
                                   'Nombre completo',
@@ -161,51 +183,54 @@ class _ProfileState extends State<Profile> {
                                 SizedBox(height: 32),
                                 Column(
                                   children: [
-                                 ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => LoginPage()),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.lightGreen,
-                                    textStyle: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 12,
-                                      horizontal: 24,
-                                    ),
-                                  ),
-                                  child: Text('Cerrar Sesión'),
-                                ),
-
-                                    SizedBox(height: 16),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        mostrarDialogo();
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.lightGreen,
-                                        textStyle: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                          color: Colors.white,
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 12,
-                                          horizontal: 24,
-                                        ),
-                                      ),
-                                      child: Text('Cambiar Contraseña'),
-                                    ),
-                                  ],
-                                ),
+                                 ElevatedButton.icon(
+      onPressed: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      },
+      icon: Icon(Icons.exit_to_app),
+      label: Text('Cerrar Sesión'),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.green[500],
+        textStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+          color: Colors.white,
+        ),
+        padding: EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 24,
+        ),
+      ),
+    ),
+    SizedBox(height: 13),
+    ElevatedButton.icon(
+      onPressed: () {
+        mostrarDialogo();
+      },
+      icon: Icon(Icons.lock),
+      label: Text('Cambiar Contraseña'),
+      style: ElevatedButton.styleFrom(
+        primary: Color.fromARGB(255, 255, 0, 0),
+        textStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+          color: Colors.white,
+        ),
+        padding: EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 24,
+        ),
+      ),
+    ),
                               ],
+                              
+                                ),
+                              ]
                             );
+                              
                           } else if (snapshot.hasError) {
                             return Text(
                                 "Ha ocurrido un error al cargar los datos del usuario.");
@@ -236,12 +261,16 @@ mostrarDialogo() {
         ),
         actions: [
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+            primary: Colors.green[500]),
             onPressed: () {
               // Aquí va la lógica para confirmar
             },
             child: Text("Confirmar"),
           ),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(255, 255, 0, 0)),
             onPressed: () {
               Navigator.of(context).pop();
             },
