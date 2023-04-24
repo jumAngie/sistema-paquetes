@@ -46,6 +46,28 @@ namespace Paqueteria.API.Controllers
             return Ok(response);
         }
 
+
+        [HttpGet("PaquetesPorCodigo/{codigo}")]
+        public IActionResult BuscarPaquetes(int codigo)
+        {
+            tblPaquetes paquetesViewModel = new tblPaquetes();
+            paquetesViewModel.paqu_Codigo = codigo;
+
+            var response = _paqueteriaServices.ListarPaquetesPorCodigo(paquetesViewModel);
+
+            if (response.Success)
+            {
+                var paquetes = (List<tblPaquetes>)response.Data;
+                var viewModel = _mapper.Map<List<PaquetesViewModel>>(paquetes);
+                return Ok(viewModel);
+            }
+            else
+            {
+                return NotFound(response.Message);
+            }
+        }
+
+
         [HttpPost("Editar")]
         public IActionResult ActualizarPaquete(PaquetesViewModel paquetesViewModel)
         {
@@ -53,6 +75,5 @@ namespace Paqueteria.API.Controllers
             var response = _paqueteriaServices.EditarPaquete(item);
             return Ok(response);
         }
-
     }
 }

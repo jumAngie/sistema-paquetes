@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Paqueteria.API.Models;
+using Paqueteria.Entities.Entities;
 
 namespace Paqueteria.API.Controllers
 {
@@ -26,6 +28,25 @@ namespace Paqueteria.API.Controllers
         {
             var list = _generalesServices.ListarDepartamentos();
             return Ok(list);
+        }
+
+        [HttpPost("CiudadesPorDepto")]
+        public IActionResult PaquetesPorEnvio(CiudadesViewModel item)
+        {
+
+            var item2 = _mapper.Map<tblCiudades>(item);
+
+            var response = _generalesServices.ListarCiudadesPorDepto(item2);
+
+            return Ok(response);
+
+        }
+
+        [HttpGet("ClientesDDL")]
+        public IEnumerable<VW_Clientes> ListarClientes()
+        {
+            var list = _generalesServices.ClientesDDL();
+            return list;
         }
     }
 }

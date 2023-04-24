@@ -66,27 +66,32 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
         body:
         Column(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.green[400]!,
-                  style: BorderStyle.solid,
-                  width: 1.0,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.add),
-                  SizedBox(width: 8),
-                  Text(
-                    "Añadir Paquete",
-                    style: TextStyle(fontSize: 16),
+            GestureDetector(
+              onTap: () {
+                    Navigator.pushNamed(context, 'agregarpaquete');
+                  },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.green[400]!,
+                    style: BorderStyle.solid,
+                    width: 1.0,
                   ),
-                ],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                margin: EdgeInsets.all(8),
+                padding: EdgeInsets.all(8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add),
+                    SizedBox(width: 8),
+                    Text(
+                      "Añadir Paquete",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
               ),
             ),
         Expanded(
@@ -246,7 +251,6 @@ void _eliminarEnvio(BuildContext context, int envioId) {
     // TODO: Implementar lógica de edición de envío
   }
 
-
-
-
 }
+
+

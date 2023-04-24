@@ -38,6 +38,9 @@ namespace Paqueteria.Entities.Entities
         public int? paqu_UsuarioModifica { get; set; }
         public DateTime? paqu_FechaModifica { get; set; }
         public bool? paqu_Estado { get; set; }
+        [NotMapped]
+
+        public string Estado { get; set; }
 
         public virtual tblCiudades paqu_CiudadNavigation { get; set; }
         public virtual tblPersonas paqu_ClienteNavigation { get; set; }

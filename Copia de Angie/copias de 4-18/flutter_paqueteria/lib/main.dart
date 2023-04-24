@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_paqueteria/pages/login_index.dart';
 import 'package:flutter_paqueteria/pages/home_page.dart';
 import 'package:flutter_paqueteria/pages/login_page.dart';
 import 'package:flutter_paqueteria/pages/paquetes_index_page.dart';
@@ -9,9 +9,12 @@ import 'package:flutter_paqueteria/pages/tracking_index_page.dart';
 import 'package:flutter_paqueteria/pages/usuario_perfil_page.dart';
 import 'package:flutter_paqueteria/pages/ejemplo.dart';
 import 'package:flutter_paqueteria/pages/linea_de_tiempo.dart';
+import 'package:flutter_paqueteria/pages/formulario_agregar_paquete.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
-  runApp(const MyApp());
+   initializeDateFormatting();
+   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget{
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Paquetería EcoPack',
-      initialRoute: 'home',
+      initialRoute: 'tracking_index_page',
       routes: {
            LoginPage.id : (context)  => LoginPage(),
             'home': ( _ ) => HomePage(),
@@ -37,6 +40,8 @@ class MyApp extends StatelessWidget{
         '/detallePaquete': (context) {
                                   final codigo = ModalRoute.of(context)!.settings.arguments as String;
                                   return DetallePaquetePage(codigo: codigo);},
+        'agregarpaquete': ( _ ) => MyForm(),
+        'loginprincipal': ( _ ) => LoginPageIndex()
 
       }
       

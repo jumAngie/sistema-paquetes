@@ -27,6 +27,10 @@ namespace Paqueteria.DataAccess.Repositories
 
         #endregion
 
+        #region Ciudad
+        public static string ListarCiudadesPorDepto = "Gral.UDP_tblCiudades_CiudadesPorDepto";
+        #endregion
+
 
         #region Usuarios
         public static string InsertarUsuario = "UDP_InsertUsuario";
@@ -43,6 +47,7 @@ namespace Paqueteria.DataAccess.Repositories
         public static string InsertarPaquete = "Paq.UDP_tblPaquetes_Insertar";
         public static string EditarPaquete = "Paq.UDP_tblPaquetes_Editar";
         public static string EliminarPaquete = "Paq.UDP_tblPaquetes_Eliminar";
+        public static string PaquetePorCodigo = "Paq.UDP_tblPaquetes_ListarPaquetePorCodigo";
         #endregion
 
         #region Envios Por Paquetes

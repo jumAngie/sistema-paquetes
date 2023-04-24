@@ -33,10 +33,10 @@ namespace Paqueteria.DataAccess.Repositories.Paq
         public RequestStatus Update(tblPaquetes item)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@paqu_Id",              item.paqu_Id,              DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@paqu_Cliente",         item.paqu_Cliente,         DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@paqu_Codigo",          item.paqu_Codigo,          DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@paqu_Ciudad",          item.paqu_Ciudad,          DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@paqu_Id", item.paqu_Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@paqu_Cliente", item.paqu_Cliente, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@paqu_Codigo", item.paqu_Codigo, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@paqu_Ciudad", item.paqu_Ciudad, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@paqu_DireccionExacta", item.paqu_DireccionExacta, DbType.String, ParameterDirection.Input);
             parameters.Add("@paqu_UsuarioModifica", item.paqu_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
 
@@ -61,6 +61,14 @@ namespace Paqueteria.DataAccess.Repositories.Paq
             return result;
         }
 
+        public List<tblPaquetes> PaquetesPorCodigo(tblPaquetes item)
+        {
+            using var db = new SqlConnection(PaqueteriaConex.ConnectionString);
+            var parametro = new DynamicParameters();
+            parametro.Add("@Codigo", item.paqu_Codigo, DbType.Int32, ParameterDirection.Input);
+
+            return (List<tblPaquetes>)db.Query<tblPaquetes>(ScriptsDatabase.PaquetePorCodigo, parametro, commandType: CommandType.StoredProcedure);
+        }
 
         public IEnumerable<WV_tblPaquetes> List()
         {

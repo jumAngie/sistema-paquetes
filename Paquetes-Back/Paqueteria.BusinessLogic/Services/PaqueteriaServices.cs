@@ -308,6 +308,22 @@ namespace Paqueteria.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ListarPaquetesPorCodigo(tblPaquetes item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _paquetesRepository.PaquetesPorCodigo(item);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
 
     }
 }

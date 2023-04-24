@@ -14,16 +14,48 @@ namespace Paqueteria.BusinessLogic.Services
     public class GeneralesService
     {
         private readonly DepartamentosRepository _departamentosRepository;
-
         private readonly UsuariosRepository _usuariosRepository;
+        private readonly EmpleadosRepository _empleadosRepository;
 
-        public GeneralesService(DepartamentosRepository departamentosRepository, UsuariosRepository usuariosRepository)
+        public GeneralesService(DepartamentosRepository departamentosRepository, 
+                                UsuariosRepository usuariosRepository,
+                                EmpleadosRepository empleadosRepository)
         {
             _departamentosRepository = departamentosRepository;
             _usuariosRepository = usuariosRepository;
+            _empleadosRepository = empleadosRepository;
+
         }
 
-   
+
+        #region Empleado
+        public ServiceResult ListarCiudadesPorDepto(tblCiudades item)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _empleadosRepository.ListadoCiudadesPorDepto(item);
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public IEnumerable<VW_Clientes> ClientesDDL()
+        {
+            var result = new ServiceResult();
+
+
+            var list = _empleadosRepository.ClientesDDL();
+            return list;
+
+        }
+        #endregion
+
         #region Departamentos
         public ServiceResult ListarDepartamentos()
         {
@@ -59,7 +91,6 @@ namespace Paqueteria.BusinessLogic.Services
         }
 
         #endregion
-
 
         #region Usuarios
 

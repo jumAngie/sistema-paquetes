@@ -29,15 +29,16 @@ CREATE OR ALTER PROCEDURE Paq.UDP_tblPaquetes_Insertar
 @paqu_Cliente			INT, 
 @paqu_Ciudad			INT,
 @paqu_Codigo			INT,
-@paqu_DireccionExacta	NVARCHAR(150),  
+@paqu_DireccionExacta	NVARCHAR(150),
+@paqu_Observaciones     NVARCHAR(MAX),
 @paqu_UsuarioCrea		INT,
 @status					INT OUTPUT
 AS
 BEGIN
 
 BEGIN TRY
-INSERT INTO [Paq].[tblPaquetes] ([paqu_Cliente], paqu_Codigo, [paqu_Ciudad], [paqu_DireccionExacta], [paqu_Bodega], [paqu_UsuarioCrea])
-VALUES							(@paqu_Cliente, @paqu_Codigo, @paqu_Ciudad, @paqu_DireccionExacta, GETDATE(), @paqu_UsuarioCrea)
+INSERT INTO [Paq].[tblPaquetes] ([paqu_Cliente], paqu_Codigo, [paqu_Ciudad], [paqu_DireccionExacta], paqu_Observaciones, [paqu_Bodega], [paqu_UsuarioCrea])
+VALUES							(@paqu_Cliente, @paqu_Codigo, @paqu_Ciudad, @paqu_DireccionExacta, @paqu_Observaciones, GETDATE(), @paqu_UsuarioCrea)
 	SET @status = 1;
 END TRY
 BEGIN CATCH 
@@ -105,7 +106,7 @@ CREATE OR ALTER PROC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo
 		@Codigo INT
 AS
 BEGIN
-	SELECT	paqu_Id, paqu_Codigo, paqu_Cliente, paqu_Ciudad, ciudad.ciud_Descri, depto.depa_Descri, paqu_DireccionExacta, paqu_Observaciones, paqu_Bodega, paqu_EnCamino, paqu_Entregado,
+	SELECT	paqu_Id, paqu_Codigo, paqu_Cliente, paqu_Ciudad, ciudad.ciud_Descri, pers.pers_Nombres + ' ' +pers.pers_Apellidos AS cliente, depto.depa_Descri, paqu_DireccionExacta, paqu_Observaciones, paqu_Bodega, paqu_EnCamino, paqu_Entregado,
 	CASE
 	WHEN paqu_Entregado IS NULL AND paqu_EnCamino IS NULL THEN 'En Bodega'
 	WHEN paqu_Entregado IS NULL AND paqu_EnCamino IS NOT NULL THEN 'En Camino'
@@ -114,9 +115,27 @@ BEGIN
 	END AS 'Estado'
 	FROM	Paq.tblPaquetes paquetes INNER JOIN  [Gral].[tblCiudades] ciudad
 	ON		paquetes.paqu_Ciudad = ciudad.ciud_ID INNER JOIN [Gral].[tblDepartamentos] depto
-	ON		ciudad.depa_ID = depto.depa_ID
+	ON		ciudad.depa_ID = depto.depa_ID INNER JOIN Gral.tblPersonas pers
+	ON		paquetes.paqu_Cliente = pers.pers_Id
 	WHERE	paqu_Codigo = @Codigo
 
 END;
 
-EXEC Paq.UDP_tblPaquetes_ListarPaquetePorCodigo 105
+GO
+
+CREATE OR ALTER VIEW VW_Clientes
+AS
+
+SELECT pers_Id, pers_Nombres + ' ' + pers_Apellidos AS 'cliente' FROM Gral.tblPersonas perso
+WHERE	perso.pers_Puesto = 0
+
+GO
+
+CREATE OR ALTER PROC Gral.UDP_tblCiudades_CiudadesPorDepto
+	@deptoID	INT
+AS
+BEGIN
+SELECT  ciud_ID, ciud_Descri, ciu.depa_ID FROM Gral.tblCiudades ciu INNER JOIN Gral.tblDepartamentos dep
+ON		ciu.depa_ID = dep.depa_ID
+WHERE	ciu.depa_ID = @deptoID
+END

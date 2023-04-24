@@ -31,5 +31,9 @@ namespace Paqueteria.API.Models
         public int? paqu_UsuarioModifica { get; set; }
         public DateTime? paqu_FechaModifica { get; set; }
         public bool? paqu_Estado { get; set; }
+
+        [NotMapped]
+
+        public string Estado { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace Paqueteria.DataAccess.Context
         {
         }
 
+        public virtual DbSet<VW_Clientes> VW_Clientes { get; set; }
         public virtual DbSet<V_Grafico_Paquetes_Por_Cliente> V_Grafico_Paquetes_Por_Cliente { get; set; }
         public virtual DbSet<V_ddl_Camiones> V_ddl_Camiones { get; set; }
         public virtual DbSet<WV_tbLUsuarios> WV_tbLUsuarios { get; set; }
@@ -36,7 +37,20 @@ namespace Paqueteria.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<VW_Clientes>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_Clientes");
+
+                entity.Property(e => e.cliente)
+                    .IsRequired()
+                    .HasMaxLength(501);
+
+                entity.Property(e => e.pers_Id).ValueGeneratedOnAdd();
+            });
 
             modelBuilder.Entity<V_Grafico_Paquetes_Por_Cliente>(entity =>
             {
@@ -87,7 +101,9 @@ namespace Paqueteria.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(501);
 
-                entity.Property(e => e.envi_FechaSalida).HasColumnType("string");
+                entity.Property(e => e.envi_FechaSalida)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
 
             modelBuilder.Entity<WV_tblPaquetes>(entity =>
@@ -114,7 +130,7 @@ namespace Paqueteria.DataAccess.Context
             modelBuilder.Entity<tblCamiones>(entity =>
             {
                 entity.HasKey(e => e.cami_Id)
-                    .HasName("PK__tblCamio__D473E766A016924A");
+                    .HasName("PK__tblCamio__D473E766D105C8C4");
 
                 entity.ToTable("tblCamiones", "Paq");
 
@@ -173,7 +189,7 @@ namespace Paqueteria.DataAccess.Context
             modelBuilder.Entity<tblEnvios>(entity =>
             {
                 entity.HasKey(e => e.envi_Id)
-                    .HasName("PK__tblEnvio__6D62E440913835B4");
+                    .HasName("PK__tblEnvio__6D62E4403801DE31");
 
                 entity.ToTable("tblEnvios", "Paq");
 
@@ -187,7 +203,9 @@ namespace Paqueteria.DataAccess.Context
 
                 entity.Property(e => e.envi_FechaModifica).HasColumnType("datetime");
 
-                entity.Property(e => e.envi_FechaSalida).HasColumnType("string");
+                entity.Property(e => e.envi_FechaSalida)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.HasOne(d => d.envi_CamionNavigation)
                     .WithMany(p => p.tblEnvios)
@@ -210,7 +228,7 @@ namespace Paqueteria.DataAccess.Context
             modelBuilder.Entity<tblEnviosPorPaquetes>(entity =>
             {
                 entity.HasKey(e => e.enpa_Id)
-                    .HasName("PK__tblEnvio__1D808A8309285CD8");
+                    .HasName("PK__tblEnvio__1D808A83CADD961B");
 
                 entity.ToTable("tblEnviosPorPaquetes", "Paq");
 
@@ -362,7 +380,7 @@ namespace Paqueteria.DataAccess.Context
             modelBuilder.Entity<tblUsuarios>(entity =>
             {
                 entity.HasKey(e => e.usua_Id)
-                    .HasName("PK__tblUsuar__EA3EC7A2AF855179");
+                    .HasName("PK__tblUsuar__EA3EC7A24F30A6B0");
 
                 entity.ToTable("tblUsuarios", "Gral");
 

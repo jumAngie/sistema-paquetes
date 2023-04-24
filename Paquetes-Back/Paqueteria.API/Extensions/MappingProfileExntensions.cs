@@ -18,6 +18,7 @@ namespace Paqueteria.API.Extensions
             CreateMap<tblUsuarios, UsuariosViewModel>().ReverseMap();
             CreateMap<tblEnviosPorPaquetes, EnviosPorPaqueteViewModel>().ReverseMap();
             CreateMap<tblEnvios, EnviosViewModel>().ReverseMap();
+            CreateMap<tblCiudades, CiudadesViewModel>().ReverseMap();
         }
     }
 }

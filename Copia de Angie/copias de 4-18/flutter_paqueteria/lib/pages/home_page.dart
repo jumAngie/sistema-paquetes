@@ -4,16 +4,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/util/iconos_menu.dart';
 import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
+  
 }
+
+extension StringExtension on String {
+  String get capitalizeFirst {
+    if (this.isEmpty) {
+      return this;
+    }
+    return '${this[0].toUpperCase()}${this.substring(1)}';
+  }
+}
+
 
 class _HomePageState extends State<HomePage> {
   int index = 0;
+  final DateFormat formatterLetra = DateFormat('EEEE, dd MMMM yyyy', 'ES');
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,9 +66,10 @@ class _HomePageState extends State<HomePage> {
                     height: 5,
                     ),
                   Text(
-                    '12 Abril, 2023',
-                    style: TextStyle(color: Colors.green[200]),
-                  ),
+                formatterLetra.format(DateTime.now()).capitalizeFirst,
+                style: TextStyle(color: Colors.green[200]),
+                ),
+
                 ],
               ),
             

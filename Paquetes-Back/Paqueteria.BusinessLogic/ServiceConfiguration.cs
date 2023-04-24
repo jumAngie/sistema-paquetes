@@ -23,6 +23,7 @@ namespace Paqueteria.BusinessLogic
             services.AddScoped<PaquetesRepository>();
             services.AddScoped<EnviosRepository>();
             services.AddScoped<CamionesRepository>();
+            services.AddScoped<EmpleadosRepository>();
 
             PaqueteriaConex.BuildConnectionString(connection);
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CqCozytf047NT2TRAipYE/zlP0Cl/vioQZe6TmYxsTlBo22cKwFb+OYQumPFO6NuR/F+9uSqk3NJ1yKWI0Fl7g==",
+  "dgSpecHash": "zEB4w7XMGmGDOXd57lcobItQUyOi82IiJcr146vf4LeA/orE1a1Fub14TPQjObpPFC6fsFGh9kr/zGL9ejiNhA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\LAB02\\Desktop\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-paquetes\\Paquetes-Back\\Paqueteria.Entities\\Paqueteria.Entities.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
