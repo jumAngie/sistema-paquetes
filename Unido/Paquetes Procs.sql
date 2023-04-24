@@ -117,7 +117,8 @@ BEGIN
 	ON		paquetes.paqu_Ciudad = ciudad.ciud_ID INNER JOIN [Gral].[tblDepartamentos] depto
 	ON		ciudad.depa_ID = depto.depa_ID INNER JOIN Gral.tblPersonas pers
 	ON		paquetes.paqu_Cliente = pers.pers_Id
-	WHERE	paqu_Codigo = @Codigo
+	WHERE	paqu_Codigo = @Codigo AND 
+	paqu_Estado = 1
 
 END;
 

@@ -93,7 +93,11 @@ BEGIN
 SELECT T1.esci_ID, T1.esci_Descripcion FROM Gral.tblEstadoCiviles T1 
 
 END
+go
 
+CREATE OR ALTER VIEW WV_tblDepartamentos
+AS
+ SELECT T1.depa_ID, T1.depa_Descri FROM Gral.tblDepartamentos T1
 
 GO
 
