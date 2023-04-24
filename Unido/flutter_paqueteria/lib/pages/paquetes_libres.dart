@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_paqueteria/util/responseApi.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 
 
@@ -33,7 +34,7 @@ class _ListadoPaquetesLibresState extends State<ListadoPaquetesLibres> {
     _listado = _getListado();
   }
 
-  String url = "https://localhost:44356/api/EnviosPorPaquete/Libres";
+  String url = "http://ecopack.somee.com/api/EnviosPorPaquete/Libres";
 
   Future<dynamic> _getListado() async {
     final respuesta = await http.get(Uri.parse(url));
@@ -218,12 +219,13 @@ class _ListadoPaquetesLibresState extends State<ListadoPaquetesLibres> {
         ).then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EnviosDetalle(envios: widget.envios))));
   }
 
+ int UsuarioID = await SessionManager().get("Usuario");
   Map<String, dynamic> datosEnpaquete = {
    
   "enpa_Id": 0,
   "enpa_Envio": int.parse(IDEnvio),
   "enpa_Paquete": int.parse(IDPaquete),
-  "enpa_UsuarioCrea": 1,
+  "enpa_UsuarioCrea": UsuarioID,
   "enpa_FechaCrea": "2023-04-21T05:43:43.084Z",
   "enpa_UsuarioModifica": 0,
   "enpa_FechaModifica": "2023-04-21T05:43:43.084Z",
@@ -240,7 +242,7 @@ class _ListadoPaquetesLibresState extends State<ListadoPaquetesLibres> {
   String date = jsonEncode(datosEnpaquete);
 
   try {
-    final response = await http.post(Uri.parse('https://localhost:44356/api/EnviosPorPaquete/Insert'),
+    final response = await http.post(Uri.parse('http://ecopack.somee.com/api/EnviosPorPaquete/Insert'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

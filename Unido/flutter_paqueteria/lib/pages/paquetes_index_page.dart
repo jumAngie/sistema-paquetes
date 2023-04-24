@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_paqueteria/util/responseApi.dart';
 import 'package:flutter_paqueteria/pages/formulario_agregar_paquete.dart';
+import 'package:flutter_paqueteria/pages/home_page.dart';
 
 void main() {
   runApp(ListadoPaquetes());
@@ -47,7 +48,7 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
   }
 
  // String url = "http://empaquetadora-ecopack.somee.com/api/Paquetes/List";
-  String url = "https://localhost:44356/api/Paquetes/List";
+  String url = "http://ecopack.somee.com/api/Paquetes/List";
 
   Future<dynamic> _getListado() async {
     final respuesta = await http.get(Uri.parse(url));
@@ -80,7 +81,10 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
             leading: IconButton(
                                 icon: Icon(Icons.arrow_back),
                                 onPressed: () {
-                                        Navigator.pop(context);
+                                        Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
                                               },
                                               ),
             backgroundColor: Colors.green[400],
@@ -101,7 +105,7 @@ class _ListadoPaquetesState extends State<ListadoPaquetes> {
                   itemBuilder: (context, index) {
                     Map<String, dynamic> envio = listaDeEnvios[index];
                     return Card(
-                      color: Color.fromARGB(255, 181, 255, 185),
+                      color:Color.fromARGB(255, 226, 226, 226),
                       margin: EdgeInsets.all(8),
                       child: Row(
                         children: [
@@ -242,7 +246,7 @@ void _eliminarEnvio(BuildContext context, int envioId) {
    
     try {
      // final response = await http.post(Uri.parse('http://empaquetadora-ecopack.somee.com/api/Envios/Insertar'),
-      final response = await http.post(Uri.parse('https://localhost:44356/api/Paquetes/Eliminar'),
+      final response = await http.post(Uri.parse('http://ecopack.somee.com/api/Paquetes/Eliminar'),
        
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

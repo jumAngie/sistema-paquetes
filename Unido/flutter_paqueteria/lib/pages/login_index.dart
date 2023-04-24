@@ -4,14 +4,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
-
-import 'package:flutter_paqueteria/util/ResponseApi.dart';
-import 'package:flutter_paqueteria/util/usuarios.dart';
-import 'package:flutter_paqueteria/pages/home_page.dart';
+import 'package:flutter_paqueteria/pages/login_page.dart';
+import 'package:flutter_paqueteria/pages/Invitado Pages/invitado_linea_tiempo.dart';
 
 class LoginPageIndex extends StatefulWidget {
   static String id = 'loginpage';
@@ -62,7 +56,10 @@ Widget build(BuildContext context) {
       children: [
         ElevatedButton.icon(
           onPressed: () {
-             Navigator.pushReplacementNamed(context, 'login_page');
+            Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
           },
           icon: Icon(Icons.login_rounded),
           label: Text(
@@ -87,7 +84,10 @@ Widget build(BuildContext context) {
         ),
         ElevatedButton.icon(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, 'invitadoTracking');
+            Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => IVerPaquetePage()),
+                    );
           },
           icon: Icon(Icons.person),
           label: Text(

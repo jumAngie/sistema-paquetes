@@ -25,6 +25,12 @@ namespace Paqueteria.DataAccess.Repositories.Gral
             return db.Query<tblDepartamentos>(ScriptsDatabase.ListarDepartamentos, commandType: CommandType.StoredProcedure);
 
         }
+        PaqueteriaConex con = new PaqueteriaConex();
+        public IEnumerable<WV_tblDepartamentos> depar()
+        {
+            return con.WV_tblDepartamentos.AsList();
+        }
+
         public tblDepartamentos Find(int? id)
         {
             throw new NotImplementedException();

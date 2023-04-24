@@ -66,6 +66,15 @@ namespace Paqueteria.API.Controllers
         }
 
 
+        [HttpPost("Cambiar")]
+
+        public IActionResult Cambiar(UsuariosViewModel usuariosViewModel)
+        {
+            var item = _mapper.Map<tblUsuarios>(usuariosViewModel);
+            var response = _generalServices.Cambiar(item);
+            return Ok(response);
+        }
+
 
 
 

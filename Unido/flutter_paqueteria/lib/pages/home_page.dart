@@ -7,6 +7,7 @@ import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
 import 'package:flutter_paqueteria/pages/paquetes_index_page.dart';
 import 'package:flutter_paqueteria/pages/linea_de_tiempo.dart';
 import 'package:flutter_paqueteria/pages/ejemplo.dart';
+import 'package:flutter_paqueteria/pages/login_index.dart';
 
 import 'package:intl/intl.dart';
 
@@ -89,8 +90,10 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       padding: EdgeInsets.all(12),
                                       child: GestureDetector(
-                                          onTap: (){
-                                          Navigator.pushReplacementNamed(context, 'login_page');
+                                          onTap: (){Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPageIndex()),
+                    );
                                             }, 
                                             child: Icon(
                                               Icons.logout,

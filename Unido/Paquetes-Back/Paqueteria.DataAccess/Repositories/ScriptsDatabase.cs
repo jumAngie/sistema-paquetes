@@ -78,5 +78,8 @@ namespace Paqueteria.DataAccess.Repositories
         public static string Perfil = "PerfilPersona";//Para el PERFIL
 
         public static string Entregado = "Paq.UDP_Envios_Por_Paquete_Entregado";//Para el PERFIL
+
+        public static string CambiarClave = "UDP_Inicio_Login_Cambiar_Clave";
+        
     }
 }

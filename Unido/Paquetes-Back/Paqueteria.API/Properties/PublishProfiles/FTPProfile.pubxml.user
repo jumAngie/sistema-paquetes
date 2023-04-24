@@ -8,23 +8,23 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAArscPKiJNaUeo4b3yzMevJgAAAAACAAAAAAAQZgAAAAEAACAAAADFu7+W8Hf3vu/JGdVAT2V+M2dm8J2lUvl3KCOnBVSWMQAAAAAOgAAAAAIAACAAAAA/5AeoR2RzLLNagEW974ua5Mvto6pDJ8mrdNBBednh4yAAAAC2VVcPdG+OLu0TBiOHeOos1d+IPVYKKA2QRq1otChb/0AAAACuPlS9UodZG2gjYJ314aqZZ1DVFplLqbEiXou7rMw0eQJVZ1zCIPwgECDuO6CTxffytzHXgFUVo9vfv83QljpL</EncryptedPassword>
     <_PublishTargetUrl>ftp://198.37.116.25/www.EcoPack.somee.com</_PublishTargetUrl>
-    <History>True|2023-04-24T05:50:24.7635850Z;False|2023-04-23T23:50:08.8191939-06:00;True|2023-04-23T23:36:19.0319682-06:00;</History>
+    <History>True|2023-04-24T20:29:38.2701581Z;False|2023-04-24T14:28:29.8052784-06:00;True|2023-04-24T14:16:39.9541045-06:00;False|2023-04-24T14:15:37.3295043-06:00;True|2023-04-24T14:08:50.7077516-06:00;False|2023-04-24T14:07:28.2781228-06:00;True|2023-04-24T13:51:16.6139133-06:00;False|2023-04-24T13:50:12.5684186-06:00;False|2023-04-24T13:49:17.4825603-06:00;True|2023-04-24T13:43:22.7709187-06:00;False|2023-04-24T13:42:13.4084937-06:00;False|2023-04-24T13:41:00.6184297-06:00;True|2023-04-23T23:50:24.7635850-06:00;False|2023-04-23T23:50:08.8191939-06:00;True|2023-04-23T23:36:19.0319682-06:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>04/19/2023 12:18:40</publishTime>
+      <publishTime>04/24/2023 10:11:46</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>04/23/2023 23:45:09</publishTime>
+      <publishTime>04/24/2023 10:11:46</publishTime>
     </File>
     <File Include="AutoMapper.dll">
-      <publishTime>01/05/2022 09:27:54</publishTime>
+      <publishTime>05/01/2022 09:27:54</publishTime>
     </File>
     <File Include="AutoMapper.Extensions.Microsoft.DependencyInjection.dll">
-      <publishTime>08/12/2019 07:19:42</publishTime>
+      <publishTime>12/08/2019 07:19:42</publishTime>
     </File>
     <File Include="Dapper.dll">
-      <publishTime>11/03/2021 08:07:40</publishTime>
+      <publishTime>03/11/2021 08:07:40</publishTime>
     </File>
     <File Include="Microsoft.AspNetCore.Http.Features.dll">
       <publishTime>04/15/2022 16:18:12</publishTime>
@@ -45,7 +45,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/24/2020 00:40:08</publishTime>
     </File>
     <File Include="Microsoft.EntityFrameworkCore.SqlServer.dll">
-      <publishTime>10/24/2020 00:41:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.Extensions.DependencyModel.dll">
       <publishTime>05/15/2018 15:01:34</publishTime>
@@ -78,37 +78,37 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>03/20/2017 14:03:18</publishTime>
     </File>
     <File Include="Paqueteria.API.deps.json">
-      <publishTime>04/23/2023 23:50:14</publishTime>
+      <publishTime>04/24/2023 14:28:37</publishTime>
     </File>
     <File Include="Paqueteria.API.dll">
-      <publishTime>04/23/2023 23:50:14</publishTime>
+      <publishTime>04/24/2023 14:28:37</publishTime>
     </File>
     <File Include="Paqueteria.API.exe">
-      <publishTime>04/23/2023 23:50:14</publishTime>
+      <publishTime>04/24/2023 14:28:37</publishTime>
     </File>
     <File Include="Paqueteria.API.pdb">
-      <publishTime>04/23/2023 23:50:14</publishTime>
+      <publishTime>04/24/2023 14:28:37</publishTime>
     </File>
     <File Include="Paqueteria.API.runtimeconfig.json">
-      <publishTime>04/23/2023 23:04:52</publishTime>
+      <publishTime>04/24/2023 10:15:34</publishTime>
     </File>
     <File Include="Paqueteria.BusinessLogic.dll">
-      <publishTime>04/23/2023 23:19:17</publishTime>
+      <publishTime>04/24/2023 14:26:55</publishTime>
     </File>
     <File Include="Paqueteria.BusinessLogic.pdb">
-      <publishTime>04/23/2023 23:19:17</publishTime>
+      <publishTime>04/24/2023 14:26:55</publishTime>
     </File>
     <File Include="Paqueteria.DataAccess.dll">
-      <publishTime>04/23/2023 23:19:16</publishTime>
+      <publishTime>04/24/2023 14:26:55</publishTime>
     </File>
     <File Include="Paqueteria.DataAccess.pdb">
-      <publishTime>04/23/2023 23:19:16</publishTime>
+      <publishTime>04/24/2023 14:26:55</publishTime>
     </File>
     <File Include="Paqueteria.Entities.dll">
-      <publishTime>04/23/2023 23:04:48</publishTime>
+      <publishTime>04/24/2023 14:26:54</publishTime>
     </File>
     <File Include="Paqueteria.Entities.pdb">
-      <publishTime>04/23/2023 23:04:48</publishTime>
+      <publishTime>04/24/2023 14:26:54</publishTime>
     </File>
     <File Include="runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll">
       <publishTime>08/25/2020 17:25:12</publishTime>
@@ -147,13 +147,13 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/15/2019 02:53:46</publishTime>
     </File>
     <File Include="Swashbuckle.AspNetCore.Swagger.dll">
-      <publishTime>01/11/2023 00:48:20</publishTime>
+      <publishTime>11/01/2023 00:48:20</publishTime>
     </File>
     <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
-      <publishTime>01/11/2023 00:48:26</publishTime>
+      <publishTime>11/01/2023 00:48:26</publishTime>
     </File>
     <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
-      <publishTime>01/11/2023 00:49:00</publishTime>
+      <publishTime>11/01/2023 00:49:00</publishTime>
     </File>
     <File Include="System.Configuration.ConfigurationManager.dll">
       <publishTime>11/15/2019 02:37:04</publishTime>
@@ -171,7 +171,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>11/15/2019 02:37:42</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>04/23/2023 23:50:15</publishTime>
+      <publishTime>04/24/2023 14:28:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

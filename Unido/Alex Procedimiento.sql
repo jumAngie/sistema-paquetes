@@ -19,6 +19,35 @@ DECLARE @INCRI2 VARCHAR(MAX) = CONVERT(VARCHAR(MAX),@CLAVE2,2)
 
 
 END
+
+
+go
+
+CREATE OR ALTER PROCEDURE UDP_Inicio_Login_Cambiar_Clave
+@usua_Id	INT,
+@usua_Clave		VARCHAR(250),
+@status				INT OUTPUT
+AS
+BEGIN
+
+ BEGIN TRY
+	
+	DECLARE @CLAVE2 VARBINARY (MAX) = HASHBYTES('SHA2_512',@usua_Clave)
+DECLARE @INCRI2 VARCHAR(MAX) = CONVERT(VARCHAR(MAX),@CLAVE2,2)
+
+
+ UPDATE Gral.tblUsuarios
+ SET usua_Clave = @INCRI2
+ WHERE usua_Id = @usua_Id
+
+	SET @status = 1;
+
+END TRY
+BEGIN CATCH 
+	SET @status = 0;
+END CATCH 
+
+END
 GO
 CREATE or alter PROCEDURE  PerfilPersona 
     @pers_Id INT

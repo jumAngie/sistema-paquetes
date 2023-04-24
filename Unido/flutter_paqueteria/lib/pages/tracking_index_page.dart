@@ -5,6 +5,7 @@ import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
+import 'package:flutter_paqueteria/pages/home_page.dart';
 
 
 class DetallePaquetePage extends StatefulWidget {
@@ -96,7 +97,7 @@ class Paquete {
 }
 
 Future<List<Map<String, dynamic>>> getPaquete(int codigo) async {
-  final response = await http.get(Uri.parse('https://localhost:44356/api/Paquetes/PaquetesPorCodigo/$codigo'));
+  final response = await http.get(Uri.parse('http://ecopack.somee.com/api/Paquetes/PaquetesPorCodigo/$codigo'));
 
   if (response.statusCode == 200) {
     final data = jsonDecode(response.body) as List<dynamic>;
@@ -144,7 +145,10 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
             leading: IconButton(
                                 icon: Icon(Icons.arrow_back),
                                 onPressed: () {
-                                        Navigator.pop(context);
+                                        Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
                                               },
                                               ),
             backgroundColor: Colors.green[400],
@@ -244,7 +248,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           width: double.infinity,
           decoration: BoxDecoration(
-            color:Colors.green[400],
+            color: Colors.green[400],
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
               topRight: Radius.circular(30),
@@ -258,6 +262,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
+                  color: Colors.white
                 ),
               ),
               SizedBox(height: 10),
@@ -266,7 +271,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(text: 'Id: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${paqueteData['paqu_Id']}'),
+                        TextSpan(text: '${paqueteData['paqu_Id']}', style: TextStyle(fontWeight: FontWeight.bold,  color: Colors.white)),
                       ],
                     ),
                   ),
@@ -275,7 +280,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(text: 'Código: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${paqueteData['paqu_Codigo']}'),
+                        TextSpan(text: '${paqueteData['paqu_Codigo']}', style: TextStyle(fontWeight: FontWeight.bold,  color: Colors.white)),
                       ],
                     ),
                   ),
@@ -284,7 +289,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(text: 'Cliente: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${paqueteData['cliente']}'),
+                        TextSpan(text: '${paqueteData['cliente']}', style: TextStyle(fontWeight: FontWeight.bold,  color: Colors.white)),
                       ],
                     ),
                   ),RichText(
@@ -292,7 +297,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(text: 'Ciudad: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${paqueteData['ciud_Descri']}'),
+                        TextSpan(text: '${paqueteData['ciud_Descri']}', style: TextStyle(fontWeight: FontWeight.bold,  color: Colors.white)),
                       ],
                     ),
                   ),
@@ -301,7 +306,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(text: 'Departamento: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${paqueteData['depa_Descri']}'),
+                        TextSpan(text: '${paqueteData['depa_Descri']}', style: TextStyle(fontWeight: FontWeight.bold,  color: Colors.white)),
                       ],
                     ),
                   ),
@@ -310,13 +315,17 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(text: 'Dirección exacta: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: '${paqueteData['paqu_DireccionExacta']}'),
+                        TextSpan(text: '${paqueteData['paqu_DireccionExacta']}', style: TextStyle(fontWeight: FontWeight.bold,  color: Colors.white)),
                       ],
                     ),
                   ),
               // ignore: prefer_if_null_operators
               Text("Observaciones: ${paqueteData['paqu_Observaciones'] != null ? paqueteData['paqu_Observaciones'] : '(Vacío)'}",
-              style: TextStyle(fontWeight: FontWeight.bold),),
+              style: TextStyle(
+                fontWeight: FontWeight.w900
+                ),
+              )
+              ,
             ],
           ),
         ),
@@ -331,11 +340,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                'https://media2.giphy.com/media/lRvtVhDB4nV66E1VmS/200w.gif?cid=6c09b9528yhrslo7xhq0gf9puxxz5tmq97jopj9yq4go7jfe&rid=200w.gif&ct=g',
-                height: 200,
-                width: 200,
-              ),
+              Image.asset('images/200w-unscreen.gif', height: 150),
               SizedBox(height: 16),
               Text(
                 'El Código que digitaste no coincide con ningún paquete.',
@@ -352,11 +357,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.network(
-                  'https://media2.giphy.com/media/lRvtVhDB4nV66E1VmS/200w.gif?cid=6c09b9528yhrslo7xhq0gf9puxxz5tmq97jopj9yq4go7jfe&rid=200w.gif&ct=g',
-                  height: 200,
-                  width: 200,
-                ),
+               Image.asset('images/200w-unscreen.gif', height: 150),
                 SizedBox(height: 16),
                 Text(
                   'El Código que digitaste no coincide con ningún paquete.',
@@ -372,11 +373,7 @@ class _DetallePaquetePageState extends State<DetallePaquetePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.network(
-                  'https://media2.giphy.com/media/lRvtVhDB4nV66E1VmS/200w.gif?cid=6c09b9528yhrslo7xhq0gf9puxxz5tmq97jopj9yq4go7jfe&rid=200w.gif&ct=g',
-                  height: 200,
-                  width: 200,
-                ),
+                Image.asset('images/200w-unscreen.gif', height: 150),
                 SizedBox(height: 16),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

@@ -93,6 +93,17 @@ namespace Paqueteria.BusinessLogic.Services
            
         }
 
+
+        public IEnumerable<WV_tblDepartamentos> departamentos()
+        {
+            var result = new ServiceResult();
+
+
+            var list = _departamentosRepository.depar();
+            return list;
+
+        }
+
         public ServiceResult ListarUsuarioEmpleados()
         {
             var result = new ServiceResult();
@@ -130,6 +141,29 @@ namespace Paqueteria.BusinessLogic.Services
                 else
                 {
                     return result.SetMessage("La solicitud contiene sintaxis erronea", ServiceResultType.BadRecuest);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult Cambiar(tblUsuarios item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _usuariosRepository.CambiarContra(item);
+                if (map.CodeStatus > 0)
+                {
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                    return result.Error(map);
                 }
             }
             catch (Exception ex)

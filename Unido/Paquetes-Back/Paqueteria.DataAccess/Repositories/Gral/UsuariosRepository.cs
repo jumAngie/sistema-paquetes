@@ -128,6 +128,19 @@ namespace Paqueteria.DataAccess.Repositories.Gral
             return db.QueryFirst<tblUsuarios>(ScriptsDatabase.ValidarLogin, parametro, commandType: CommandType.StoredProcedure);
         }
 
+        public RequestStatus CambiarContra(tblUsuarios item)
+        {
+            var parametro = new DynamicParameters();
+            parametro.Add("@usua_Id", item.usua_Id, DbType.String, ParameterDirection.Input);
+            parametro.Add("@usua_Clave", item.usua_Clave, DbType.String, ParameterDirection.Input);
+
+            parametro.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(PaqueteriaConex.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.CambiarClave, parametro, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parametro.Get<int>("@status") };
+            return result;
+        }
+
         //public RequestStatus RestablecerPassword(tblUsuarios item)
         //{
         //    var parameters = new DynamicParameters();

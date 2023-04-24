@@ -14,6 +14,8 @@ import 'package:flutter_paqueteria/pages/formulario_envios.dart';
 import 'package:flutter_paqueteria/pages/formulario_editar_envio.dart';
 import 'package:flutter_paqueteria/pages/detalles_envios.dart';
 
+import 'package:flutter_session_manager/flutter_session_manager.dart';
+
 void main() {
   runApp(ListadoEnvios());
 }
@@ -34,7 +36,7 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
   }
 
  // String url = "http://empaquetadora-ecopack.somee.com/api/Envios/List";
-    String url = "https://localhost:44356/api/Envios/List";
+    String url = "http://ecopack.somee.com/api/Envios/List";
 
   Future<dynamic> _getListado() async {
     final respuesta = await http.get(Uri.parse(url));
@@ -58,12 +60,10 @@ class _ListadoEnviosState extends State<ListadoEnvios> {
               bottomRight: Radius.circular(30),
             ),
           ),
-          title: Center(
-            child: Text(
-              "Listado de envíos",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+          title: Text(
+            "Listado de envíos",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
             ),
           ),
            leading: IconButton(
@@ -146,7 +146,7 @@ class EnvioCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color.fromARGB(255, 181, 255, 185),
+      color: Color.fromARGB(255, 226, 226, 226),
       margin: EdgeInsets.all(8),
       child: Row(
         children: [
@@ -314,11 +314,12 @@ Future<responseApi> _Eliminar(BuildContext context,int envi_Id, int envi_Camion,
       String envi_FechaSalida, int envi_UsuarioCrea , DateTime envi_FechaCrea, 
       int envi_UsuarioModifica, DateTime envi_FechaModifica, bool envi_Estado, String transportista) async {
       
+       int UsuarioID = await SessionManager().get("Usuario");
       Map<String, dynamic> DatosUser = {
           "envi_Id": envi_Id,
           "envi_Camion": envi_Camion,
           "envi_FechaSalida": envi_FechaSalida,
-          "envi_UsuarioCrea": envi_UsuarioCrea,
+          "envi_UsuarioCrea": UsuarioID,
           "envi_FechaCrea": "2023-04-18T21:38:28.813Z",
           "envi_UsuarioModifica": 1,
           "envi_FechaModifica": "2023-04-18T21:38:28.813Z",
@@ -331,7 +332,7 @@ Future<responseApi> _Eliminar(BuildContext context,int envi_Id, int envi_Camion,
    
     try {
      // final response = await http.post(Uri.parse('http://empaquetadora-ecopack.somee.com/api/Envios/Insertar'),
-      final response = await http.post(Uri.parse('https://localhost:44356/api/Envios/Eliminar'),
+      final response = await http.post(Uri.parse('http://ecopack.somee.com/api/Envios/Eliminar'),
        
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

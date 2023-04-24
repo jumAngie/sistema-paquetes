@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_paqueteria/pages/ejemplo.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 
 
@@ -47,7 +48,7 @@ class _EditFormState extends State<EditForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Post'),
+        title: Text('Editar Envio'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -70,7 +71,9 @@ class _EditFormState extends State<EditForm> {
                   );
                 }).toList(),
                 decoration: InputDecoration(
-                  labelText: 'Camión',
+                  border: OutlineInputBorder(),
+                  labelText: 'Transportista',
+                   contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 ),
                 validator: (value) {
                   if (value == null) {
@@ -161,12 +164,12 @@ class _EditFormState extends State<EditForm> {
 Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
       String envi_FechaSalida, int envi_UsuarioCrea , DateTime envi_FechaCrea, 
       int envi_UsuarioModifica, DateTime envi_FechaModifica, bool envi_Estado, String transportista) async {
-        print(envi_FechaSalida);
+        int UsuarioID = await SessionManager().get("Usuario");
       Map<String, dynamic> DatosUser = {
           "envi_Id": 0,
           "envi_Camion": envi_Camion,
           "envi_FechaSalida": envi_FechaSalida,
-          "envi_UsuarioCrea": envi_UsuarioCrea,
+          "envi_UsuarioCrea": UsuarioID,
           "envi_FechaCrea": "2023-04-18T21:38:28.813Z",
           "envi_UsuarioModifica": 0,
           "envi_FechaModifica": "2023-04-18T21:38:28.813Z",
@@ -179,7 +182,7 @@ Future<responseApi> _enviarDatos(int envi_Id, int envi_Camion,
    
     try {
      // final response = await http.post(Uri.parse('http://empaquetadora-ecopack.somee.com/api/Envios/Insertar'),
-      final response = await http.post(Uri.parse('https://localhost:44356/api/Envios/Insertar'),
+      final response = await http.post(Uri.parse('http://ecopack.somee.com/api/Envios/Insertar'),
        
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

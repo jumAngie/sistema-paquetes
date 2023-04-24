@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:flutter_paqueteria/pages/Invitado Pages/invitado_tracking_page.dart';
+import 'package:flutter_paqueteria/pages/login_page.dart';
 
 class IVerPaquetePage extends StatelessWidget {
   final _codigoController = TextEditingController(); // controlador para obtener el valor del TextField
@@ -15,18 +17,19 @@ class IVerPaquetePage extends StatelessWidget {
             bottomRight: Radius.circular(30),
           ),
         ),
-        title: Center(
-          child: Text(
-            "Buscar Paquete",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+        title: Text(
+          "Buscar Paquete",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
                                 icon: Icon(Icons.arrow_back),
                                 onPressed: () {
-                                        Navigator.pushNamed(context, 'loginprincipal');
+                                        Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
                                               },
                                               ),
             backgroundColor: Colors.green[400],
@@ -68,7 +71,10 @@ class IVerPaquetePage extends StatelessWidget {
         ),
       );
     } else {
-      Navigator.pushNamed(context, '/IdetallePaquete', arguments: codigo);
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => IDetallePaquetePage(codigo: codigo)),
+    );
     }
   },
   child: Text('Buscar'),

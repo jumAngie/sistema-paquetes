@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 //String url = "http://empaquetadora-ecopack.somee.com/api/EnviosPorPaquete/Grafico";
 
-String url = "https://localhost:44356/api/EnviosPorPaquete/Grafico";
+String url = "http://ecopack.somee.com/api/EnviosPorPaquete/Grafico";
 Future<dynamic> _getListado() async{
   final respuesta = await http.get(Uri.parse(url));
   if(respuesta.statusCode == 200)
@@ -78,7 +78,7 @@ class _GraficosState extends State<Graficos> {
             Center(child:
               
                 Text(
-                              'Cantidad de paquetes enviados por Clientes' + ['cantidad'].toString(),
+                              'Cantidad de paquetes enviados por Clientes',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
             ),

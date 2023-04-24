@@ -62,6 +62,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[dbo].[WV_tblDepartamentos]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[WV_tblEnvios]",
          "ObjectType": 3
       },
@@ -78,7 +82,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-BDFGUVA\\SQLEXPRESS.Paqueteria",
+   "UiHint": "DESKTOP-KKVKH2B\\SQLEXPRESSLOCAL.Paqueteria",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

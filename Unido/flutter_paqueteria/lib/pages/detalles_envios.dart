@@ -35,7 +35,7 @@ class _EnviosDetalleState extends State<EnviosDetalle> {
  // String url = "http://empaquetadora-ecopack.somee.com/api/Paquetes/List";
  
  Future<dynamic> _getListado(int envio) async {
-  final url = "https://localhost:44356/api/EnviosPorPaquete/PaquetesPorEnvio";
+  final url = "http://ecopack.somee.com/api/EnviosPorPaquete/PaquetesPorEnvio";
   final headers = {'Content-Type': 'application/json'};
   final body = jsonEncode({'enpa_Envio': envio});
 
@@ -64,11 +64,10 @@ class _EnviosDetalleState extends State<EnviosDetalle> {
       bottomRight: Radius.circular(30),
           ),
           ),
-            title: Center(child: Text("Listado de Paquetes del envio #${widget.envios}",
+            title: Text("Listado de Paquetes del envio #${widget.envios}",
                                       style: TextStyle(
                                         fontWeight: 
                                         FontWeight.bold),
-                                        )
                                         ),
             leading: IconButton(
             icon: Icon(Icons.arrow_back),
@@ -127,7 +126,7 @@ class _EnviosDetalleState extends State<EnviosDetalle> {
                   itemBuilder: (context, index) {
                     Map<String, dynamic> envio = listaDeEnvios[index];
                    return Card(
-  color: Color.fromARGB(255, 181, 255, 185),
+  color: Color.fromARGB(255, 226, 226, 226),
   margin: EdgeInsets.all(8),
   child: Row(
     children: [
@@ -282,7 +281,7 @@ Future<responseApi> _Eliminar(BuildContext context, String IDPaquete, String IDE
   String date = jsonEncode(datosEnpaquete);
 
   try {
-    final response = await http.post(Uri.parse('https://localhost:44356/api/EnviosPorPaquete/Delete'),
+    final response = await http.post(Uri.parse('http://ecopack.somee.com/api/EnviosPorPaquete/Delete'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -367,7 +366,7 @@ Future<responseApi> _Eliminar(BuildContext context, String IDPaquete, String IDE
   String date = jsonEncode(datosEnpaquete);
 
   try {
-    final response = await http.post(Uri.parse('https://localhost:44356/api/EnviosPorPaquete/Entregado'),
+    final response = await http.post(Uri.parse('http://ecopack.somee.com/api/EnviosPorPaquete/Entregado'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

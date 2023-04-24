@@ -23,11 +23,12 @@ namespace Paqueteria.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("ListarDepartamentos")]
-        public IActionResult ListarDepartamentos()
+        [HttpGet("ListarDepart")]
+        public IEnumerable<tblDepartamentos> ListarDepartamentos()
         {
+            tblDepartamentos depa = new tblDepartamentos();
             var list = _generalesServices.ListarDepartamentos();
-            return Ok(list);
+            return list;
         }
 
         [HttpPost("CiudadesPorDepto")]
@@ -46,6 +47,13 @@ namespace Paqueteria.API.Controllers
         public IEnumerable<VW_Clientes> ListarClientes()
         {
             var list = _generalesServices.ClientesDDL();
+            return list;
+        }
+
+        [HttpGet("Departa")]
+        public IEnumerable<WV_tblDepartamentos> depar()
+        {
+            var list = _generalesServices.departamentos();
             return list;
         }
     }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -5,6 +7,10 @@ import 'package:flutter_paqueteria/util/responseApi.dart';
 import 'package:flutter_paqueteria/pages/paquetes_index_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_material_pickers/flutter_material_pickers.dart';
+
 
 final TextEditingController _observationsController = TextEditingController();
 final _packageCodeController = TextEditingController();
@@ -99,7 +105,7 @@ class _MyFormState extends State<MyForm> {
 
 
 Future<List<Departamento>> fetchDepartamentos() async {
-  final response = await http.get(Uri.parse('https://localhost:44356/api/Departamentos/ListarDepartamentos'));
+  final response = await http.get(Uri.parse('http://ecopack.somee.com/api/Departamentos/Departa'));
   
   if (response.statusCode == 200) {
     List<dynamic> data = jsonDecode(response.body);
@@ -132,7 +138,7 @@ void _loadDepartments() async {
 
 
 Future<List<Ciudad>> fetchCiudades(String _selectedDepartment) async {
-  final response = await http.post(Uri.parse('https://localhost:44356/api/Departamentos/CiudadesPorDepto'),
+  final response = await http.post(Uri.parse('http://ecopack.somee.com/api/Departamentos/CiudadesPorDepto'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -174,7 +180,14 @@ Future<List<Ciudad>> fetchCiudades(String _selectedDepartment) async {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+         shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+        ),
         title: Text('Registrar paquete'),
+         backgroundColor: Colors.green[400],
       ),
       body: Form(
         child: Padding(
@@ -183,105 +196,247 @@ Future<List<Ciudad>> fetchCiudades(String _selectedDepartment) async {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
              TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Código de paquete',
-              ),
-              keyboardType: TextInputType.number,
-              controller: _packageCodeController,
-            ),
+  decoration: InputDecoration(
+    labelText: 'Código de paquete',
+    border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+                        ),
+                         prefixIcon: Icon(Icons.numbers), 
+  ),
+  keyboardType: TextInputType.number,
+  controller: _packageCodeController,
+   validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Por favor, ingrese una observación';
+    }
+    return null;
+  },
+  inputFormatters: <TextInputFormatter>[
+    FilteringTextInputFormatter.digitsOnly
+  ],
+),
 
-             DropdownButtonFormField(
-                 value: _selectedClient,
-                 onChanged: (value) {
-                   setState(() {
-                     _selectedClient = value;
-                   });
-                 },
-                 items: _client.map<DropdownMenuItem<dynamic>>((cliente) {
-                   return DropdownMenuItem<dynamic>(
-                     value: cliente['pers_Id'],
-                     child: Text(cliente['cliente']),
-                   );
-                 }).toList(),
-                 decoration: InputDecoration(
-                   labelText: 'Cliente',
-                 ),
-                 validator: (value) {
-                   if (value == null) {
-                     return 'Por favor, seleccione un cliente';
-                   }
-                   return null;
-                },
+SizedBox(
+              height: 15,
              ),
-           DropdownButton<String>(
-  value: _selectedDepartment,
-  hint: Text('Seleccione un departamento'),
-  items: _departmentList.map((departamento) {
-    return DropdownMenuItem<String>(
-      value: departamento.id,
-      child: Text(departamento.descripcion),
-    );
-  }).toList(),
-  onChanged: (value) async {
-    setState(() {
-      _selectedDepartment = value!;
-      _selectedCity = null;
-      _cityList.clear();
-    });
+             InputDecorator(
+  decoration: InputDecoration(
+    border: OutlineInputBorder(),
+    labelText: 'Seleccione un Cliente',
+    contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+     prefixIcon: Icon(Icons.person)
+  ),
+               child: DropdownButtonFormField(
+                   value: _selectedClient,
+                   onChanged: (value) {
+                     setState(() {
+                       _selectedClient = value;
+                     });
+                   },
+                   items: _client.map<DropdownMenuItem<dynamic>>((cliente) {
+                     return DropdownMenuItem<dynamic>(
+                       value: cliente['pers_Id'],
+                       child: Text(cliente['cliente']),
+                     );
+                   }).toList(),
+                   decoration: InputDecoration(
+                     labelText: 'Cliente',
+                   ),
+                   validator: (value) {
+                     if (value == null) {
+                       return 'Por favor, seleccione un cliente';
+                     }
+                     return null;
+                  },
+               ),
+             ),
+             SizedBox(
+              height: 10,
+             ),
+InputDecorator(
+  decoration: InputDecoration(
+    border: OutlineInputBorder(),
+    labelText: 'Seleccione un departamento',
+    contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    prefixIcon: Icon(Icons.place_outlined)
+  ),
+  child: DropdownButton<String>(
+    value: _selectedDepartment,
+    isExpanded: true,
+    underline: SizedBox(),
+    items: _departmentList.map((departamento) {
+      return DropdownMenuItem<String>(
+        value: departamento.id,
+        child: Text(departamento.descripcion),
+      );
+    }).toList(),
+    onChanged: (value) async {
+      setState(() {
+        _selectedDepartment = value!;
+        _selectedCity = null;
+        _cityList.clear();
+      });
 
-    List<Ciudad> cities = await fetchCiudades(value.toString());
+      List<Ciudad> cities = await fetchCiudades(value.toString());
 
-    setState(() {
-      _cityList = cities;
-    });
-  },
+      setState(() {
+        _cityList = cities;
+      });
+    },
+  ),
 ),
 
-DropdownButton<Ciudad>(
-  value: _selectedCity,
-  hint: Text('Seleccione una ciudad'),
-  items: _cityList.map((ciudad) {
-    return DropdownMenuItem<Ciudad>(
-      value: ciudad,
-      child: Text(ciudad.ciud_Descri),
-    );
-  }).toList(),
-  onChanged: (Ciudad? value) {
-    setState(() {
-      _selectedCity = value;
-     
-    });
-  },
+ SizedBox(
+              height: 10,
+             ),
+InputDecorator(
+  decoration: InputDecoration(
+    border: OutlineInputBorder(),
+    labelText: 'Seleccione una Ciudad',
+    contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    prefixIcon: Icon(Icons.place)
+  ),
+  child:   DropdownButton<Ciudad>(
+  
+    
+  
+    value: _selectedCity,
+  
+    hint: Text('Seleccione una ciudad'),
+  
+    items: _cityList.map((ciudad) {
+  
+      return DropdownMenuItem<Ciudad>(
+  
+        value: ciudad,
+  
+        child: Text(ciudad.ciud_Descri),
+  
+      );
+  
+    }).toList(),
+  
+    onChanged: (Ciudad? value) {
+  
+      setState(() {
+  
+        _selectedCity = value;
+  
+       
+  
+      });
+  
+    },
+  
+  ),
 ),
-
-
-
-
+ SizedBox(
+              height: 12,
+             ),
               TextFormField(
   controller: direccionController,
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Por favor, ingrese una Direccion';
+    }
+    return null;
+  },
   decoration: InputDecoration(
+    prefixIcon: Icon(Icons.home_filled),
+    border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                          
+                        ),
     labelText: 'Dirección Exacta',
   ),
 ),
+ SizedBox(
+              height: 12,
+             ),
              TextFormField(
   decoration: InputDecoration(
+    prefixIcon: Icon(Icons.pending_actions_outlined),
+    border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+                        ),
     labelText: 'Observaciones',
   ),
   controller: _observationsController,
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Por favor, ingrese una observación';
+    }
+    return null;
+  },
 ),
-              SizedBox(height: 16.0),
-            ElevatedButton(
+          SizedBox(height: 16.0),
+           ElevatedButton(
+            style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+                Color.fromARGB(255, 39, 160, 2)),
+            padding: MaterialStateProperty.all<EdgeInsets>(
+              EdgeInsets.symmetric(vertical: 20.0),
+            ),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+          ),
   onPressed: () {
+    // Obtener los valores de los campos
     final String code = _packageCodeController.text;
-    final String client = _selectedClient.toString()  ;
+    final String client = _selectedClient.toString();
     final String city = _selectedCity?.ciud_ID.toString() ?? '';
     final String direccion = direccionController.text;
     final String observations = _observationsController.text;
-    
-    _enviarDatos(int.parse(code), int.parse(client), int.parse(city), direccion, observations);
+
+    // Validar que todos los campos estén llenos
+    if (code.isNotEmpty &&
+        client.isNotEmpty &&
+        city.isNotEmpty &&
+        direccion.isNotEmpty &&
+        observations.isNotEmpty) {
+      // Enviar los datos si todo está bien
+      _enviarDatos(int.parse(code), int.parse(client), int.parse(city), direccion, observations);
+    } else {
+      // Mostrar un mensaje de error si algún campo está vacío
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Row(
+          children: [
+            Image.asset(
+              "images/Alerta.png", // ruta de la imagen
+              height: 40, // tamaño de la imagen
+              width: 40,
+            ),
+            SizedBox(width: 8), // espacio entre la imagen y el texto
+            Text("Error"), // texto del encabezado
+          ],
+        ),
+            content: Text('Todos los campos son obligatorios.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   },
   child: Text('Registrar paquete'),
 )
+
 
 
             ],
@@ -295,7 +450,7 @@ DropdownButton<Ciudad>(
 
   Future<responseApi> _enviarDatos(int Codigo, int Cliente, int Ciudad, String paqu_DireccionExacta, String Observaciones) async {
       
-     
+      int UsuarioID = await SessionManager().get("Usuario");
      
       Map<String, dynamic> Datos = {
          
@@ -311,7 +466,7 @@ DropdownButton<Ciudad>(
             "paqu_Bodega": "2023-04-22T20:31:04.472Z",
             "paqu_EnCamino": "2023-04-22T20:31:04.472Z",
             "paqu_Entregado": "2023-04-22T20:31:04.472Z",
-            "paqu_UsuarioCrea": 1,
+            "paqu_UsuarioCrea": UsuarioID,
             "paqu_FechaCrea": "2023-04-22T20:31:04.472Z",
             "paqu_UsuarioModifica": 0,
             "paqu_FechaModifica": "2023-04-22T20:31:04.472Z",
@@ -324,7 +479,7 @@ DropdownButton<Ciudad>(
    
     try {
      // final response = await http.post(Uri.parse('http://empaquetadora-ecopack.somee.com/api/Envios/Insertar'),
-      final response = await http.post(Uri.parse('https://localhost:44356/api/Paquetes/Insertar'),
+      final response = await http.post(Uri.parse('http://ecopack.somee.com/api/Paquetes/Insertar'),
        
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -383,7 +538,7 @@ DropdownButton<Ciudad>(
 
    Future<responseApi> Eliminar(int paqu_Id) async {
       
-     
+      int UsuarioID = await SessionManager().get("Usuario");
      
       Map<String, dynamic> Datos = {
          
@@ -401,7 +556,7 @@ DropdownButton<Ciudad>(
             "paqu_Entregado": "2023-04-22T20:31:04.472Z",
             "paqu_UsuarioCrea": 0,
             "paqu_FechaCrea": "2023-04-22T20:31:04.472Z",
-            "paqu_UsuarioModifica": 1,
+            "paqu_UsuarioModifica": UsuarioID,
             "paqu_FechaModifica": "2023-04-22T20:31:04.472Z",
             "paqu_Estado": true
 
@@ -412,7 +567,7 @@ DropdownButton<Ciudad>(
    
     try {
      // final response = await http.post(Uri.parse('http://empaquetadora-ecopack.somee.com/api/Envios/Insertar'),
-      final response = await http.post(Uri.parse('https://localhost:44356/api/Paquetes/Insertar'),
+      final response = await http.post(Uri.parse('http://ecopack.somee.com/api/Paquetes/Insertar'),
        
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -472,7 +627,7 @@ DropdownButton<Ciudad>(
   try {
     final response = await http.get(
       //Uri.parse('http://empaquetadora-ecopack.somee.com/api/Camiones/DDLCamiones'),
-          Uri.parse('https://localhost:44356/api/Departamentos/ClientesDDL'),
+          Uri.parse('http://ecopack.somee.com/api/Departamentos/ClientesDDL'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

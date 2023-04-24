@@ -12,18 +12,11 @@ class BNavigator extends StatefulWidget {
 }
 
 class _BNavigatorState extends State<BNavigator> {
-  int index = 0;
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: index,
-        onTap: (int i){
-          setState(() {
-            index = i;
-          });
-        },
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.green,
+        
         iconSize: 25.0,
         selectedFontSize: 14.0,
         unselectedFontSize: 12.0,
@@ -33,7 +26,7 @@ class _BNavigatorState extends State<BNavigator> {
               onPressed: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => HomePage())),
 
-         icon: Icon(Icons.add_chart)
+         icon: Icon(Icons.home)
          ), 
          label: 'Principal'
          ),
@@ -43,7 +36,7 @@ class _BNavigatorState extends State<BNavigator> {
               onPressed: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => Profile())),
 
-         icon: Icon(Icons.add_chart)
+         icon: Icon(Icons.person)
          ), 
          label: 'Perfil'
          ),
@@ -52,7 +45,7 @@ class _BNavigatorState extends State<BNavigator> {
               onPressed: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => Graficos())),
 
-         icon: Icon(Icons.add_chart)
+         icon: Icon(Icons.bar_chart)
          ), 
          label: 'Gráficos'
          )

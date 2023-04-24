@@ -7359,28 +7359,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\LAB02\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.API\\Paqueteria.API.csproj",
+      "projectUniqueName": "C:\\Users\\LAB02\\Documents\\GitHub\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.API\\Paqueteria.API.csproj",
       "projectName": "Paqueteria.API",
-      "projectPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.API\\Paqueteria.API.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.API\\obj\\",
+      "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.API\\Paqueteria.API.csproj",
+      "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -7393,11 +7390,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.BusinessLogic\\Paqueteria.BusinessLogic.csproj": {
-              "projectPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.BusinessLogic\\Paqueteria.BusinessLogic.csproj"
+            "C:\\Users\\LAB02\\Documents\\GitHub\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.BusinessLogic\\Paqueteria.BusinessLogic.csproj": {
+              "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.BusinessLogic\\Paqueteria.BusinessLogic.csproj"
             },
-            "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj"
+            "C:\\Users\\LAB02\\Documents\\GitHub\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\sistema-paquetes\\Unido\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj"
             }
           }
         }
@@ -7457,7 +7454,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
       }
     }
   }

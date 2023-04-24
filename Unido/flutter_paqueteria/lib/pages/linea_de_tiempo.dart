@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_paqueteria/navigation/bottomnavigation.dart';
+import 'package:flutter_paqueteria/pages/tracking_index_page.dart';
 
 class VerPaquetePage extends StatelessWidget {
   final _codigoController = TextEditingController(); // controlador para obtener el valor del TextField
@@ -64,7 +65,10 @@ class VerPaquetePage extends StatelessWidget {
         ),
       );
     } else {
-      Navigator.pushNamed(context, '/detallePaquete', arguments: codigo);
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DetallePaquetePage(codigo: codigo)),
+    );
     }
   },
   child: Text('Buscar'),
