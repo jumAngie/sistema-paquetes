@@ -47,6 +47,18 @@ namespace Paqueteria.DataAccess.Repositories.Paq
             return result;
         }
 
+
+        public RequestStatus Entregado(tblEnviosPorPaquetes item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@enpa_Paquete", item.enpa_Paquete, DbType.String, ParameterDirection.Input);
+            parameters.Add("@status", DbType.Int32, direction: ParameterDirection.Output);
+            using var db = new SqlConnection(PaqueteriaConex.ConnectionString);
+            db.Query<RequestStatus>(ScriptsDatabase.Entregado, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var result = new RequestStatus { CodeStatus = parameters.Get<int>("@status") };
+            return result;
+        }
+
         public IEnumerable<tblEnviosPorPaquetes> PaquetesPorEnvio(tblEnviosPorPaquetes item)
         {
             using var db = new SqlConnection(PaqueteriaConex.ConnectionString);

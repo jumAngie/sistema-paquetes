@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bF3v0/IHSJhJP+CDxCSA2dj36SZybE7s0UIhmoVDT7RL86i2WFlGaZOsgrIJQGRviHeyYhIeQ8uvXARxuzH2mw==",
+  "dgSpecHash": "bdUSqAsEmVydhxo0FFARoj0gQ7PfEUod2KFYxl/8N4kl5/o7+UPWMmenbzXqjqA1du0MWoZFvg5pqSyZAb9gTA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL\\Desktop\\Copia de la Copia\\Paquetes-Back\\Paqueteria.API\\Paqueteria.API.csproj",
+  "projectFilePath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Copia de Alex\\Copia de la Copia\\Paquetes-Back\\Paqueteria.API\\Paqueteria.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",

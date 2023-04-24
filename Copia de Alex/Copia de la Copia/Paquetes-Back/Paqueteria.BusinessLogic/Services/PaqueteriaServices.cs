@@ -101,6 +101,31 @@ namespace Paqueteria.BusinessLogic.Services
             }
         }
 
+        public ServiceResult Entregado(tblEnviosPorPaquetes item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+
+                var map = _enviosPorPaquetesRepository.Entregado(item);
+                if (map.CodeStatus > 0)
+                {
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de Consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
 
 
         #endregion

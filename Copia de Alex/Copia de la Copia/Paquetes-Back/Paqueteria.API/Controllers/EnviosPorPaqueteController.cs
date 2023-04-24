@@ -68,6 +68,14 @@ namespace Paqueteria.API.Controllers
             return Ok(response);
         }
 
+        [HttpPost("Entregado")]
+        public IActionResult Entregado(EnviosPorPaqueteViewModel enviosPorPaqueteViewModel)
+        {
+            var item = _mapper.Map<tblEnviosPorPaquetes>(enviosPorPaqueteViewModel);
+            var response = _paqueteriaServices.Entregado(item);
+            return Ok(response);
+        }
+
         [HttpPost("Insert")]
         public IActionResult Insert(EnviosPorPaqueteViewModel enviosPorPaqueteViewModel)
         {

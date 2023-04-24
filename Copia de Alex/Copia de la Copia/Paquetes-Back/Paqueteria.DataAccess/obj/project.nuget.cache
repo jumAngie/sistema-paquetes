@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qMx84m5C5qkZYyhJvdAH5Y8wQqL4V2K1OyiKFR4aCLj8WGbsQKqkj/r5Uf8y7M4K7QpqJj69Ckmi0LJKIiI32w==",
+  "dgSpecHash": "Efj4FaIMEeA9dM6LwxLgMRwmr92R0SDQHja9hHG6UQTIBBBftjMW2wpSYkYMvREqHTrZ3Pl5uaT6DoO+xJWqGw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL\\Desktop\\Copia de la Copia\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Copia de Alex\\Copia de la Copia\\Paquetes-Back\\Paqueteria.DataAccess\\Paqueteria.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

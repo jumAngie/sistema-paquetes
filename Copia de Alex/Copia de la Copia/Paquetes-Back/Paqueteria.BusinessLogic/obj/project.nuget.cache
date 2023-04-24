@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3ApBytAR6CfqtpPOrBQW0tFFPgSsFf/ioYLqGZdiW7IIdolEuapha9iG5ni1uAZ3aoAJH7sz7mPzaL0W9U4i4Q==",
+  "dgSpecHash": "NnhvhBhvuq78CjBPHBiL+oxTTBDlanazrlttiDEuZnYI5pewgZXo/Ya7Q6DswBYpQ7rRqnghq8uaRTuznfva1w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL\\Desktop\\Copia de la Copia\\Paquetes-Back\\Paqueteria.BusinessLogic\\Paqueteria.BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\DELL\\Desktop\\sistema-paquetes\\Copia de Alex\\Copia de la Copia\\Paquetes-Back\\Paqueteria.BusinessLogic\\Paqueteria.BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

@@ -184,7 +184,7 @@ END;
 --ENVIOS POR PAQUETE
 
 GO
-CREATE OR ALTER PROCEDURE Paq.UDP_Envios_Por_Paquete_Mostrar
+CREATE OR ALTER PROCEDURE Paq.UDP_Envios_Por_Paquete_Mostrar 
 @enpa_Envio				INT
 AS
 BEGIN
@@ -205,11 +205,38 @@ FROM Paq.tblEnviosPorPaquetes T1
 INNER JOIN Paq.tblPaquetes t2 ON t1.enpa_Paquete = t2.paqu_Id 
 INNER JOIN Gral.tblCiudades t3 ON t2.paqu_Ciudad = t3.ciud_ID  
 INNER JOIN Gral.tblPersonas t4 ON t2.paqu_Cliente = t4.pers_Id
-WHERE t1.enpa_Envio = @enpa_Envio;
-
+WHERE t1.enpa_Envio = @enpa_Envio 
 
 END
 
+
+GO
+
+CREATE OR ALTER PROCEDURE Paq.UDP_Envios_Por_Paquete_Entregado 
+@enpa_Paquete			INT,
+@status				INT OUTPUT
+AS
+BEGIN
+
+BEGIN TRY
+		
+	UPDATE Paq.tblPaquetes
+	SET paqu_Entregado = GETDATE()
+	WHERE paqu_Id = @enpa_Paquete
+	
+	SET @status = 1;
+END TRY
+BEGIN CATCH 
+	SET @status = 0;
+END CATCH 
+
+
+END
+go
+
+select * from Paq.tblPaquetes
+
+select * from Paq.tblEnviosPorPaquetes
 
 
 GO
@@ -283,9 +310,14 @@ END CATCH
 
 END
 
+go
+
+
+
+
 ------------------------------------------------------------------------------------------------
 --------------------------------------ENVIOS---------------------------------------------------
-GO
+
 CREATE OR ALTER VIEW WV_tblEnvios
 AS
  SELECT T1.envi_Id, 
@@ -373,8 +405,13 @@ BEGIN CATCH
 END CATCH 
 END;
 
-
 GO
+
+
+
+
+
+
 
 CREATE OR ALTER VIEW  V_Grafico_Paquetes_Por_Cliente
 AS
@@ -427,7 +464,7 @@ AS
 		ON T1.paqu_Cliente = T2.pers_Id INNER JOIN Gral.tblCiudades			T3
 		ON T1.paqu_Ciudad = T3.ciud_ID  INNER JOIN Gral.tblDepartamentos	T4
 		ON T3.depa_ID = T4.depa_ID
-		WHERE T1.paqu_Estado = 1 AND T1.paqu_EnCamino IS NULL
+		WHERE T1.paqu_Estado = 1 AND T1.paqu_EnCamino IS NULL AND T1.paqu_Entregado IS NULL
 
 
 GO

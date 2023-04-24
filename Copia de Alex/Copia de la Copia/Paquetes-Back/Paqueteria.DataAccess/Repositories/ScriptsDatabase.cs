@@ -71,5 +71,7 @@ namespace Paqueteria.DataAccess.Repositories
         public static string EnviosTodos = "Paq.UDP_Envios_Mostrar";//Para ddl de Envios
 
         public static string Perfil = "PerfilPersona";//Para el PERFIL
+
+        public static string Entregado = "Paq.UDP_Envios_Por_Paquete_Entregado";//Para el PERFIL
     }
 }
